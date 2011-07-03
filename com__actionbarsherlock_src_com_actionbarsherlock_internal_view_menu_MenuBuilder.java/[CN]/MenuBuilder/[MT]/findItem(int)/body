@@ -1,0 +1,8 @@
+{
+  for (  MenuItemImpl item : this.mItems) {
+    if (item.getItemId() == itemId) {
+      return item;
+    }
+  }
+  throw new IndexOutOfBoundsException("No item with id " + itemId);
+}

@@ -1,0 +1,11 @@
+{
+  Cursor show=context.getContentResolver().query(Shows.buildShowUri(String.valueOf(seriesid)),new String[]{Shows.NEXTEPISODE},null,null,null);
+  show.moveToFirst();
+  ContentValues values=new ContentValues();
+  values.put(Episodes.WATCHED,true);
+  String episodeid=show.getString(show.getColumnIndexOrThrow(Shows.NEXTEPISODE));
+  if (episodeid.length() != 0) {
+    context.getContentResolver().update(Episodes.buildEpisodeUri(episodeid),values,null,null);
+  }
+  show.close();
+}

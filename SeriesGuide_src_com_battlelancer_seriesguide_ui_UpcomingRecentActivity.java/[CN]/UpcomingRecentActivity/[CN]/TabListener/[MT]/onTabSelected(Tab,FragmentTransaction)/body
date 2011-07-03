@@ -1,0 +1,5 @@
+{
+  ft=getSupportFragmentManager().beginTransaction();
+  ft.add(R.id.fragment_content,mFragment,null);
+  ft.commit();
+}

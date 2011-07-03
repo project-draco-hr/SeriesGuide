@@ -1,0 +1,6 @@
+{
+  if (this.mMenuItem != null) {
+    HoneycombMenuItem.setActionView(this.mMenuItem,view);
+  }
+  return this;
+}

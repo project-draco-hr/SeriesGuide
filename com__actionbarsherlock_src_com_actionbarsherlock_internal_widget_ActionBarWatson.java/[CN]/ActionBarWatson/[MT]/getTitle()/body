@@ -1,0 +1,8 @@
+{
+  if ((mNavigationMode == ActionBar.NAVIGATION_MODE_STANDARD) && !mTitle.getText().equals("")) {
+    return mTitle.getText();
+  }
+ else {
+    return null;
+  }
+}

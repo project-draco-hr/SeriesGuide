@@ -1,0 +1,4 @@
+{
+  this.field(FIELD_QUERY,query);
+  return this;
+}

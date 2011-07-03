@@ -1,0 +1,14 @@
+{
+  super.onActivityCreated(savedInstanceState);
+  if (getShowId() == null || getShowId().length() == 0) {
+    getActivity().finish();
+  }
+  imageCache=((SeriesGuideApplication)getActivity().getApplication()).getImageCache();
+  fillShowData();
+  setHasOptionsMenu(true);
+  View seasonsFragment=getActivity().findViewById(R.id.fragment_seasons);
+  mDualPane=seasonsFragment != null && seasonsFragment.getVisibility() == View.VISIBLE;
+  if (mDualPane) {
+    showSeasons();
+  }
+}

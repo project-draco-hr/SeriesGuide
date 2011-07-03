@@ -1,0 +1,9 @@
+{
+  new Thread(new Runnable(){
+    public void run(){
+      SeriesDatabase.markSeasonEpisodes(getActivity(),getSeasonId(),state);
+      getActivity().getContentResolver().notifyChange(Episodes.CONTENT_URI,null);
+    }
+  }
+).start();
+}

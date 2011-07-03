@@ -1,0 +1,5 @@
+{
+  mContext=context;
+  mResources=context.getResources();
+  mItems=new ArrayList<SimpleMenuItem>();
+}

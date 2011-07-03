@@ -1,0 +1,11 @@
+{
+  if (resultsAdapter != null) {
+    activity.resultList.setAdapter(resultsAdapter);
+  }
+  if (searchThread != null) {
+    searchThread.setHandler(activity.searchHandler);
+    if (searchThread.isAlive()) {
+      activity.setProgressBarIndeterminateVisibility(true);
+    }
+  }
+}

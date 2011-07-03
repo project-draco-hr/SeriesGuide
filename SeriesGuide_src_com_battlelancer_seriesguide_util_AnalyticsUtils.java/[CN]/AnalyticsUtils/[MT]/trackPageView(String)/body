@@ -1,0 +1,15 @@
+{
+  new AsyncTask<Void,Void,Void>(){
+    @Override protected Void doInBackground(    Void... voids){
+      try {
+        mTracker.trackPageView(path);
+        Log.d(TAG,"SeriesGuide Analytics trackPageView: " + path);
+      }
+ catch (      Exception e) {
+        Log.w(TAG,"SeriesGuide Analytics trackPageView error: " + path,e);
+      }
+      return null;
+    }
+  }
+.execute();
+}

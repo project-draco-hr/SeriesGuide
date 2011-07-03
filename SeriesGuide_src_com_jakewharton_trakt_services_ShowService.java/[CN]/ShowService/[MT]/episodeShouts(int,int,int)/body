@@ -1,0 +1,3 @@
+{
+  return new EpisodeShoutsBuilder(this).title(tvdbId).season(season).episode(episode);
+}

@@ -1,0 +1,20 @@
+{
+  final Context context=getActivity();
+  if (context == null) {
+    return;
+  }
+  new Thread(new Runnable(){
+    public void run(){
+      episodeid=SeriesDatabase.updateLatestEpisode(context,getShowId());
+      if (getActivity() != null) {
+        getActivity().runOnUiThread(new Runnable(){
+          public void run(){
+            fillEpisodeData();
+          }
+        }
+);
+      }
+    }
+  }
+).start();
+}

@@ -1,0 +1,6 @@
+{
+  SharedPreferences prefs=PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
+  String username=prefs.getString(SeriesGuidePreferences.PREF_TRAKTUSER,"");
+  String password=prefs.getString(SeriesGuidePreferences.PREF_TRAKTPWD,"");
+  return (!username.equalsIgnoreCase("") && !password.equalsIgnoreCase(""));
+}

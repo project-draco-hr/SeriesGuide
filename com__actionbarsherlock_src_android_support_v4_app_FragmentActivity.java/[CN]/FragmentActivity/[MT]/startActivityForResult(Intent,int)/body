@@ -1,0 +1,6 @@
+{
+  if (requestCode != -1 && (requestCode & 0xffff0000) != 0) {
+    throw new IllegalArgumentException("Can only use lower 16 bits for requestCode");
+  }
+  super.startActivityForResult(intent,requestCode);
+}

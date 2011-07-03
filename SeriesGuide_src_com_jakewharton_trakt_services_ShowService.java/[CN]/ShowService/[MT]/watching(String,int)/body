@@ -1,0 +1,3 @@
+{
+  return new WatchingBuilder(this).title(title).year(year);
+}

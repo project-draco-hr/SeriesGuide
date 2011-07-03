@@ -1,0 +1,3 @@
+{
+  return getActionBar().newTab().setCustomView(tab.getCustomView()).setIcon(tab.getIcon()).setTabListener(this).setTag(tab).setText(tab.getText());
+}

@@ -1,0 +1,10 @@
+{
+  new AsyncTask<Void,Void,Void>(){
+    @Override protected Void doInBackground(    Void... voids){
+      SharedPreferences sp=PreferenceManager.getDefaultSharedPreferences(context);
+      sp.edit().putBoolean("accepted_eula",true).commit();
+      return null;
+    }
+  }
+.execute();
+}

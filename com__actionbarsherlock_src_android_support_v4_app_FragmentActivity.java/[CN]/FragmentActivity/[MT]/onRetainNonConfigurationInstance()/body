@@ -1,0 +1,28 @@
+{
+  if (mStopped) {
+    doReallyStop(true);
+  }
+  ArrayList<Fragment> fragments=mFragments.retainNonConfig();
+  boolean retainLoaders=false;
+  if (mAllLoaderManagers != null) {
+    for (int i=mAllLoaderManagers.size() - 1; i >= 0; i--) {
+      LoaderManagerImpl lm=mAllLoaderManagers.valueAt(i);
+      if (lm.mRetaining) {
+        retainLoaders=true;
+      }
+ else {
+        lm.doDestroy();
+        mAllLoaderManagers.removeAt(i);
+      }
+    }
+  }
+  if (fragments == null && !retainLoaders) {
+    return null;
+  }
+  NonConfigurationInstances nci=new NonConfigurationInstances();
+  nci.activity=null;
+  nci.children=null;
+  nci.fragments=fragments;
+  nci.loaders=mAllLoaderManagers;
+  return nci;
+}

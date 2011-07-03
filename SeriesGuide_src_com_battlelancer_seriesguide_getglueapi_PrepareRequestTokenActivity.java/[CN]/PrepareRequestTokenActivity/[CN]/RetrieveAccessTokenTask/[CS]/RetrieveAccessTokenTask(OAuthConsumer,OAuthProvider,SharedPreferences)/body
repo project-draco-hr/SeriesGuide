@@ -1,0 +1,5 @@
+{
+  this.consumer=consumer;
+  this.provider=provider;
+  this.prefs=prefs;
+}

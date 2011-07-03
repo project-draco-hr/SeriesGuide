@@ -1,0 +1,6 @@
+{
+  MenuItemImpl item=(MenuItemImpl)this.add(groupId,itemId,order,title);
+  SubMenuBuilder subMenu=new SubMenuBuilder(this.mContext,this,item);
+  item.setSubMenu(subMenu);
+  return subMenu;
+}

@@ -1,0 +1,5 @@
+{
+  android.app.ActionBar.LayoutParams nativeLayoutParams=new android.app.ActionBar.LayoutParams(layoutParams);
+  nativeLayoutParams.gravity=layoutParams.gravity;
+  getActionBar().setCustomView(view,nativeLayoutParams);
+}

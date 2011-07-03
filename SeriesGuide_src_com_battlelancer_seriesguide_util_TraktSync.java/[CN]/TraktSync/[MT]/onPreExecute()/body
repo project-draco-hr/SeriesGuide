@@ -1,0 +1,10 @@
+{
+  if (mIsSyncToTrakt) {
+    mContainer.findViewById(R.id.progressBarToTraktSync).setVisibility(View.VISIBLE);
+  }
+ else {
+    mContainer.findViewById(R.id.progressBarToDeviceSync).setVisibility(View.VISIBLE);
+  }
+  mContainer.findViewById(R.id.syncToDeviceButton).setEnabled(false);
+  mContainer.findViewById(R.id.syncToTraktButton).setEnabled(false);
+}

@@ -1,0 +1,7 @@
+{
+  super(service,new TypeToken<List<TvShowEpisode>>(){
+  }
+,URI);
+  this.field(FIELD_QUERY,query);
+  this.field(FIELD_SEASON,season);
+}

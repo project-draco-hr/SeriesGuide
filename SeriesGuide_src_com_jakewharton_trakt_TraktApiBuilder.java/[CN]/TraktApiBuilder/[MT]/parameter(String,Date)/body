@@ -1,0 +1,3 @@
+{
+  return this.parameter(name,Long.toString(TraktApiBuilder.dateToUnixTimestamp(value)));
+}

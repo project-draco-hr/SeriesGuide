@@ -1,0 +1,27 @@
+{
+  AlertDialog.Builder eula=new AlertDialog.Builder(activity).setTitle(R.string.eula_title).setIcon(android.R.drawable.ic_dialog_info).setMessage(R.string.eula_text).setCancelable(accepted);
+  if (accepted) {
+    eula.setPositiveButton(android.R.string.ok,new DialogInterface.OnClickListener(){
+      public void onClick(      DialogInterface dialog,      int which){
+        dialog.dismiss();
+      }
+    }
+);
+  }
+ else {
+    eula.setPositiveButton(R.string.accept,new android.content.DialogInterface.OnClickListener(){
+      public void onClick(      DialogInterface dialog,      int which){
+        setAcceptedEula(activity);
+        dialog.dismiss();
+      }
+    }
+).setNegativeButton(R.string.decline,new android.content.DialogInterface.OnClickListener(){
+      public void onClick(      DialogInterface dialog,      int which){
+        dialog.cancel();
+        activity.finish();
+      }
+    }
+);
+  }
+  eula.show();
+}

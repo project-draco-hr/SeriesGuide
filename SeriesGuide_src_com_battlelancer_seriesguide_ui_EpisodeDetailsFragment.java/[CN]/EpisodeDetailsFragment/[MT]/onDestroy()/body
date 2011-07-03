@@ -1,0 +1,7 @@
+{
+  super.onDestroy();
+  if (mArtTask != null && mArtTask.getStatus() == AsyncTask.Status.RUNNING) {
+    mArtTask.cancel(true);
+    mArtTask=null;
+  }
+}

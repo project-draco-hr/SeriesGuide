@@ -1,0 +1,6 @@
+{
+  mMenu=menu;
+  mId=id;
+  mOrder=order;
+  mTitle=title;
+}

@@ -1,0 +1,17 @@
+{
+  KeyGenerator kgen=KeyGenerator.getInstance("AES");
+  SecureRandom sr=SecureRandom.getInstance("SHA1PRNG");
+  SharedPreferences prefs=PreferenceManager.getDefaultSharedPreferences(context);
+  String seed=prefs.getString(KEY_SECURE,null);
+  if (seed == null) {
+    seed=toHex(sr.generateSeed(128));
+    prefs.edit().putString(KEY_SECURE,seed).commit();
+  }
+ else {
+    sr.setSeed(toByte(seed));
+  }
+  kgen.init(128,sr);
+  SecretKey skey=kgen.generateKey();
+  byte[] raw=skey.getEncoded();
+  return raw;
+}

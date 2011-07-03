@@ -1,0 +1,6 @@
+{
+  super.onSaveInstanceState(outState);
+  saveUpdateTask(outState);
+  saveArtTask(outState);
+  mSavedState=outState;
+}

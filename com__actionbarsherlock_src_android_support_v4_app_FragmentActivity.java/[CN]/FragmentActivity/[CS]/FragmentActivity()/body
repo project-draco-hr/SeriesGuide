@@ -1,0 +1,31 @@
+{
+  super();
+  if (DEBUG)   Log.d(TAG,"<ctor>(): IS_HONEYCOMB = " + IS_HONEYCOMB);
+  Class<? extends ActionBar> handler=null;
+  if (IS_HONEYCOMB) {
+    handler=ActionBarHandlerNative.get();
+    mActionBarMenu=null;
+  }
+ else {
+    if (ActionBar.HANDLER_CUSTOM != null) {
+      handler=ActionBar.HANDLER_CUSTOM;
+    }
+    mActionBarMenu=new MenuBuilder(this);
+    mActionBarMenu.setCallback(mMenuCallback);
+  }
+  if (handler != null) {
+    try {
+      mActionBar=handler.newInstance();
+      mActionBar.setActivity(this);
+    }
+ catch (    Exception e) {
+      e.printStackTrace();
+      throw new RuntimeException(e);
+    }
+  }
+ else {
+    mActionBar=null;
+  }
+  if (DEBUG)   Log.d(TAG,"<ctor>(): mActionBarMenu = " + mActionBarMenu);
+  if (DEBUG)   Log.d(TAG,"<ctor>(): mActionBar = " + mActionBar);
+}

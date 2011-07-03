@@ -1,0 +1,6 @@
+{
+  JsonObject movie=new JsonObject();
+  movie.addProperty(POST_TMDB_ID,tmdbId);
+  this.movieList.add(movie);
+  return this;
+}

@@ -1,0 +1,6 @@
+{
+  super(service,new TypeToken<UserProfile>(){
+  }
+,URI);
+  this.field(FIELD_USERNAME,username);
+}

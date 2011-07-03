@@ -1,0 +1,3 @@
+TraktApiService service
+TypeToken<T> token
+String methodUri

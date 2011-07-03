@@ -1,0 +1,22 @@
+{
+switch (id) {
+case ADD_DIALOG:
+    SearchResult itemAtPosition=(SearchResult)resultList.getItemAtPosition(data.currentPosition);
+  AlertDialog.Builder addDialogBuilder=new AlertDialog.Builder(this);
+addDialogBuilder.setTitle(itemAtPosition.getSeriesName()).setMessage(itemAtPosition.getOverview()).setPositiveButton(R.string.add_show,new DialogInterface.OnClickListener(){
+  public void onClick(  DialogInterface dialog,  int id){
+    removeDialog(ADD_DIALOG);
+    addShow();
+  }
+}
+).setNegativeButton(R.string.dont_add_show,new DialogInterface.OnClickListener(){
+  public void onClick(  DialogInterface dialog,  int id){
+    removeDialog(ADD_DIALOG);
+  }
+}
+);
+AlertDialog addDialog=addDialogBuilder.create();
+return addDialog;
+}
+return null;
+}

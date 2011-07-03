@@ -1,0 +1,6 @@
+{
+  mCustomView.removeAllViews();
+  LayoutInflater.from(mActionBar.getContext()).inflate(layoutResId,mCustomView,true);
+  reloadDisplay();
+  return this;
+}

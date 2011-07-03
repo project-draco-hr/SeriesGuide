@@ -1,0 +1,3 @@
+{
+  return mMenu.addIntentOptions(groupId,itemId,order,caller,specifics,intent,flags,outSpecificItems);
+}

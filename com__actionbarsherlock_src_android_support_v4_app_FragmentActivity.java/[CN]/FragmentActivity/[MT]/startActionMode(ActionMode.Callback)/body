@@ -1,0 +1,8 @@
+{
+  ActionMode actionMode=onWindowStartingActionMode(callback);
+  if (actionMode == null) {
+    actionMode=mActionBar.startActionMode(callback);
+  }
+  onActionModeStarted(actionMode);
+  return actionMode;
+}

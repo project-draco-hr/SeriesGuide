@@ -1,0 +1,16 @@
+{
+  SharedPreferences prefs=PreferenceManager.getDefaultSharedPreferences(ctx);
+  try {
+    Calendar local=getLocalCalendar(tvdbDateString,airtime,prefs.getBoolean(SeriesGuidePreferences.KEY_USE_MY_TIMEZONE,false),ctx);
+    String timezone=local.getTimeZone().getDisplayName(true,TimeZone.SHORT);
+    String today="";
+    if (DateUtils.isToday(local.getTimeInMillis())) {
+      today=ctx.getString(R.string.today) + ", ";
+    }
+    return today + DateFormat.getDateFormat(ctx).format(local.getTime()) + " "+ timezone;
+  }
+ catch (  ParseException e) {
+    e.printStackTrace();
+  }
+  return "";
+}

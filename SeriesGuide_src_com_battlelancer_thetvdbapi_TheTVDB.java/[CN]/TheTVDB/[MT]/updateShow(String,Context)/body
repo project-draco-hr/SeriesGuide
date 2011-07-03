@@ -1,0 +1,16 @@
+{
+  String language=getTheTVDBLanguage(context);
+  Series show=fetchShow(showId,language,context);
+  final ArrayList<ContentProviderOperation> batch=Lists.newArrayList();
+  batch.add(SeriesDatabase.buildShowOp(show,context,false));
+  batch.addAll(importShowEpisodes(showId,language,context));
+  try {
+    context.getContentResolver().applyBatch(SeriesContract.CONTENT_AUTHORITY,batch);
+  }
+ catch (  RemoteException e) {
+    throw new RuntimeException("Problem applying batch operation",e);
+  }
+catch (  OperationApplicationException e) {
+    throw new RuntimeException("Problem applying batch operation",e);
+  }
+}

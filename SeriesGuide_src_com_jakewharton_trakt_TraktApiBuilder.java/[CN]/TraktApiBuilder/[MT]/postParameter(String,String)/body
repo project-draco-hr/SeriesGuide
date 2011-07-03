@@ -1,0 +1,4 @@
+{
+  this.postBody.addProperty(name,value);
+  return this;
+}

@@ -1,0 +1,6 @@
+{
+  if ((index < 0) || (index >= mItems.size())) {
+    return;
+  }
+  mItems.remove(index);
+}

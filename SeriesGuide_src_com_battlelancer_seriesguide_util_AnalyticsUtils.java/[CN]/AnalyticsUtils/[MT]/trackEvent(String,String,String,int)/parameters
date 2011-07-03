@@ -1,0 +1,4 @@
+String category
+String action
+String label
+int value

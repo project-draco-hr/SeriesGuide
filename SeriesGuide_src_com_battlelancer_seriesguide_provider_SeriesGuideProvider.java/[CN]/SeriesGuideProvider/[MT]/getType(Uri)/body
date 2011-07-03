@@ -1,0 +1,35 @@
+{
+  final int match=sUriMatcher.match(uri);
+switch (match) {
+case SHOWS:
+    return Shows.CONTENT_TYPE;
+case SHOWS_ID:
+  return Shows.CONTENT_ITEM_TYPE;
+case EPISODES:
+return Episodes.CONTENT_TYPE;
+case EPISODES_OFSHOW:
+return Episodes.CONTENT_TYPE;
+case EPISODES_OFSEASON:
+return Episodes.CONTENT_TYPE;
+case EPISODES_OFSEASON_WITHSHOW:
+return Episodes.CONTENT_TYPE;
+case EPISODES_ID:
+return Episodes.CONTENT_ITEM_TYPE;
+case EPISODES_WITHSHOW:
+return Episodes.CONTENT_TYPE;
+case EPISODES_ID_WITHSHOW:
+return Episodes.CONTENT_ITEM_TYPE;
+case SEASONS:
+return Seasons.CONTENT_TYPE;
+case SEASONS_OFSHOW:
+return Seasons.CONTENT_TYPE;
+case SEASONS_ID:
+return Seasons.CONTENT_ITEM_TYPE;
+case SEARCH_SUGGEST:
+return SearchManager.SUGGEST_MIME_TYPE;
+case RENEW_FTSTABLE:
+return Episodes.CONTENT_TYPE;
+default :
+throw new UnsupportedOperationException("Unknown uri: " + uri);
+}
+}

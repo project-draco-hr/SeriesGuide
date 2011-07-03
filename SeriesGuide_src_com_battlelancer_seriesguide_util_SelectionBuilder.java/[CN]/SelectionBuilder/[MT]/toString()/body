@@ -1,0 +1,3 @@
+{
+  return "SelectionBuilder[table=" + mTable + ", selection="+ getSelection()+ ", selectionArgs="+ Arrays.toString(getSelectionArgs())+ "]";
+}

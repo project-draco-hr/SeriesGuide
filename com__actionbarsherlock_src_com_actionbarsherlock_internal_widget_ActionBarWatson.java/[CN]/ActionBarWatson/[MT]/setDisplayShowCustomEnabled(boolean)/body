@@ -1,0 +1,3 @@
+{
+  setDisplayOptions(showCustom ? ActionBar.DISPLAY_SHOW_CUSTOM : 0,ActionBar.DISPLAY_SHOW_CUSTOM);
+}

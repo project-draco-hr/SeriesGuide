@@ -1,0 +1,22 @@
+{
+  mFragments.attachActivity(this);
+  if (getLayoutInflater().getFactory() == null) {
+    getLayoutInflater().setFactory(this);
+  }
+  super.onCreate(savedInstanceState);
+  if (!IS_HONEYCOMB) {
+    mActionBar.performAttach();
+  }
+  NonConfigurationInstances nc=(NonConfigurationInstances)getLastNonConfigurationInstance();
+  if (nc != null) {
+    mAllLoaderManagers=nc.loaders;
+  }
+  if (savedInstanceState != null) {
+    Parcelable p=savedInstanceState.getParcelable(FRAGMENTS_TAG);
+    mFragments.restoreAllState(p,nc != null ? nc.fragments : null);
+  }
+  mFragments.dispatchCreate();
+  if (!IS_HONEYCOMB) {
+    invalidateOptionsMenu();
+  }
+}

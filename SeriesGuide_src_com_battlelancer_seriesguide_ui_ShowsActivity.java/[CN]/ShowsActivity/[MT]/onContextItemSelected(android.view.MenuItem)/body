@@ -1,0 +1,34 @@
+{
+  AdapterContextMenuInfo info=(AdapterContextMenuInfo)item.getMenuInfo();
+switch (item.getItemId()) {
+case CONTEXT_DELETE_ID:
+    fireTrackerEvent("Delete show");
+  if (isUpdateTaskRunning()) {
+    return true;
+  }
+toDeleteID=info.id;
+showDialog(CONFIRM_DELETE_DIALOG);
+return true;
+case CONTEXT_UPDATESHOW_ID:
+fireTrackerEvent("Update show");
+if (isUpdateTaskRunning()) {
+return true;
+}
+String[] showIDs=new String[]{String.valueOf(info.id)};
+createUpdateTask(showIDs);
+return true;
+case CONTEXT_SHOWINFO:
+fireTrackerEvent("Display show info");
+Intent i=new Intent(this,ShowInfo.class);
+i.putExtra(Shows._ID,String.valueOf(info.id));
+startActivity(i);
+return true;
+case CONTEXT_MARKNEXT:
+fireTrackerEvent("Mark next episode");
+SeriesDatabase.markNextEpisode(this,info.id);
+Thread t=new UpdateLatestEpisodeThread(this,String.valueOf(info.id));
+t.start();
+return true;
+}
+return super.onContextItemSelected(item);
+}

@@ -1,0 +1,14 @@
+{
+  final Class<?> localClass=MenuInflater.this.getClass();
+  try {
+    mMethod=localClass.getMethod(methodName,PARAM_TYPES);
+  }
+ catch (  Exception e) {
+    StringBuilder b=new StringBuilder();
+    b.append("Couldn't resolve menu item onClick handler ");
+    b.append(methodName);
+    b.append(" in class ");
+    b.append(localClass.getName());
+    throw new InflateException(b.toString(),e);
+  }
+}

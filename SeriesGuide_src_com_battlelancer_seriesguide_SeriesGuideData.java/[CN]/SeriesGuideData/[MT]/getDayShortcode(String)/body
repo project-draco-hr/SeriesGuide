@@ -1,0 +1,3 @@
+{
+  return getDayShortcode(getDayOfWeek(day));
+}

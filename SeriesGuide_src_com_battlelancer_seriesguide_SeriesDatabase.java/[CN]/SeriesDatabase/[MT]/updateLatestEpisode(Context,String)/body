@@ -1,0 +1,44 @@
+{
+  SharedPreferences prefs=PreferenceManager.getDefaultSharedPreferences(context);
+  final boolean onlyFutureEpisodes=prefs.getBoolean("onlyFutureEpisodes",false);
+  final String[] projection=new String[]{Episodes._ID,Episodes.FIRSTAIRED,Episodes.SEASON,Episodes.NUMBER,Episodes.TITLE};
+  final String sortBy=Episodes.FIRSTAIRED + " ASC";
+  final Cursor unwatched;
+  if (onlyFutureEpisodes) {
+    Date date=new Date();
+    String today=SeriesGuideData.theTVDBDateFormat.format(date);
+    unwatched=context.getContentResolver().query(Episodes.buildEpisodesOfShowUri(id),projection,Episodes.WATCHED + "=0 AND " + Episodes.FIRSTAIRED+ ">=?",new String[]{today},sortBy);
+  }
+ else {
+    unwatched=context.getContentResolver().query(Episodes.buildEpisodesOfShowUri(id),projection,Episodes.WATCHED + "=0 AND " + Episodes.FIRSTAIRED+ " like '%-%'",null,sortBy);
+  }
+  long episodeid=0;
+  ContentValues update=new ContentValues();
+  if (unwatched.getCount() != 0) {
+    unwatched.moveToFirst();
+    String season=unwatched.getString(unwatched.getColumnIndexOrThrow(Episodes.SEASON));
+    String number=unwatched.getString(unwatched.getColumnIndexOrThrow(Episodes.NUMBER));
+    String title=unwatched.getString(unwatched.getColumnIndexOrThrow(Episodes.TITLE));
+    String nextEpisodeString=SeriesGuideData.getNextEpisodeString(prefs,season,number,title);
+    nextEpisodeString+=SeriesGuideData.NEXTEPISODE_SPLIT;
+    String firstAired=unwatched.getString(unwatched.getColumnIndexOrThrow(Episodes.FIRSTAIRED));
+    if (firstAired.length() != 0) {
+      final Series show=getShow(context,id);
+      if (show != null) {
+        nextEpisodeString+=SeriesGuideData.parseDateToLocalRelative(firstAired,show.getAirsTime(),context);
+      }
+    }
+    episodeid=unwatched.getLong(unwatched.getColumnIndexOrThrow(Episodes._ID));
+    update.put(Shows.NEXTEPISODE,episodeid);
+    update.put(Shows.NEXTAIRDATE,unwatched.getString(unwatched.getColumnIndexOrThrow(Episodes.FIRSTAIRED)));
+    update.put(Shows.NEXTTEXT,nextEpisodeString);
+  }
+ else {
+    update.put(Shows.NEXTEPISODE,"");
+    update.put(Shows.NEXTAIRDATE,"9999");
+    update.put(Shows.NEXTTEXT,"");
+  }
+  unwatched.close();
+  context.getContentResolver().update(Shows.buildShowUri(id),update,null,null);
+  return episodeid;
+}

@@ -1,0 +1,5 @@
+{
+  this.postParameter(POST_PLUGIN_VERSION,service.getPluginVersion());
+  this.postParameter(POST_MEDIA_CENTER_VERSION,service.getMediaCenterVersion());
+  this.postParameter(POST_MEDIA_CENTER_DATE,service.getMediaCenterDate());
+}

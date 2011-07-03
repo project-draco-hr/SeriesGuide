@@ -1,0 +1,4 @@
+{
+  this(showId,updateOverview);
+  mSeasonId=seasonid;
+}

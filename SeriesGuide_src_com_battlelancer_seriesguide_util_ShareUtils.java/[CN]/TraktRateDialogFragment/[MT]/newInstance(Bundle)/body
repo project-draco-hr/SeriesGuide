@@ -1,0 +1,5 @@
+{
+  TraktRateDialogFragment f=new TraktRateDialogFragment();
+  f.setArguments(traktData);
+  return f;
+}

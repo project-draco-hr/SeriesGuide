@@ -1,0 +1,8 @@
+{
+  super.onResume();
+  checkPreferences();
+  updateLatestEpisode();
+  if (mSavedState != null) {
+    restoreLocalState(mSavedState);
+  }
+}

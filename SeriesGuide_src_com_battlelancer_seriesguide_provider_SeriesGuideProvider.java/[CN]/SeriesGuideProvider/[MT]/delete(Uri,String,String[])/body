@@ -1,0 +1,8 @@
+{
+  if (LOGV)   Log.v(TAG,"delete(uri=" + uri + ")");
+  final SQLiteDatabase db=mOpenHelper.getWritableDatabase();
+  final SelectionBuilder builder=buildSimpleSelection(uri);
+  int retVal=builder.where(selection,selectionArgs).delete(db);
+  getContext().getContentResolver().notifyChange(uri,null);
+  return retVal;
+}

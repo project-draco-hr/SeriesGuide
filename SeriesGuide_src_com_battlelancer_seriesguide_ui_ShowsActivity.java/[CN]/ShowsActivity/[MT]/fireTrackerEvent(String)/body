@@ -1,0 +1,3 @@
+{
+  AnalyticsUtils.getInstance(this).trackEvent("Shows","Click",label,0);
+}

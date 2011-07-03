@@ -1,0 +1,4 @@
+SharedPreferences prefs
+String season
+String episode
+String title

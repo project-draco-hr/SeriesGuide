@@ -1,0 +1,81 @@
+{
+  final Context context=getActivity();
+  SharedPreferences prefs=PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
+  String username=prefs.getString(SeriesGuidePreferences.PREF_TRAKTUSER,"");
+  String password=prefs.getString(SeriesGuidePreferences.PREF_TRAKTPWD,"");
+  try {
+    password=SimpleCrypto.decrypt(password,context);
+  }
+ catch (  Exception e) {
+    password="";
+  }
+  AlertDialog.Builder builder;
+  LayoutInflater inflater=(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+  final View layout=inflater.inflate(R.layout.trakt_credentials_dialog,null);
+  builder=new AlertDialog.Builder(context);
+  builder.setView(layout);
+  builder.setTitle("trakt.tv");
+  ((EditText)layout.findViewById(R.id.username)).setText(username);
+  ((EditText)layout.findViewById(R.id.password)).setText(password);
+  final View mailviews=layout.findViewById(R.id.mailviews);
+  mailviews.setVisibility(View.GONE);
+  ((CheckBox)layout.findViewById(R.id.checkNewAccount)).setOnCheckedChangeListener(new OnCheckedChangeListener(){
+    public void onCheckedChanged(    CompoundButton buttonView,    boolean isChecked){
+      if (isChecked) {
+        mailviews.setVisibility(View.VISIBLE);
+      }
+ else {
+        mailviews.setVisibility(View.GONE);
+      }
+    }
+  }
+);
+  builder.setPositiveButton(R.string.save,new OnClickListener(){
+    public void onClick(    DialogInterface dialog,    int which){
+      SharedPreferences prefs=PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
+      final String username=((EditText)layout.findViewById(R.id.username)).getText().toString();
+      String password=((EditText)layout.findViewById(R.id.password)).getText().toString();
+      boolean isNewAccount=((CheckBox)layout.findViewById(R.id.checkNewAccount)).isChecked();
+      try {
+        password=SimpleCrypto.encrypt(password,context);
+      }
+ catch (      Exception e) {
+        password="";
+      }
+      Editor editor=prefs.edit();
+      editor.putString(SeriesGuidePreferences.PREF_TRAKTUSER,username);
+      editor.putString(SeriesGuidePreferences.PREF_TRAKTPWD,password);
+      editor.commit();
+      if (isNewAccount) {
+        final String email=((EditText)layout.findViewById(R.id.email)).getText().toString();
+        if (!isTraktCredentialsValid(context) || email.length() == 0) {
+          Toast.makeText(context,context.getString(R.string.trakt_credentials_invalid),Toast.LENGTH_LONG).show();
+          editor.putString(SeriesGuidePreferences.PREF_TRAKTUSER,"");
+          editor.putString(SeriesGuidePreferences.PREF_TRAKTPWD,"");
+          editor.commit();
+          return;
+        }
+        final ServiceManager manager=new ServiceManager();
+        manager.setApiKey(Constants.TRAKT_API_KEY);
+        manager.setAuthentication(username,ShareUtils.toSHA1(password.getBytes()));
+        final Response response=manager.userService().createAccount(username,password,email).fire();
+        if (response.getStatus().equalsIgnoreCase("success")) {
+          Toast.makeText(context,response.getStatus() + ": " + response.getMessage(),Toast.LENGTH_SHORT).show();
+        }
+ else {
+          Toast.makeText(context,response.getStatus() + ": " + response.getError(),Toast.LENGTH_LONG).show();
+          editor.putString(SeriesGuidePreferences.PREF_TRAKTUSER,"");
+          editor.putString(SeriesGuidePreferences.PREF_TRAKTPWD,"");
+          editor.commit();
+          return;
+        }
+      }
+      if (isForwardingGivenTask) {
+        new TraktTask(context,getFragmentManager(),getArguments()).execute();
+      }
+    }
+  }
+);
+  builder.setNegativeButton(R.string.dontsave,null);
+  return builder.create();
+}

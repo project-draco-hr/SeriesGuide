@@ -1,0 +1,9 @@
+{
+  setProgressBarIndeterminateVisibility(true);
+  String name=((EditText)findViewById(R.id.EditTextSearchString)).getText().toString().trim();
+  if (data.searchThread != null && data.searchThread.isAlive()) {
+    return;
+  }
+  data.searchThread=new SearchThread(searchHandler,name);
+  data.searchThread.start();
+}

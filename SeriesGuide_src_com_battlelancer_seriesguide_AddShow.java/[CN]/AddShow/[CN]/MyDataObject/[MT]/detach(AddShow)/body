@@ -1,0 +1,7 @@
+{
+  if (addTask != null && addTask.getStatus() != AsyncTask.Status.FINISHED) {
+    mAddQueue=activity.addTask.getRemainingShows();
+  }
+  resultsAdapter=activity.resultList.getAdapter();
+  activity=null;
+}

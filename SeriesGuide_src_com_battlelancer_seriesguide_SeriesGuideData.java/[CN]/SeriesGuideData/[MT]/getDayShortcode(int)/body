@@ -1,0 +1,5 @@
+{
+  DateFormatSymbols dfs=new DateFormatSymbols();
+  String[] weekdays=dfs.getShortWeekdays();
+  return weekdays[day];
+}

@@ -1,0 +1,29 @@
+{
+  Calendar cal;
+  if (useUserTimeZone) {
+    cal=Calendar.getInstance(TimeZone.getTimeZone("America/Los_Angeles"));
+  }
+ else {
+    cal=Calendar.getInstance();
+  }
+  Date date=theTVDBDateFormat.parse(tvdbDateString);
+  cal.set(Calendar.DATE,date.getDate());
+  cal.set(Calendar.MONTH,date.getMonth());
+  cal.set(Calendar.YEAR,date.getYear() + 1900);
+  Calendar time=Calendar.getInstance(TimeZone.getTimeZone("America/Los_Angeles"));
+  time.setTimeInMillis(airtime);
+  cal.set(Calendar.HOUR_OF_DAY,time.get(Calendar.HOUR_OF_DAY));
+  cal.set(Calendar.MINUTE,time.get(Calendar.MINUTE));
+  cal.set(Calendar.SECOND,0);
+  SharedPreferences prefs=PreferenceManager.getDefaultSharedPreferences(context);
+  int offset=Integer.valueOf(prefs.getString(SeriesGuidePreferences.KEY_OFFSET,"0"));
+  cal.add(Calendar.HOUR_OF_DAY,offset);
+  if (useUserTimeZone) {
+    Calendar local=Calendar.getInstance(TimeZone.getDefault(),Locale.getDefault());
+    local.setTime(cal.getTime());
+    return local;
+  }
+ else {
+    return cal;
+  }
+}

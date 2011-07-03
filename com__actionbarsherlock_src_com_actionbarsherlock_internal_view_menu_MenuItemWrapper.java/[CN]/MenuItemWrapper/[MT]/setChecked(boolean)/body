@@ -1,0 +1,4 @@
+{
+  this.mMenuItem.setChecked(checked);
+  return this;
+}

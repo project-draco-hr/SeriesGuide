@@ -1,0 +1,16 @@
+{
+  if (isCancelled()) {
+    return;
+  }
+switch (resultCode) {
+case SUCCESS:
+    Bitmap bitmap=imageCache.get(mPath);
+  if (bitmap != null) {
+    mImageView.setImageBitmap(bitmap);
+    return;
+  }
+default :
+mImageView.setImageResource(R.drawable.show_generic);
+break;
+}
+}

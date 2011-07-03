@@ -1,0 +1,4 @@
+{
+  if (DEBUG)   Log.d(TAG,"onCreateOptionsMenu(Menu): Returning " + menu.hasVisibleItems());
+  return menu.hasVisibleItems();
+}

@@ -1,0 +1,46 @@
+{
+  super.onCreate(savedInstanceState);
+  requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+  setContentView(R.layout.add_show);
+  resultList=((ListView)findViewById(R.id.ListViewSearchResults));
+  setProgressBarIndeterminateVisibility(false);
+  data=(MyDataObject)getLastNonConfigurationInstance();
+  if (data != null) {
+    data.attach(this);
+    if (data.mAddQueue != null) {
+      addTask=(AddShowTask)new AddShowTask(this,data.mAddQueue).execute();
+    }
+  }
+ else {
+    data=new MyDataObject();
+  }
+  ImageButton searchButton=(ImageButton)findViewById(R.id.ButtonSearch);
+  searchButton.setOnClickListener(new OnClickListener(){
+    public void onClick(    View v){
+      fireTrackerEvent("Search Button");
+      searchSeries();
+    }
+  }
+);
+  EditText searchString=(EditText)findViewById(R.id.EditTextSearchString);
+  searchString.setOnKeyListener(new OnKeyListener(){
+    public boolean onKey(    View v,    int keyCode,    KeyEvent event){
+      if (keyCode == KeyEvent.KEYCODE_ENTER) {
+        fireTrackerEvent("Search Keyboard");
+        searchSeries();
+        return true;
+      }
+ else {
+        return false;
+      }
+    }
+  }
+);
+  resultList.setOnItemClickListener(new OnItemClickListener(){
+    public void onItemClick(    AdapterView<?> arg0,    View arg1,    int arg2,    long arg3){
+      data.currentPosition=arg2;
+      showDialog(ADD_DIALOG);
+    }
+  }
+);
+}

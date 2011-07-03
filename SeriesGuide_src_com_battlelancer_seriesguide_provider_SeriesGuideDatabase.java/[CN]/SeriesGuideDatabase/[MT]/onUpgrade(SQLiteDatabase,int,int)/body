@@ -1,0 +1,40 @@
+{
+  Log.d(TAG,"onUpgrade() from " + oldVersion + " to "+ newVersion);
+  if (UIUtils.isExtStorageAvailable()) {
+    File dbFile=new File(db.getPath());
+    File exportDir=new File(Environment.getExternalStorageDirectory(),"seriesguidebackup");
+    exportDir.mkdirs();
+    File file=new File(exportDir,dbFile.getName() + "_b4upgr");
+    try {
+      file.createNewFile();
+      FileUtil.copyFile(dbFile,file);
+    }
+ catch (    IOException e) {
+      Log.e(TAG,e.getMessage(),e);
+    }
+  }
+  int version=oldVersion;
+switch (version) {
+case 12:
+    upgradeToThirteen(db);
+  version=13;
+case 13:
+upgradeToFourteen(db);
+version=14;
+case 14:
+upgradeToFifteen(db);
+version=15;
+case 15:
+upgradeToSixteen(db);
+version=16;
+}
+Log.d(TAG,"after upgrade logic, at version " + version);
+if (version != DATABASE_VERSION) {
+Log.w(TAG,"Database has incompatible version, starting from scratch");
+db.execSQL("DROP TABLE IF EXISTS " + Tables.SHOWS);
+db.execSQL("DROP TABLE IF EXISTS " + Tables.SEASONS);
+db.execSQL("DROP TABLE IF EXISTS " + Tables.EPISODES);
+db.execSQL("DROP TABLE IF EXISTS " + Tables.EPISODES_SEARCH);
+onCreate(db);
+}
+}

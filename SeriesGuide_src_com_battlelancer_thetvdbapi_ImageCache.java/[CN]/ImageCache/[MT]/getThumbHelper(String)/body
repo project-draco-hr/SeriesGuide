@@ -1,0 +1,12 @@
+{
+  String imageThumbUrl=imageUrl + THUMB_SUFFIX;
+  Bitmap original=get(imageUrl);
+  if (original != null) {
+    int scaledWidth=(int)(THUMBNAIL_WIDTH_DIP * mScale + 0.5f);
+    int scaledHeight=(int)(THUMBNAIL_HEIGHT_DIP * mScale + 0.5f);
+    return put(imageThumbUrl,Bitmap.createScaledBitmap(original,scaledWidth,scaledHeight,true));
+  }
+ else {
+    return null;
+  }
+}

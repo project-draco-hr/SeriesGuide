@@ -1,0 +1,8 @@
+{
+  mActionView=null;
+  mActionViewRes=resId;
+  if (mActionViewRes != View.NO_ID) {
+    setActionViewOnViews(LayoutInflater.from(mMenu.getContext()).inflate(mActionViewRes,null,false));
+  }
+  return this;
+}

@@ -1,0 +1,19 @@
+{
+  if (context == null) {
+    return sEmptyAnalyticsUtils;
+  }
+  SharedPreferences prefs=PreferenceManager.getDefaultSharedPreferences(context.getApplicationContext());
+  if (prefs.getBoolean(SeriesGuideData.KEY_GOOGLEANALYTICS,true)) {
+    ANALYTICS_ENABLED=true;
+  }
+ else {
+    ANALYTICS_ENABLED=false;
+  }
+  if (!ANALYTICS_ENABLED) {
+    return sEmptyAnalyticsUtils;
+  }
+  if (sInstance == null) {
+    sInstance=new AnalyticsUtils(context);
+  }
+  return sInstance;
+}

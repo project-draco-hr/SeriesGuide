@@ -1,0 +1,27 @@
+{
+  TextView episodetitle=(TextView)getActivity().findViewById(R.id.TextViewEpisodeTitle);
+  episodetitle.setText(episode.getString(EpisodeQuery.TITLE));
+  TextView numbers=(TextView)getActivity().findViewById(R.id.TextViewEpisodeNumbers);
+  mShareData.putInt(ShareItems.TVDBID,episode.getInt(EpisodeQuery.REF_SHOW_ID));
+  mShareData.putInt(ShareItems.SEASON,episode.getInt(EpisodeQuery.SEASON));
+  mShareData.putInt(ShareItems.EPISODE,episode.getInt(EpisodeQuery.NUMBER));
+  numbers.setText(getString(R.string.season) + " " + episode.getString(EpisodeQuery.SEASON)+ " "+ getString(R.string.episode)+ " "+ episode.getString(EpisodeQuery.NUMBER));
+  TextView description=(TextView)getActivity().findViewById(R.id.TextViewEpisodeDescription);
+  description.setText(episode.getString(EpisodeQuery.OVERVIEW));
+  TextView dvdnumber=(TextView)getActivity().findViewById(R.id.textViewEpisodeDVDnumber);
+  dvdnumber.setText(getString(R.string.episode_dvdnumber) + ": " + episode.getString(EpisodeQuery.DVDNUMBER));
+  TextView directors=(TextView)getActivity().findViewById(R.id.TextViewEpisodeDirectors);
+  String directorsAll=SeriesGuideData.splitAndKitTVDBStrings(episode.getString(EpisodeQuery.DIRECTORS));
+  directors.setText(getString(R.string.episode_directors) + " " + directorsAll);
+  TextView gueststars=(TextView)getActivity().findViewById(R.id.TextViewEpisodeGuestStars);
+  gueststars.setText(getString(R.string.episode_gueststars) + " " + SeriesGuideData.splitAndKitTVDBStrings(episode.getString(EpisodeQuery.GUESTSTARS)));
+  TextView writers=(TextView)getActivity().findViewById(R.id.TextViewEpisodeWriters);
+  writers.setText(getString(R.string.episode_writers) + " " + SeriesGuideData.splitAndKitTVDBStrings(episode.getString(EpisodeQuery.WRITERS)));
+  TextView rating=(TextView)getActivity().findViewById(R.id.value);
+  String ratingText=episode.getString(EpisodeQuery.RATING);
+  if (ratingText != null && ratingText.length() != 0) {
+    RatingBar ratingBar=(RatingBar)getActivity().findViewById(R.id.bar);
+    ratingBar.setProgress((int)(Double.valueOf(ratingText) / 0.1));
+    rating.setText(ratingText + "/10");
+  }
+}

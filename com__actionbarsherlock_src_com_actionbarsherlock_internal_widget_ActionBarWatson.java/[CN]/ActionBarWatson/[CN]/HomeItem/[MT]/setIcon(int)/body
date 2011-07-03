@@ -1,0 +1,4 @@
+{
+  mIcon.setImageResource(resId);
+  return this;
+}

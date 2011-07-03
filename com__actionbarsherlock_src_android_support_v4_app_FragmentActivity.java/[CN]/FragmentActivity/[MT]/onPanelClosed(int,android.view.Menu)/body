@@ -1,0 +1,12 @@
+{
+switch (featureId) {
+case Window.FEATURE_OPTIONS_PANEL:
+    mFragments.dispatchOptionsMenuClosed(menu);
+  if (!IS_HONEYCOMB) {
+    if (DEBUG)     Log.d(TAG,"onPanelClosed(int, android.view.Menu): Dispatch menu visibility false to custom action bar.");
+    mActionBar.onMenuVisibilityChanged(false);
+  }
+break;
+}
+super.onPanelClosed(featureId,menu);
+}

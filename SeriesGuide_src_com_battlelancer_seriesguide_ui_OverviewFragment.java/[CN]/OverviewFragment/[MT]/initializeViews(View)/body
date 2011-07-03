@@ -1,0 +1,17 @@
+{
+  fragmentView.findViewById(R.id.showinfo).setOnClickListener(new OnClickListener(){
+    public void onClick(    View v){
+      onShowShowInfo();
+    }
+  }
+);
+  View v=fragmentView.findViewById(R.id.gotoseasons);
+  if (v != null) {
+    v.setOnClickListener(new OnClickListener(){
+      public void onClick(      View v){
+        showSeasons();
+      }
+    }
+);
+  }
+}

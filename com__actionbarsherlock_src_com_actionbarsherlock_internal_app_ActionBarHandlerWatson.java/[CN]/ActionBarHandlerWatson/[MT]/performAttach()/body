@@ -1,0 +1,31 @@
+{
+  getActivity().requestWindowFeature(Window.FEATURE_NO_TITLE);
+  setActivityContentView(R.layout.actionbarwatson_wrapper);
+  mActionBar=(ActionBarWatson)getActivity().findViewById(R.id.actionbarwatson);
+  mContentView=(FrameLayout)getActivity().findViewById(R.id.actionbarsherlock_content);
+  final MenuItemImpl homeMenuItem=getHomeMenuItem();
+  final ActionBarWatson.Item homeItem=mActionBar.getHomeItem();
+  final WatsonItemViewWrapper homeWrapper=new WatsonItemViewWrapper(homeItem);
+  homeWrapper.initialize(homeMenuItem,MenuBuilder.TYPE_WATSON);
+  homeMenuItem.setItemView(MenuBuilder.TYPE_WATSON,homeWrapper);
+  final PackageManager pm=getActivity().getPackageManager();
+  final ApplicationInfo appInfo=getActivity().getApplicationInfo();
+  ActivityInfo actInfo=null;
+  try {
+    actInfo=pm.getActivityInfo(getActivity().getComponentName(),PackageManager.GET_ACTIVITIES);
+  }
+ catch (  NameNotFoundException e) {
+  }
+  if ((actInfo != null) && (actInfo.labelRes != 0)) {
+    mActionBar.setTitle(actInfo.labelRes);
+  }
+ else   if (mActionBar.getTitle() == null) {
+    mActionBar.setTitle(actInfo.loadLabel(pm));
+  }
+  if ((actInfo != null) && (actInfo.icon != 0)) {
+    homeItem.setIcon(actInfo.icon);
+  }
+ else   if (homeItem.getIcon() == null) {
+    homeItem.setIcon(pm.getApplicationIcon(appInfo));
+  }
+}

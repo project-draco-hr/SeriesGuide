@@ -1,0 +1,3 @@
+{
+  db.execSQL("ALTER TABLE " + SeriesDatabase.EPISODE_TABLE + " ADD COLUMN "+ SeriesDatabase.EPISODE_DVDNUMBER+ " real;");
+}

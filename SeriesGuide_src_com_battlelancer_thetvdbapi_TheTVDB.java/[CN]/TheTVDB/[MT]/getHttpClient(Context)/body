@@ -1,0 +1,8 @@
+{
+  final HttpParams params=new BasicHttpParams();
+  HttpConnectionParams.setConnectionTimeout(params,20 * SECOND_IN_MILLIS);
+  HttpConnectionParams.setSoTimeout(params,20 * SECOND_IN_MILLIS);
+  HttpConnectionParams.setSocketBufferSize(params,8192);
+  final DefaultHttpClient client=new DefaultHttpClient(params);
+  return client;
+}

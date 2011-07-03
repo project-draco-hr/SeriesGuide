@@ -1,0 +1,7 @@
+{
+  ContentValues values=new ContentValues();
+  values.put(SeriesDatabase.SERIES_NEXTEPISODE,"");
+  db.update(SeriesDatabase.SERIES_TABLE,values,null,null);
+  db.execSQL("ALTER TABLE " + SeriesDatabase.SERIES_TABLE + " ADD COLUMN "+ SeriesDatabase.SERIES_NEXTAIRDATE+ " TEXT DEFAULT '0';");
+  db.execSQL("ALTER TABLE " + SeriesDatabase.SERIES_TABLE + " ADD COLUMN "+ SeriesDatabase.SERIES_NEXTTEXT+ " TEXT DEFAULT '';");
+}

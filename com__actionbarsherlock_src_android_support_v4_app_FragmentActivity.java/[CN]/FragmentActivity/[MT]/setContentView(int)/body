@@ -1,0 +1,8 @@
+{
+  if ((mActionBar != null) && !IS_HONEYCOMB) {
+    mActionBar.setContentView(layoutResId);
+  }
+ else {
+    super.setContentView(layoutResId);
+  }
+}

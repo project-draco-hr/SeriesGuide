@@ -1,0 +1,8 @@
+{
+  groupId=attrs.getAttributeResourceValue(XML_NS,"id",defaultGroupId);
+  groupCategory=attrs.getAttributeIntValue(XML_NS,"menuCategory",defaultItemCategory);
+  groupOrder=attrs.getAttributeIntValue(XML_NS,"orderInCategory",defaultItemOrder);
+  groupCheckable=attrs.getAttributeIntValue(XML_NS,"checkableBehavior",defaultItemCheckable);
+  groupVisible=attrs.getAttributeBooleanValue(XML_NS,"visible",defaultItemVisible);
+  groupEnabled=attrs.getAttributeBooleanValue(XML_NS,"enabled",defaultItemEnabled);
+}

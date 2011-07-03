@@ -1,0 +1,5 @@
+{
+  ft=getSupportFragmentManager().beginTransaction();
+  ft.remove(mFragment);
+  ft.commit();
+}

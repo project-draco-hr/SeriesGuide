@@ -1,0 +1,4 @@
+{
+  mCustomView.removeAllViews();
+  LayoutInflater.from(getContext()).inflate(resId,mCustomView,true);
+}

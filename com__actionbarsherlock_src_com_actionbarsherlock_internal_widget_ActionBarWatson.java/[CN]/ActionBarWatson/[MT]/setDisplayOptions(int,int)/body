@@ -1,0 +1,4 @@
+{
+  mFlags=(mFlags & ~mask) | options;
+  reloadDisplay();
+}

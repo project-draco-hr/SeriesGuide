@@ -1,0 +1,3 @@
+{
+  AnalyticsUtils.getInstance(getActivity()).trackEvent(TAG,"Click",label,0);
+}

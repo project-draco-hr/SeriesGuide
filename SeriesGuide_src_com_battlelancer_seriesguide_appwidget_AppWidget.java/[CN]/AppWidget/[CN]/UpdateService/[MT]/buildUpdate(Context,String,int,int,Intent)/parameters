@@ -1,0 +1,5 @@
+Context context
+String limit
+int layout
+int itemLayout
+Intent updateIntent

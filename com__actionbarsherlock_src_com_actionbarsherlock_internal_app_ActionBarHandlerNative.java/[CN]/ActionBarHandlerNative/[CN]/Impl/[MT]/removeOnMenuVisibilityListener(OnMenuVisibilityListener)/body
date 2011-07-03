@@ -1,0 +1,5 @@
+{
+  if ((listener != null) && mMenuListenerMap.containsKey(listener)) {
+    getActionBar().removeOnMenuVisibilityListener(mMenuListenerMap.remove(listener));
+  }
+}

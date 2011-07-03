@@ -1,0 +1,13 @@
+{
+  super.onCreate(savedInstanceState);
+  setContentView(R.layout.episodes_multipane);
+  final ActionBar actionBar=getSupportActionBar();
+  actionBar.setDisplayShowTitleEnabled(true);
+  final String customTitle=getIntent().getStringExtra(Intent.EXTRA_TITLE);
+  actionBar.setTitle(customTitle != null ? customTitle : getTitle());
+  if (savedInstanceState == null) {
+    mFragment=onCreatePane();
+    mFragment.setArguments(intentToFragmentArguments(getIntent()));
+    getSupportFragmentManager().beginTransaction().add(R.id.fragment_episodes,mFragment).commit();
+  }
+}

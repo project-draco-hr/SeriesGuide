@@ -1,0 +1,4 @@
+{
+  SharedPreferences prefs=PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+  updateSorting(prefs);
+}

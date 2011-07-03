@@ -1,0 +1,4 @@
+HttpUriRequest request
+HttpClient httpClient
+ContentHandler handler
+boolean isZipFile

@@ -1,0 +1,8 @@
+{
+  if (REFRESH.equals(intent.getAction())) {
+    context.startService(createUpdateIntent(context));
+  }
+ else {
+    super.onReceive(context,intent);
+  }
+}

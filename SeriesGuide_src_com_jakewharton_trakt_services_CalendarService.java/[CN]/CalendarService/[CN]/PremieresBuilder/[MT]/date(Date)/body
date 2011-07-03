@@ -1,0 +1,7 @@
+{
+  this.field(FIELD_DATE,date);
+  if (!this.hasField(FIELD_DAYS)) {
+    this.field(FIELD_DAYS,DEFAULT_DAYS);
+  }
+  return this;
+}

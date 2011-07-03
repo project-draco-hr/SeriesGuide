@@ -1,0 +1,61 @@
+{
+  String[] from=new String[]{Seasons.COMBINED,Seasons.WATCHCOUNT};
+  int[] to=new int[]{R.id.TextViewSeasonListTitle,R.id.TextViewSeasonListWatchCount};
+  mAdapter=new SimpleCursorAdapter(getActivity(),R.layout.season_row,null,from,to,CursorAdapter.NO_SELECTION);
+  mAdapter.setViewBinder(new ViewBinder(){
+    public boolean setViewValue(    View view,    Cursor cursor,    int columnIndex){
+      if (columnIndex == SeasonsQuery.WATCHCOUNT) {
+        TextView watchcount=(TextView)view;
+        String episodeCount="";
+        int count=cursor.getInt(SeasonsQuery.WATCHCOUNT);
+        int unairedCount=cursor.getInt(SeasonsQuery.UNAIREDCOUNT);
+        int noairdateCount=cursor.getInt(SeasonsQuery.NOAIRDATECOUNT);
+        if (count == 0) {
+          if (noairdateCount == 0) {
+            episodeCount+=getString(R.string.season_allwatched);
+          }
+ else {
+            episodeCount+=noairdateCount + " ";
+            if (noairdateCount == 1) {
+              episodeCount+=getString(R.string.oneotherepisode);
+            }
+ else {
+              episodeCount+=getString(R.string.otherepisodes);
+            }
+          }
+          watchcount.setTextColor(Color.GRAY);
+        }
+ else         if (count == 1) {
+          episodeCount+=count + " " + getString(R.string.season_onenotwatched);
+          watchcount.setTextColor(Color.WHITE);
+        }
+ else {
+          episodeCount+=count + " " + getString(R.string.season_watchcount);
+          watchcount.setTextColor(Color.WHITE);
+        }
+        if (unairedCount > 0) {
+          episodeCount+=" (+" + unairedCount + " "+ getString(R.string.season_unaired)+ ")";
+        }
+        watchcount.setText(episodeCount);
+        return true;
+      }
+      if (columnIndex == SeasonsQuery.COMBINED) {
+        TextView seasonNameTextView=(TextView)view;
+        String seasonNumber=cursor.getString(SeasonsQuery.COMBINED);
+        String seasonName;
+        if (seasonNumber.equals("0") || seasonNumber.length() == 0) {
+          seasonName=getString(R.string.specialseason);
+        }
+ else {
+          seasonName=getString(R.string.season) + " " + seasonNumber;
+        }
+        seasonNameTextView.setText(seasonName);
+        return true;
+      }
+      return false;
+    }
+  }
+);
+  setListAdapter(mAdapter);
+  getLoaderManager().initLoader(LOADER_ID,null,this);
+}

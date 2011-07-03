@@ -1,0 +1,15 @@
+{
+  Bundle arguments=new Bundle();
+  if (intent == null) {
+    return arguments;
+  }
+  final Uri data=intent.getData();
+  if (data != null) {
+    arguments.putParcelable("_uri",data);
+  }
+  final Bundle extras=intent.getExtras();
+  if (extras != null) {
+    arguments.putAll(intent.getExtras());
+  }
+  return arguments;
+}

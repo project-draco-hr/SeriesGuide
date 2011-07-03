@@ -1,0 +1,14 @@
+{
+  String url=this.buildUrl();
+  while (url.endsWith("/")) {
+    url=url.substring(0,url.length() - 2);
+  }
+switch (this.method) {
+case Get:
+    return this.service.get(url);
+case Post:
+  return this.service.post(url,this.postBody.toString());
+default :
+throw new IllegalArgumentException("Unknown HttpMethod type " + this.method.toString());
+}
+}

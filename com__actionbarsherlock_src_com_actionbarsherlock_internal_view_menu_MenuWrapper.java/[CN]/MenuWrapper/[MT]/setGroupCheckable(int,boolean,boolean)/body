@@ -1,0 +1,3 @@
+{
+  mMenu.setGroupCheckable(group,checkable,exclusive);
+}

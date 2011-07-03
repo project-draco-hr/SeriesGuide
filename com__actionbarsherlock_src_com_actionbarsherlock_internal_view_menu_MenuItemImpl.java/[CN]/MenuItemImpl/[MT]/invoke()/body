@@ -1,0 +1,40 @@
+{
+  if (hasSubMenu()) {
+    AlertDialog.Builder builder=new AlertDialog.Builder(mMenu.getContext());
+    builder.setTitle(getTitle());
+    final boolean isExclusive=(mSubMenu.size() > 0) && mSubMenu.getItem(0).isExclusiveCheckable();
+    final boolean isCheckable=(mSubMenu.size() > 0) && mSubMenu.getItem(0).isCheckable();
+    if (isExclusive) {
+      builder.setSingleChoiceItems(getSubMenuTitles(),getSubMenuSelected(),subMenuClick);
+    }
+ else     if (isCheckable) {
+      builder.setMultiChoiceItems(getSubMenuTitles(),getSubMenuChecked(),subMenuMultiClick);
+    }
+ else {
+      builder.setItems(getSubMenuTitles(),subMenuClick);
+    }
+    builder.show();
+    return true;
+  }
+  if (mClickListener != null && mClickListener.onMenuItemClick(this)) {
+    return true;
+  }
+  MenuBuilder.Callback callback=mMenu.getRootMenu().getCallback();
+  if (callback != null && callback.onMenuItemSelected(mMenu.getRootMenu(),this)) {
+    return true;
+  }
+  if (mItemCallback != null) {
+    mItemCallback.run();
+    return true;
+  }
+  if (mIntent != null) {
+    try {
+      mMenu.getContext().startActivity(mIntent);
+      return true;
+    }
+ catch (    ActivityNotFoundException e) {
+      Log.e(TAG,"Can't find activity to handle intent; ignoring",e);
+    }
+  }
+  return false;
+}

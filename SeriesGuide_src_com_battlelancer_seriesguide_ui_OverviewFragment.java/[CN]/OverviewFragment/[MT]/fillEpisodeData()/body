@@ -1,0 +1,39 @@
+{
+  final FragmentActivity context=getActivity();
+  if (context == null) {
+    return;
+  }
+  TextView nextheader=(TextView)context.findViewById(R.id.nextheader);
+  TextView episodetitle=(TextView)context.findViewById(R.id.TextViewEpisodeTitle);
+  TextView numbers=(TextView)context.findViewById(R.id.TextViewEpisodeNumbers);
+  String sharestring=getString(R.string.share_checkout);
+  String episodestring="";
+  sharestring+=" \"" + ((TextView)context.findViewById(R.id.seriesname)).getText();
+  if (episodeid != 0) {
+    episodetitle.setVisibility(View.VISIBLE);
+    numbers.setVisibility(View.VISIBLE);
+    LinearLayout episodemeta=(LinearLayout)context.findViewById(R.id.episodemeta);
+    episodemeta.setVisibility(View.VISIBLE);
+    final Cursor episode=context.getContentResolver().query(Episodes.buildEpisodeUri(String.valueOf(episodeid)),EpisodeQuery.PROJECTION,null,null,null);
+    episode.moveToFirst();
+    airdate=episode.getString(EpisodeQuery.FIRSTAIRED);
+    if (airdate.length() != 0) {
+      nextheader.setText(SeriesGuideData.parseDateToLocalRelative(airdate,show.getAirsTime(),context) + ":");
+    }
+    onLoadEpisodeDetails(episode);
+    episodestring=ShareUtils.onCreateShareString(context,episode);
+    String imagePath=episode.getString(EpisodeQuery.IMAGE);
+    onLoadImage(imagePath);
+    episode.close();
+  }
+ else {
+    nextheader.setText("  " + getString(R.string.no_nextepisode));
+    episodetitle.setVisibility(View.GONE);
+    numbers.setVisibility(View.GONE);
+    LinearLayout episodemeta=(LinearLayout)context.findViewById(R.id.episodemeta);
+    episodemeta.setVisibility(View.GONE);
+  }
+  sharestring+=" - " + episodestring + "\" via @SeriesGuide";
+  mShareData.putString(ShareItems.SHARESTRING,sharestring);
+  mShareData.putString(ShareItems.EPISODESTRING,episodestring);
+}

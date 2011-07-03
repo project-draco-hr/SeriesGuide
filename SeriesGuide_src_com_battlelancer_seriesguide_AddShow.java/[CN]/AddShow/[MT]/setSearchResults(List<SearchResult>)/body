@@ -1,0 +1,4 @@
+{
+  ArrayAdapter<SearchResult> adapter=new ArrayAdapter<SearchResult>(getApplicationContext(),R.layout.add_searchresult,searchResults);
+  ((ListView)findViewById(R.id.ListViewSearchResults)).setAdapter(adapter);
+}

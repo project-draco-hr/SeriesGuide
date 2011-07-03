@@ -1,0 +1,45 @@
+{
+  final SelectionBuilder builder=new SelectionBuilder();
+  final int match=sUriMatcher.match(uri);
+switch (match) {
+case SHOWS_ID:
+{
+      final String showId=Shows.getShowId(uri);
+      return builder.table(Tables.SHOWS).where(Shows._ID + "=?",showId);
+    }
+case EPISODES_OFSHOW:
+{
+    final String showId=uri.getPathSegments().get(2);
+    return builder.table(Tables.EPISODES).where(Shows.REF_SHOW_ID + "=?",showId);
+  }
+case EPISODES_OFSEASON:
+{
+  final String seasonId=uri.getPathSegments().get(2);
+  return builder.table(Tables.EPISODES).where(Seasons.REF_SEASON_ID + "=?",seasonId);
+}
+case EPISODES_ID:
+{
+final String episodeId=Episodes.getEpisodeId(uri);
+return builder.table(Tables.EPISODES).where(Episodes._ID + "=?",episodeId);
+}
+case SEASONS_OFSHOW:
+{
+final String showId=uri.getPathSegments().get(2);
+return builder.table(Tables.SEASONS).where(Shows.REF_SHOW_ID + "=?",showId);
+}
+case SEASONS_ID:
+{
+final String seasonId=Seasons.getSeasonId(uri);
+return builder.table(Tables.SEASONS).where(Seasons._ID + "=?",seasonId);
+}
+case EPISODESEARCH_ID:
+{
+final String rowid=EpisodeSearch.getDocId(uri);
+return builder.table(Tables.EPISODES_SEARCH).where(EpisodeSearch._DOCID + "=?",rowid);
+}
+default :
+{
+throw new UnsupportedOperationException("Unknown uri: " + uri);
+}
+}
+}

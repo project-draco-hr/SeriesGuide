@@ -1,0 +1,12 @@
+{
+  if (mUpdateTask != null && mUpdateTask.getStatus() == AsyncTask.Status.RUNNING) {
+    mUpdateTask.cancel(true);
+    mUpdateTask=null;
+    AnalyticsUtils.getInstance(this).trackEvent("Shows","Task Lifecycle","Update Task Canceled",0);
+  }
+  if (mArtTask != null && mArtTask.getStatus() == AsyncTask.Status.RUNNING) {
+    mArtTask.cancel(true);
+    mArtTask=null;
+    AnalyticsUtils.getInstance(this).trackEvent("Shows","Task Lifecycle","Art Task Canceled",0);
+  }
+}

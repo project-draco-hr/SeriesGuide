@@ -1,0 +1,3 @@
+{
+  mLogo.setVisibility(visibility);
+}

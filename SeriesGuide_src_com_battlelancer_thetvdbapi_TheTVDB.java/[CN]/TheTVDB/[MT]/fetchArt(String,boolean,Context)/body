@@ -1,0 +1,32 @@
+{
+  if (fileName == null) {
+    return true;
+  }
+  Bitmap bitmap=null;
+  ImageCache imageCache=((SeriesGuideApplication)context.getApplicationContext()).getImageCache();
+  boolean resultCode=true;
+  if (fileName.length() != 0 && imageCache.get(fileName) == null) {
+    try {
+      String imageUrl;
+      if (isPoster) {
+        imageUrl=mirror_banners + "/_cache/" + fileName;
+      }
+ else {
+        imageUrl=mirror_banners + "/" + fileName;
+      }
+      bitmap=downloadBitmap(imageUrl);
+      if (bitmap != null) {
+        imageCache.put(fileName,bitmap);
+        if (isPoster) {
+          imageCache.getThumbHelper(fileName);
+        }
+      }
+ else {
+        resultCode=false;
+      }
+    }
+ catch (    MalformedURLException e) {
+    }
+  }
+  return resultCode;
+}

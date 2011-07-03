@@ -1,0 +1,5 @@
+{
+  final SimpleMenuItem item=new SimpleMenuItem(this,itemId,order,title);
+  mItems.add(findInsertIndex(mItems,order),item);
+  return item;
+}

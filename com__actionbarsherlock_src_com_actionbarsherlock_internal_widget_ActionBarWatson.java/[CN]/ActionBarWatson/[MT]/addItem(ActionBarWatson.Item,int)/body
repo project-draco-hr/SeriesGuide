@@ -1,0 +1,6 @@
+{
+  if (item instanceof HomeItem) {
+    throw new IllegalStateException("Cannot add home item as an action item.");
+  }
+  mActionsView.addView(item,position);
+}

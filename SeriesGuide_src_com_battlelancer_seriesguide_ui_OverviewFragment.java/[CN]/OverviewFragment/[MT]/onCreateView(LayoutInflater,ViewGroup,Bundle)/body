@@ -1,0 +1,8 @@
+{
+  if (container == null) {
+    return null;
+  }
+  View v=inflater.inflate(R.layout.overview_fragment,container,false);
+  initializeViews(v);
+  return v;
+}

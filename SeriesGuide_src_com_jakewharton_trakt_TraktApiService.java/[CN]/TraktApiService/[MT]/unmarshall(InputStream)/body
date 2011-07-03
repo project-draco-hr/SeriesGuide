@@ -1,0 +1,20 @@
+{
+  try {
+    JsonElement element=this.parser.parse(new InputStreamReader(jsonContent,UTF_8_CHAR_SET));
+    if (element.isJsonObject()) {
+      return element.getAsJsonObject();
+    }
+ else     if (element.isJsonArray()) {
+      return element.getAsJsonArray();
+    }
+ else {
+      throw new ApiException("Unknown content found in response." + element);
+    }
+  }
+ catch (  Exception e) {
+    throw new ApiException(e);
+  }
+ finally {
+    ApiService.closeStream(jsonContent);
+  }
+}

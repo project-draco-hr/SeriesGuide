@@ -1,0 +1,13 @@
+{
+switch (resultCode) {
+case UPDATE_SUCCESS:
+    AnalyticsUtils.getInstance(ShowsActivity.this).trackEvent("Shows","Fetch missing posters","Success",0);
+  Toast.makeText(getApplicationContext(),getString(R.string.update_success),Toast.LENGTH_SHORT).show();
+break;
+case UPDATE_INCOMPLETE:
+AnalyticsUtils.getInstance(ShowsActivity.this).trackEvent("Shows","Fetch missing posters","Incomplete",0);
+Toast.makeText(getApplicationContext(),getString(R.string.imagedownload_incomplete),Toast.LENGTH_LONG).show();
+break;
+}
+hideOverlay(mProgressOverlay);
+}

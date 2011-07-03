@@ -1,0 +1,6 @@
+{
+  Cursor testsearch=context.getContentResolver().query(Shows.buildShowUri(showId),new String[]{Shows._ID},null,null,null);
+  boolean isShowExists=testsearch.getCount() != 0 ? true : false;
+  testsearch.close();
+  return isShowExists;
+}

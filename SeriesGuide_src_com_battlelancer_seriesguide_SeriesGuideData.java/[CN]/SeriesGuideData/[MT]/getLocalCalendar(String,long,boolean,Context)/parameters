@@ -1,0 +1,4 @@
+String tvdbDateString
+long airtime
+boolean useUserTimeZone
+Context context

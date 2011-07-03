@@ -1,0 +1,11 @@
+{
+  getActionBar().setListNavigationCallbacks(adapter,new android.app.ActionBar.OnNavigationListener(){
+    @Override public boolean onNavigationItemSelected(    int itemPosition,    long itemId){
+      if (callback != null) {
+        return callback.onNavigationItemSelected(itemPosition,itemId);
+      }
+      return false;
+    }
+  }
+);
+}

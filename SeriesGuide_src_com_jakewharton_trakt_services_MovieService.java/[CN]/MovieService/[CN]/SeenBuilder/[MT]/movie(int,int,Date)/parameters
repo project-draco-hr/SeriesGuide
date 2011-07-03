@@ -1,0 +1,3 @@
+int tmdbId
+int plays
+Date lastPlayed

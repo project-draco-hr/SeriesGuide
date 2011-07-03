@@ -1,0 +1,8 @@
+{
+  final int count=mSubMenu.size();
+  CharSequence[] list=new CharSequence[count];
+  for (int i=0; i < count; i++) {
+    list[i]=mSubMenu.getItem(i).getTitle();
+  }
+  return list;
+}

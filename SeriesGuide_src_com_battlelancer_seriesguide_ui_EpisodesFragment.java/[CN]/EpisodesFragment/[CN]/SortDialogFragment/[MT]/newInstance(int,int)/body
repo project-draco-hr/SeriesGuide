@@ -1,0 +1,8 @@
+{
+  SortDialogFragment f=new SortDialogFragment();
+  Bundle args=new Bundle();
+  args.putInt("index",index);
+  args.putInt("sortingarray",sortingArray);
+  f.setArguments(args);
+  return f;
+}

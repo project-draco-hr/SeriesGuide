@@ -1,0 +1,6 @@
+{
+  mIcon=icon;
+  mIconRes=View.NO_ID;
+  setIconOnViews(icon);
+  return this;
+}

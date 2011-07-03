@@ -1,0 +1,7 @@
+{
+  super(context,attrs,defStyle);
+  LayoutInflater.from(context).inflate(R.layout.actionbarwatson_item_home,this,true);
+  mLogo=(ImageView)findViewById(R.id.actionbarwatson_home_logo);
+  mIcon=(ImageView)findViewById(R.id.actionbarwatson_home_icon);
+  mUpIndicator=findViewById(R.id.actionbarwatson_home_as_up_indicator);
+}

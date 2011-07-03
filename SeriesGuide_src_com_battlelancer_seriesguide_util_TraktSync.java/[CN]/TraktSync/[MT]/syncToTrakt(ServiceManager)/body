@@ -1,0 +1,43 @@
+{
+  Cursor showTvdbIds=mContext.getContentResolver().query(Shows.CONTENT_URI,new String[]{Shows._ID},null,null,null);
+  if (showTvdbIds.getCount() == 0) {
+    return SUCCESS_NOWORK;
+  }
+  while (showTvdbIds.moveToNext()) {
+    String tvdbId=showTvdbIds.getString(0);
+    EpisodeSeenBuilder builder=manager.showService().episodeSeen(Integer.valueOf(tvdbId));
+    Cursor seenEpisodes=mContext.getContentResolver().query(Episodes.buildEpisodesOfShowUri(tvdbId),new String[]{Episodes.SEASON,Episodes.NUMBER},Episodes.WATCHED + "=?",new String[]{"1"},null);
+    while (seenEpisodes.moveToNext()) {
+      int season=seenEpisodes.getInt(0);
+      int episode=seenEpisodes.getInt(1);
+      builder.episode(season,episode);
+    }
+    seenEpisodes.close();
+    EpisodeUnseenBuilder builderUnseen=null;
+    if (mIsSyncingUnseen) {
+      builderUnseen=manager.showService().episodeUnseen(Integer.valueOf(tvdbId));
+      Cursor unseenEpisodes=mContext.getContentResolver().query(Episodes.buildEpisodesOfShowUri(tvdbId),new String[]{Episodes.SEASON,Episodes.NUMBER},Episodes.WATCHED + "=?",new String[]{"0"},null);
+      while (unseenEpisodes.moveToNext()) {
+        int season=unseenEpisodes.getInt(0);
+        int episode=unseenEpisodes.getInt(1);
+        builder.episode(season,episode);
+      }
+      unseenEpisodes.close();
+    }
+    if (isCancelled()) {
+      showTvdbIds.close();
+      return null;
+    }
+    try {
+      builder.fire();
+      if (mIsSyncingUnseen) {
+        builderUnseen.fire();
+      }
+    }
+ catch (    ApiException e) {
+      return FAILED_API;
+    }
+  }
+  showTvdbIds.close();
+  return SUCCESS_WORK;
+}

@@ -1,0 +1,4 @@
+{
+  mCustomView=view;
+  return this;
+}

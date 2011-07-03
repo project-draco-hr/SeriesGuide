@@ -1,0 +1,4 @@
+{
+  this.postBody.add(name,value);
+  return this;
+}

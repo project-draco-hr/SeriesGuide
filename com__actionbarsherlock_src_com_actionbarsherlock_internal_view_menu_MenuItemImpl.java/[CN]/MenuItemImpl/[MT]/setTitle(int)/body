@@ -1,0 +1,4 @@
+{
+  mTitle=mMenu.getContext().getResources().getString(titleResourceId);
+  return this;
+}

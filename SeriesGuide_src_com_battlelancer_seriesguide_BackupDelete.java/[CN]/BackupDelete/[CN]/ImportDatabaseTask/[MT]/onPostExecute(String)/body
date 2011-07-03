@@ -1,0 +1,15 @@
+{
+  if (importProgress.isShowing()) {
+    importProgress.dismiss();
+  }
+  if (errMsg == null) {
+    AnalyticsUtils.getInstance(BackupDelete.this).trackEvent(TAG,"Import","Success",0);
+    Toast.makeText(BackupDelete.this,getString(R.string.import_success),Toast.LENGTH_SHORT).show();
+  }
+ else {
+    AnalyticsUtils.getInstance(BackupDelete.this).trackEvent(TAG,"Import",errMsg,0);
+    Toast.makeText(BackupDelete.this,getString(R.string.import_failed) + " - " + errMsg,Toast.LENGTH_LONG).show();
+  }
+  setResult(RESULT_OK);
+  finish();
+}

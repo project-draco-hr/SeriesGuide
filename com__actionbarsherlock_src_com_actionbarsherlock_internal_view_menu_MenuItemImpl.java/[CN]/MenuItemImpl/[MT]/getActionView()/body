@@ -1,0 +1,9 @@
+{
+  if (mActionView != null) {
+    return mActionView;
+  }
+  if (mActionViewRes != View.NO_ID) {
+    return LayoutInflater.from(mMenu.getContext()).inflate(mActionViewRes,null,false);
+  }
+  return null;
+}

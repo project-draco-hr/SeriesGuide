@@ -1,0 +1,44 @@
+{
+  int maxItems=MAX_ACTION_BAR_ITEMS_PORTRAIT;
+  if (getActivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+    maxItems=MAX_ACTION_BAR_ITEMS_LANDSCAPE;
+  }
+  int ifItems=0;
+  final int count=menu.size();
+  List<MenuItemImpl> keep=new ArrayList<MenuItemImpl>();
+  for (int i=0; i < count; i++) {
+    MenuItemImpl item=(MenuItemImpl)menu.getItem(i);
+    if (!mIsActionItemTextEnabled && (item.getIcon() == null)) {
+      continue;
+    }
+ else     if (mIsActionItemTextEnabled && ((item.getTitle() == null) || item.getTitle().equals(""))) {
+      continue;
+    }
+    if ((item.getShowAsAction() & MenuItem.SHOW_AS_ACTION_ALWAYS) != 0) {
+      keep.add(item);
+      if ((keep.size() > maxItems) && (ifItems > 0)) {
+        for (int j=keep.size() - 1; j >= 0; j--) {
+          if ((keep.get(j).getShowAsAction() & MenuItem.SHOW_AS_ACTION_IF_ROOM) != 0) {
+            keep.remove(j);
+            ifItems-=1;
+            break;
+          }
+        }
+      }
+    }
+ else     if (((item.getShowAsAction() & MenuItem.SHOW_AS_ACTION_IF_ROOM) != 0) && (keep.size() < maxItems)) {
+      keep.add(item);
+      ifItems+=1;
+    }
+  }
+  mActionBar.removeAllItems();
+  mActionBar.setIsActionItemTextEnabled(mIsActionItemTextEnabled);
+  for (  MenuItemImpl item : keep) {
+    item.setIsShownOnActionBar(true);
+    ActionBarWatson.Item watsonItem=mActionBar.newItem();
+    WatsonItemViewWrapper watsonWrapper=new WatsonItemViewWrapper(watsonItem);
+    watsonWrapper.initialize(item,MenuBuilder.TYPE_WATSON);
+    item.setItemView(MenuBuilder.TYPE_WATSON,watsonWrapper);
+    mActionBar.addItem(watsonItem);
+  }
+}

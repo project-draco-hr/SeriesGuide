@@ -1,0 +1,11 @@
+{
+  if (mNavigationMode == ActionBar.NAVIGATION_MODE_TABS) {
+    ActionBar.Tab tab=getTabAt(position);
+    if (tab != null) {
+      tab.select();
+    }
+  }
+ else   if (mNavigationMode == ActionBar.NAVIGATION_MODE_LIST) {
+    mListView.setSelection(position);
+  }
+}

@@ -1,0 +1,62 @@
+{
+switch (id) {
+case ABOUT_DIALOG:
+{
+      final TextView message=new TextView(this);
+      message.setAutoLinkMask(Linkify.ALL);
+      message.setText(getString(R.string.about_message));
+      message.setPadding(10,5,10,5);
+      message.setTextSize(16);
+      final ScrollView aboutScroll=new ScrollView(this);
+      aboutScroll.addView(message);
+      return new AlertDialog.Builder(this).setTitle(getString(R.string.about)).setCancelable(true).setIcon(R.drawable.icon).setPositiveButton(getString(android.R.string.ok),null).setView(aboutScroll).create();
+    }
+case TRAKT_DIALOG:
+{
+    AlertDialog.Builder builder;
+    LayoutInflater inflater=(LayoutInflater)getSystemService(LAYOUT_INFLATER_SERVICE);
+    final View layout=inflater.inflate(R.layout.trakt_credentials_dialog,null);
+    builder=new AlertDialog.Builder(this);
+    builder.setView(layout);
+    builder.setTitle(R.string.pref_trakt);
+    SharedPreferences prefs=PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+    String username=prefs.getString(PREF_TRAKTUSER,"");
+    String password=prefs.getString(PREF_TRAKTPWD,"");
+    try {
+      password=SimpleCrypto.decrypt(password,this);
+    }
+ catch (    Exception e) {
+      password="";
+    }
+    ((EditText)layout.findViewById(R.id.username)).setText(username);
+    ((EditText)layout.findViewById(R.id.password)).setText(password);
+    builder.setPositiveButton(R.string.save,new OnClickListener(){
+      public void onClick(      DialogInterface dialog,      int which){
+        SharedPreferences prefs=PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        String username=((EditText)layout.findViewById(R.id.username)).getText().toString();
+        String password=((EditText)layout.findViewById(R.id.password)).getText().toString();
+        try {
+          password=SimpleCrypto.encrypt(password,SeriesGuidePreferences.this);
+        }
+ catch (        Exception e) {
+          password="";
+        }
+        Editor editor=prefs.edit();
+        editor.putString(PREF_TRAKTUSER,username);
+        editor.putString(PREF_TRAKTPWD,password);
+        editor.commit();
+        removeDialog(TRAKT_DIALOG);
+      }
+    }
+);
+    builder.setNegativeButton(R.string.dontsave,new OnClickListener(){
+      public void onClick(      DialogInterface dialog,      int which){
+        removeDialog(TRAKT_DIALOG);
+      }
+    }
+);
+    return builder.create();
+  }
+}
+return null;
+}

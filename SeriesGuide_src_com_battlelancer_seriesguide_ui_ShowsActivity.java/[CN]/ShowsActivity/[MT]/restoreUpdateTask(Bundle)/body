@@ -1,0 +1,11 @@
+{
+  if (savedInstanceState.getBoolean(STATE_UPDATE_IN_PROGRESS)) {
+    String[] shows=savedInstanceState.getStringArray(STATE_UPDATE_SHOWS);
+    int index=savedInstanceState.getInt(STATE_UPDATE_INDEX);
+    String failedShows=savedInstanceState.getString(STATE_UPDATE_FAILEDSHOWS);
+    if (shows != null) {
+      mUpdateTask=(UpdateTask)new UpdateTask(shows,index,failedShows,this).execute();
+      AnalyticsUtils.getInstance(this).trackEvent("Shows","Task Lifecycle","Update Task Restored",0);
+    }
+  }
+}

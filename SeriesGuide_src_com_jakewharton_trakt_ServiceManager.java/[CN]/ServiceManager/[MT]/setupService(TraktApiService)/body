@@ -1,0 +1,23 @@
+{
+  if (this.apiKeyValue != null) {
+    service.setApiKey(this.apiKeyValue);
+  }
+  if ((this.username != null) && (this.password_sha != null)) {
+    service.setAuthentication(this.username,this.password_sha);
+  }
+  if (this.connectionTimeout != null) {
+    service.setConnectTimeout(this.connectionTimeout);
+  }
+  if (this.readTimeout != null) {
+    service.setReadTimeout(this.readTimeout);
+  }
+  if (this.pluginVersion != null) {
+    service.setPluginVersion(this.pluginVersion);
+  }
+  if (this.mediaCenterVersion != null) {
+    service.setMediaCenterVersion(this.mediaCenterVersion);
+  }
+  if (this.mediaCenterDate != null) {
+    service.setMediaCenterDate(this.mediaCenterDate);
+  }
+}

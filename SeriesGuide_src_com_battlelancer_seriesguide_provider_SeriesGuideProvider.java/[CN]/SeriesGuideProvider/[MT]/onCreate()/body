@@ -1,0 +1,6 @@
+{
+  final Context context=getContext();
+  mOpenHelper=new SeriesGuideDatabase(context);
+  PreferenceManager.getDefaultSharedPreferences(context).registerOnSharedPreferenceChangeListener(mImportListener);
+  return true;
+}

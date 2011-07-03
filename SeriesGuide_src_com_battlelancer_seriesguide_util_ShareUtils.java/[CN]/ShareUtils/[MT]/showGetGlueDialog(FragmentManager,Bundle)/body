@@ -1,0 +1,5 @@
+{
+  GetGlueDialogFragment newFragment=GetGlueDialogFragment.newInstance(shareData);
+  FragmentTransaction ft=manager.beginTransaction();
+  newFragment.show(ft,"getgluedialog");
+}

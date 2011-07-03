@@ -1,0 +1,9 @@
+{
+  if (isFinishedAddingShows) {
+    return false;
+  }
+ else {
+    mAddQueue.add(show);
+    return true;
+  }
+}

@@ -1,0 +1,4 @@
+{
+  this.postParameter(POST_IMDB_ID,imdbId);
+  return this;
+}

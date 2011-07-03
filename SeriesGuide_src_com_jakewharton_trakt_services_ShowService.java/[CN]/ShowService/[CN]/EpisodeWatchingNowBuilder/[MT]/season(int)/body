@@ -1,0 +1,4 @@
+{
+  this.field(FIELD_SEASON,season);
+  return this;
+}

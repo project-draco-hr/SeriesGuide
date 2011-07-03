@@ -1,0 +1,8 @@
+{
+  this.parser=new JsonParser();
+  this.setConnectTimeout(DEFAULT_TIMEOUT_CONNECT);
+  this.setReadTimeout(DEFAULT_TIMEOUT_READ);
+  this.setPluginVersion(DEFAULT_PLUGIN_VERSION);
+  this.setMediaCenterVersion(DEFAULT_MEDIA_CENTER_VERSION);
+  this.setMediaCenterDate(DEFAULT_MEDIA_CENTER_DATE);
+}

@@ -1,0 +1,4 @@
+{
+  this.mMenuItem.setTitleCondensed(title);
+  return this;
+}

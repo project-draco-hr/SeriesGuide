@@ -1,0 +1,4 @@
+SimpleMenu menu
+int id
+int order
+CharSequence title

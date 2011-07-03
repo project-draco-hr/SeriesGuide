@@ -1,0 +1,7 @@
+{
+  JsonObject show=new JsonObject();
+  show.addProperty(POST_TITLE,title);
+  show.addProperty(POST_YEAR,year);
+  this.showList.add(show);
+  return this;
+}

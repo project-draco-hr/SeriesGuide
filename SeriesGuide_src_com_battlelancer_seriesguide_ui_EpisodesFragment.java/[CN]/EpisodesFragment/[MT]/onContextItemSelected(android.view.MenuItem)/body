@@ -1,0 +1,16 @@
+{
+  AdapterContextMenuInfo info=(AdapterContextMenuInfo)item.getMenuInfo();
+switch (item.getItemId()) {
+case MARK_WATCHED_ID:
+    markEpisode(String.valueOf(info.id),true);
+  return true;
+case MARK_UNWATCHED_ID:
+markEpisode(String.valueOf(info.id),false);
+return true;
+case DELETE_EPISODE_ID:
+getActivity().getContentResolver().delete(Episodes.buildEpisodeUri(String.valueOf(info.id)),null,null);
+getActivity().getContentResolver().notifyChange(Episodes.buildEpisodesOfSeasonUri(getSeasonId()),null);
+return true;
+}
+return super.onContextItemSelected(item);
+}

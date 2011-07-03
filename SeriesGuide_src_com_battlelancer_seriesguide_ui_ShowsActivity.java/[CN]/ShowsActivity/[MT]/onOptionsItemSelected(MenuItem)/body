@@ -1,0 +1,44 @@
+{
+switch (item.getItemId()) {
+case R.id.menu_search:
+    fireTrackerEvent("Search");
+  onSearchRequested();
+return true;
+case R.id.menu_update:
+fireTrackerEvent("Update all shows");
+if (!isUpdateTaskRunning() && !isArtTaskRunning()) {
+updateAllShows();
+}
+return true;
+case R.id.menu_upcoming:
+startActivity(new Intent(this,UpcomingRecentActivity.class));
+return true;
+case R.id.menu_new_show:
+startActivity(new Intent(this,AddShow.class));
+return true;
+case R.id.menu_showsortby:
+fireTrackerEvent("Sort shows");
+showDialog(SORT_DIALOG);
+return true;
+case R.id.menu_updateart:
+fireTrackerEvent("Fetch missing posters");
+if (isArtTaskRunning() || isUpdateTaskRunning()) {
+return true;
+}
+if (!UIUtils.isExtStorageAvailable()) {
+Toast.makeText(this,getString(R.string.update_nosdcard),Toast.LENGTH_LONG).show();
+}
+ else {
+Toast.makeText(this,getString(R.string.update_inbackground),Toast.LENGTH_LONG).show();
+mArtTask=(FetchArtTask)new FetchArtTask().execute();
+}
+return true;
+case R.id.menu_preferences:
+startActivity(new Intent(this,SeriesGuidePreferences.class));
+return true;
+default :
+{
+return super.onOptionsItemSelected(item);
+}
+}
+}

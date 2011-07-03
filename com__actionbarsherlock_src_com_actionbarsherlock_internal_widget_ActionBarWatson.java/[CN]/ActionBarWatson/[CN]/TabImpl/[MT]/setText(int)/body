@@ -1,0 +1,4 @@
+{
+  mTextView.setText(resId);
+  return this;
+}

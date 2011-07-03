@@ -1,0 +1,39 @@
+{
+  boolean result=super.onPrepareOptionsMenu(menu);
+  if (!IS_HONEYCOMB) {
+    if (DEBUG) {
+      Log.d(TAG,"onPrepareOptionsMenu(android.view.Menu): mOptionsMenuCreateResult = " + mOptionsMenuCreateResult);
+      Log.d(TAG,"onPrepareOptionsMenu(android.view.Menu): mOptionsMenuInvalidated = " + mOptionsMenuInvalidated);
+    }
+    boolean prepareResult=true;
+    if (mOptionsMenuCreateResult) {
+      if (DEBUG)       Log.d(TAG,"onPrepareOptionsMenu(android.view.Menu): Calling support method with custom menu.");
+      prepareResult=onPrepareOptionsMenu(mActionBarMenu);
+      if (DEBUG)       Log.d(TAG,"onPrepareOptionsMenu(android.view.Menu): Support method result returned " + prepareResult);
+    }
+    if (mOptionsMenuInvalidated) {
+      if (DEBUG)       Log.d(TAG,"onPrepareOptionsMenu(android.view.Menu): Clearing existing options menu.");
+      menu.clear();
+      mOptionsMenuInvalidated=false;
+      if (mOptionsMenuCreateResult && prepareResult) {
+        if (DEBUG)         Log.d(TAG,"onPrepareOptionsMenu(android.view.Menu): Adding any action items that are not displayed on the action bar.");
+        for (        MenuItemImpl item : mActionBarMenu.getItems()) {
+          if (!item.isShownOnActionBar()) {
+            item.addTo(menu);
+          }
+        }
+      }
+    }
+    if (mOptionsMenuCreateResult && prepareResult && menu.hasVisibleItems()) {
+      if (DEBUG)       Log.d(TAG,"onPrepareOptionsMenu(android.view.Menu): Dispatch menu visibility true to custom action bar.");
+      mActionBar.onMenuVisibilityChanged(true);
+      result=true;
+    }
+  }
+ else {
+    if (DEBUG)     Log.d(TAG,"onPrepareOptionsMenu(android.view.Menu): Calling support method with custom menu.");
+    result=onPrepareOptionsMenu(new MenuWrapper(menu));
+  }
+  if (DEBUG)   Log.d(TAG,"onPrepareOptionsMenu(android.view.Menu): Returning " + result);
+  return result;
+}

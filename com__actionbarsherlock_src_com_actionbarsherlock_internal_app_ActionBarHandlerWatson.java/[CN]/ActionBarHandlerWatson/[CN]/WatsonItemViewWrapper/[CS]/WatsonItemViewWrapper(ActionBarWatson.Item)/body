@@ -1,0 +1,4 @@
+{
+  mWatsonItem=item;
+  mWatsonItem.setOnClickListener(this);
+}

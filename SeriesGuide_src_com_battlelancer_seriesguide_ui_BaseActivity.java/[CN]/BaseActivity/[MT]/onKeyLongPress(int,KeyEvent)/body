@@ -1,0 +1,3 @@
+{
+  return mActivityHelper.onKeyLongPress(keyCode,event) || super.onKeyLongPress(keyCode,event);
+}

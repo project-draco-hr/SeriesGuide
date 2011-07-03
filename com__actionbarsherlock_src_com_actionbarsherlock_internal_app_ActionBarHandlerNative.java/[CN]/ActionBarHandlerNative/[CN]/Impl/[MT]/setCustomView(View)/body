@@ -1,0 +1,3 @@
+{
+  getActionBar().setCustomView(view);
+}

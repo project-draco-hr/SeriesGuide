@@ -1,0 +1,5 @@
+{
+  super.onFocusChanged(gainFocus,direction,previouslyFocusedRect);
+  this.hasFocus=gainFocus;
+  updateStateImage();
+}

@@ -1,0 +1,12 @@
+{
+  final Object[] params=new Object[]{item};
+  try {
+    if (mMethod.getReturnType() == Boolean.TYPE) {
+      return (Boolean)mMethod.invoke(MenuInflater.this,params);
+    }
+    return false;
+  }
+ catch (  Exception e) {
+    throw new RuntimeException(e);
+  }
+}

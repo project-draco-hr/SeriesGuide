@@ -1,0 +1,23 @@
+{
+  ContentResolver resolver=context.getContentResolver();
+  Date date=new Date();
+  String today=SeriesGuideData.theTVDBDateFormat.format(date);
+  Uri episodesOfSeasonUri=Episodes.buildEpisodesOfSeasonUri(seasonid);
+  String selection=Episodes.WATCHED + "=? AND " + Episodes.FIRSTAIRED+ " like '%-%'"+ " AND "+ Episodes.FIRSTAIRED+ "<=?";
+  Cursor unwatched=resolver.query(episodesOfSeasonUri,new String[]{Episodes._ID},selection,new String[]{"0",today},null);
+  int count=unwatched.getCount();
+  unwatched.close();
+  selection=Episodes.WATCHED + "=? AND " + Episodes.FIRSTAIRED+ ">?";
+  Cursor unaired=resolver.query(episodesOfSeasonUri,new String[]{Episodes._ID},selection,new String[]{"0",today},null);
+  int unaired_count=unaired.getCount();
+  unaired.close();
+  selection=Episodes.WATCHED + "=? AND " + Episodes.FIRSTAIRED+ "=?";
+  Cursor noairdate=resolver.query(episodesOfSeasonUri,new String[]{Episodes._ID},selection,new String[]{"0",""},null);
+  int noairdate_count=noairdate.getCount();
+  noairdate.close();
+  ContentValues update=new ContentValues();
+  update.put(Seasons.WATCHCOUNT,count);
+  update.put(Seasons.UNAIREDCOUNT,unaired_count);
+  update.put(Seasons.NOAIRDATECOUNT,noairdate_count);
+  resolver.update(Seasons.buildSeasonUri(seasonid),update,null,null);
+}

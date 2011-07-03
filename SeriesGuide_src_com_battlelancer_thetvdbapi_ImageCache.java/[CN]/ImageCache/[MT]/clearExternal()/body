@@ -1,0 +1,9 @@
+{
+  File directory=new File(mSecondLevelCacheDir);
+  File[] files=directory.listFiles();
+  if (files != null) {
+    for (    File file : files) {
+      file.delete();
+    }
+  }
+}

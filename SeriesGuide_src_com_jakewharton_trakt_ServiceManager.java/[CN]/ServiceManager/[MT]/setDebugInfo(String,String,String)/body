@@ -1,0 +1,6 @@
+{
+  this.pluginVersion=pluginVersion;
+  this.mediaCenterVersion=mediaCenterVersion;
+  this.mediaCenterDate=mediaCenterDate;
+  return this;
+}

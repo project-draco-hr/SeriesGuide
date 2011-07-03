@@ -1,0 +1,5 @@
+{
+  UserService service=ServiceManager.createUserService();
+  this.setupService(service);
+  return service;
+}

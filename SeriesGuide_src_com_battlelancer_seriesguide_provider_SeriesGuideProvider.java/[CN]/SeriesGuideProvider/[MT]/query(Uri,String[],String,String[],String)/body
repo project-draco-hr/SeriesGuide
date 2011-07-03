@@ -1,0 +1,35 @@
+{
+  if (LOGV) {
+    Log.v(TAG,"query(uri=" + uri + ", proj="+ Arrays.toString(projection)+ ")");
+  }
+  final SQLiteDatabase db=mOpenHelper.getReadableDatabase();
+  final int match=sUriMatcher.match(uri);
+switch (match) {
+case RENEW_FTSTABLE:
+{
+      SeriesGuideDatabase.onRenewFTSTable(db);
+      return null;
+    }
+case EPISODESEARCH:
+{
+    if (selectionArgs == null) {
+      throw new IllegalArgumentException("selectionArgs must be provided for the Uri: " + uri);
+    }
+    return SeriesGuideDatabase.search(selectionArgs[0],db);
+  }
+case SEARCH_SUGGEST:
+{
+  if (selectionArgs == null) {
+    throw new IllegalArgumentException("selectionArgs must be provided for the Uri: " + uri);
+  }
+  return SeriesGuideDatabase.getSuggestions(selectionArgs[0],db);
+}
+default :
+{
+final SelectionBuilder builder=buildExpandedSelection(uri,match);
+Cursor query=builder.where(selection,selectionArgs).query(db,projection,sortOrder);
+query.setNotificationUri(getContext().getContentResolver(),uri);
+return query;
+}
+}
+}

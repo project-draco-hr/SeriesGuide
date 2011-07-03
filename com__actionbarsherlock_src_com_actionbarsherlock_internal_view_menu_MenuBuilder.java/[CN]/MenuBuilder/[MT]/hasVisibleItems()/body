@@ -1,0 +1,8 @@
+{
+  for (  MenuItem item : this.mItems) {
+    if (item.isVisible()) {
+      return true;
+    }
+  }
+  return false;
+}

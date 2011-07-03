@@ -1,0 +1,5 @@
+{
+  SeriesDatabase.markSeasonEpisodes(getActivity(),String.valueOf(seasonid),state);
+  Thread t=new UpdateUnwatchThread(getShowId(),String.valueOf(seasonid),true);
+  t.start();
+}

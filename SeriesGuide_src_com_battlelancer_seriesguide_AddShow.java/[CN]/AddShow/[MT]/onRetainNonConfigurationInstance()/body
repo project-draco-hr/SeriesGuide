@@ -1,0 +1,8 @@
+{
+  data.detach(this);
+  if (addTask != null && addTask.getStatus() == AsyncTask.Status.RUNNING) {
+    addTask.cancel(true);
+    addTask=null;
+  }
+  return data;
+}

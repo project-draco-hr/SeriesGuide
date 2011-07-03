@@ -1,0 +1,9 @@
+{
+  if (mNavigationMode == ActionBar.NAVIGATION_MODE_LIST) {
+    return mListView.getCount();
+  }
+  if (mNavigationMode == ActionBar.NAVIGATION_MODE_TABS) {
+    return mTabsView.getChildCount();
+  }
+  return 0;
+}

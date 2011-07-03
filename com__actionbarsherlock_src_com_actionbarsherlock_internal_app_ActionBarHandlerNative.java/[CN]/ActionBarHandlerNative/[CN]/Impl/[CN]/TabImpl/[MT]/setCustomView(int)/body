@@ -1,0 +1,4 @@
+{
+  mCustomView=mActionBar.getActivity().getLayoutInflater().inflate(layoutResId,null);
+  return this;
+}

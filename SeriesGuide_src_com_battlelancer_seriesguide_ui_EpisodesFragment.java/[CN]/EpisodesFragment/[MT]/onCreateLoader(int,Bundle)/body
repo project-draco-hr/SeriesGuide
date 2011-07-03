@@ -1,0 +1,3 @@
+{
+  return new CursorLoader(getActivity(),Episodes.buildEpisodesOfSeasonWithShowUri(getSeasonId()),EpisodesQuery.PROJECTION,null,null,sorting.query());
+}

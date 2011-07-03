@@ -1,0 +1,7 @@
+{
+  super.onCreateContextMenu(menu,v,menuInfo);
+  menu.add(0,CONTEXT_SHOWINFO,0,R.string.context_showinfo);
+  menu.add(0,CONTEXT_MARKNEXT,1,R.string.context_marknext);
+  menu.add(0,CONTEXT_UPDATESHOW_ID,2,R.string.context_updateshow);
+  menu.add(0,CONTEXT_DELETE_ID,3,R.string.delete_show);
+}

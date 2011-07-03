@@ -1,0 +1,5 @@
+{
+  CalendarService service=ServiceManager.createCalendarService();
+  this.setupService(service);
+  return service;
+}

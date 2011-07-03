@@ -1,0 +1,6 @@
+{
+  super.onFinishInflate();
+  mIconView=(ImageView)findViewById(R.id.actionbarwatson_item_icon);
+  mTextView=(TextView)findViewById(R.id.actionbarwatson_item_text);
+  mCustomView=(FrameLayout)findViewById(R.id.actionbarwatson_item_custom);
+}

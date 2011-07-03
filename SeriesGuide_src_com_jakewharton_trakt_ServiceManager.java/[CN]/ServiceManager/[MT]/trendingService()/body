@@ -1,0 +1,5 @@
+{
+  TrendingService service=ServiceManager.createTrendingService();
+  this.setupService(service);
+  return service;
+}

@@ -1,0 +1,5 @@
+{
+  mIconDrawable=null;
+  mIconResId=iconResId;
+  return this;
+}

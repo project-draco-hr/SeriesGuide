@@ -1,0 +1,6 @@
+{
+  AlphaAnimation anim=new AlphaAnimation(start,end);
+  anim.setInterpolator(DECELERATE_CUBIC);
+  anim.setDuration(ANIM_DUR);
+  return anim;
+}

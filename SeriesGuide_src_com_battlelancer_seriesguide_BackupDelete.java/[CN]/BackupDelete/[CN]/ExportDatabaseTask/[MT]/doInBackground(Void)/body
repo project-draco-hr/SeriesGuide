@@ -1,0 +1,21 @@
+{
+  File dbFile=getApplication().getDatabasePath(SeriesGuideDatabase.DATABASE_NAME);
+  File exportDir=new File(Environment.getExternalStorageDirectory(),"seriesguidebackup");
+  if (!exportDir.exists()) {
+    exportDir.mkdirs();
+  }
+  File file=new File(exportDir,dbFile.getName());
+  if (isCancelled()) {
+    return null;
+  }
+  String errorMsg=null;
+  try {
+    file.createNewFile();
+    FileUtil.copyFile(dbFile,file);
+  }
+ catch (  IOException e) {
+    Log.e(TAG,e.getMessage(),e);
+    errorMsg=e.getMessage();
+  }
+  return errorMsg;
+}

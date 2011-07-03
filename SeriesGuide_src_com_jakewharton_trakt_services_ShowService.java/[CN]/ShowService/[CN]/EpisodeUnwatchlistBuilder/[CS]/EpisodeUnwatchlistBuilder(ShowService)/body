@@ -1,0 +1,6 @@
+{
+  super(service,new TypeToken<Void>(){
+  }
+,URI,HttpMethod.Post);
+  this.episodeList=new JsonArray();
+}

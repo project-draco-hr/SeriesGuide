@@ -1,0 +1,14 @@
+{
+  FrameLayout root=new FrameLayout(getActivity());
+  TextView tv=new TextView(getActivity());
+  tv.setId(INTERNAL_EMPTY_ID);
+  tv.setGravity(Gravity.CENTER);
+  root.addView(tv,new FrameLayout.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT,ViewGroup.LayoutParams.FILL_PARENT));
+  ListView lv=new ListView(getActivity());
+  lv.setId(android.R.id.list);
+  lv.setDrawSelectorOnTop(false);
+  root.addView(lv,new FrameLayout.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT,ViewGroup.LayoutParams.FILL_PARENT));
+  ListView.LayoutParams lp=new ListView.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT,ViewGroup.LayoutParams.FILL_PARENT);
+  root.setLayoutParams(lp);
+  return root;
+}

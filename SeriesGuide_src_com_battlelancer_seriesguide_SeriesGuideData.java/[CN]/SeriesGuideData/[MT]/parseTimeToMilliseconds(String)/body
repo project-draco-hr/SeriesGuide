@@ -1,0 +1,23 @@
+{
+  Date time;
+  Calendar cal=Calendar.getInstance(TimeZone.getTimeZone("America/Los_Angeles"));
+  try {
+    time=thetvdbTimeFormatAMPM.parse(tvdbTimeString);
+    cal.set(Calendar.HOUR_OF_DAY,time.getHours());
+    cal.set(Calendar.MINUTE,time.getMinutes());
+    cal.set(Calendar.SECOND,0);
+    return cal.getTimeInMillis();
+  }
+ catch (  ParseException e) {
+    try {
+      time=thetvdbTimeFormatNormal.parse(tvdbTimeString);
+      cal.set(Calendar.HOUR_OF_DAY,time.getHours());
+      cal.set(Calendar.MINUTE,time.getMinutes());
+      cal.set(Calendar.SECOND,0);
+      return cal.getTimeInMillis();
+    }
+ catch (    ParseException e1) {
+    }
+  }
+  return -1;
+}

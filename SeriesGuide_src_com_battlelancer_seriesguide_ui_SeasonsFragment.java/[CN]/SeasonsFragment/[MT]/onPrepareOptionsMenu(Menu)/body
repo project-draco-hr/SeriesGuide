@@ -1,0 +1,6 @@
+{
+  if (Build.VERSION.SDK_INT >= 11) {
+    final CharSequence[] items=getResources().getStringArray(R.array.sesorting);
+    menu.findItem(R.id.menu_sesortby).setTitle(getString(R.string.sort) + ": " + items[sorting.index()]);
+  }
+}

@@ -1,0 +1,8 @@
+{
+  mCustomView.removeAllViews();
+  if (view != null) {
+    mCustomView.addView(view);
+  }
+  reloadDisplay();
+  return this;
+}

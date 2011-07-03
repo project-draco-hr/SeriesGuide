@@ -1,0 +1,4 @@
+{
+  this.postParameter(POST_DURATION,duration);
+  return this;
+}

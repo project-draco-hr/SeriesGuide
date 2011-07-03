@@ -1,0 +1,27 @@
+{
+  if (IS_HONEYCOMB) {
+  }
+  writer.print(prefix);
+  writer.print("Local FragmentActivity ");
+  writer.print(Integer.toHexString(System.identityHashCode(this)));
+  writer.println(" State:");
+  String innerPrefix=prefix + "  ";
+  writer.print(innerPrefix);
+  writer.print("mResumed=");
+  writer.print(mResumed);
+  writer.print(" mStopped=");
+  writer.print(mStopped);
+  writer.print(" mReallyStopped=");
+  writer.println(mReallyStopped);
+  writer.print(innerPrefix);
+  writer.print("mLoadersStarted=");
+  writer.println(mLoadersStarted);
+  if (mLoaderManager != null) {
+    writer.print(prefix);
+    writer.print("Loader Manager ");
+    writer.print(Integer.toHexString(System.identityHashCode(mLoaderManager)));
+    writer.println(":");
+    mLoaderManager.dump(prefix + "  ",fd,writer,args);
+  }
+  mFragments.dump(prefix,fd,writer,args);
+}

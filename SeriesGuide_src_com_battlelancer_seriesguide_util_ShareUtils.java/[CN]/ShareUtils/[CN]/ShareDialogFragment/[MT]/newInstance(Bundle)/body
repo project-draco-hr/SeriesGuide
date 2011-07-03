@@ -1,0 +1,5 @@
+{
+  ShareDialogFragment f=new ShareDialogFragment();
+  f.setArguments(shareData);
+  return f;
+}

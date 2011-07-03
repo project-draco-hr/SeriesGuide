@@ -1,0 +1,5 @@
+{
+  ContentValues values=new ContentValues();
+  values.put(Episodes.WATCHED,state);
+  context.getContentResolver().update(Episodes.buildEpisodesOfSeasonUri(seasonId),values,null,null);
+}

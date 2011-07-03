@@ -1,0 +1,6 @@
+{
+  Bundle extras=getIntent().getExtras();
+  String comment=extras.getString(SeriesGuideData.KEY_GETGLUE_COMMENT);
+  String imdbId=extras.getString(SeriesGuideData.KEY_GETGLUE_IMDBID);
+  GetGlue.checkIn(prefs,imdbId,comment);
+}

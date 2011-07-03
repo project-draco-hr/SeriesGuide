@@ -1,0 +1,8 @@
+{
+  mIcon=null;
+  mIconRes=iconResourceId;
+  if (mIconRes != View.NO_ID) {
+    setIconOnViews(mMenu.getContext().getResources().getDrawable(mIconRes));
+  }
+  return this;
+}

@@ -1,0 +1,9 @@
+{
+  if ((mode != ActionBar.NAVIGATION_MODE_STANDARD) && (mode != ActionBar.NAVIGATION_MODE_LIST) && (mode != ActionBar.NAVIGATION_MODE_TABS)) {
+    throw new IllegalArgumentException("Unknown navigation mode value " + Integer.toString(mode));
+  }
+  if (mode != mNavigationMode) {
+    mNavigationMode=mode;
+    reloadDisplay();
+  }
+}

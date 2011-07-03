@@ -1,0 +1,4 @@
+FragmentActivity activity
+View container
+boolean isSyncToTrakt
+boolean isSyncingUnseen

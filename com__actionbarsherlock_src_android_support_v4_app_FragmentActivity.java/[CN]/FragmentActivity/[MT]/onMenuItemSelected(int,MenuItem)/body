@@ -1,0 +1,13 @@
+{
+  if (onOptionsItemSelected(item)) {
+    return true;
+  }
+switch (featureId) {
+case Window.FEATURE_OPTIONS_PANEL:
+    return mFragments.dispatchOptionsItemSelected(item);
+case Window.FEATURE_CONTEXT_MENU:
+  return mFragments.dispatchContextItemSelected(item);
+default :
+return false;
+}
+}

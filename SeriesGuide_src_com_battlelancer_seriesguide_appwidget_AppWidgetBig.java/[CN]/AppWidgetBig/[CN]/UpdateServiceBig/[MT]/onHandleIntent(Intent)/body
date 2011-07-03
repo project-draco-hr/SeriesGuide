@@ -1,0 +1,6 @@
+{
+  ComponentName me=new ComponentName(this,AppWidgetBig.class);
+  AppWidgetManager mgr=AppWidgetManager.getInstance(this);
+  Intent i=new Intent(this,AppWidgetBig.class);
+  mgr.updateAppWidget(me,buildUpdate(this,LIMIT,LAYOUT,ITEMLAYOUT,i));
+}

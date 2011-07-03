@@ -1,0 +1,6 @@
+{
+  TraktCredentialsDialogFragment f=new TraktCredentialsDialogFragment();
+  f.setArguments(traktData);
+  f.isForwardingGivenTask=true;
+  return f;
+}

@@ -1,0 +1,4 @@
+{
+  this.mMenuItem.setShortcut(numericChar,alphaChar);
+  return this;
+}

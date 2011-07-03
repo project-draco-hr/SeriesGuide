@@ -1,0 +1,4 @@
+{
+  mFlags=options;
+  reloadDisplay();
+}

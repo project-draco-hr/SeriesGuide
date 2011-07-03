@@ -1,0 +1,4 @@
+String[] shows
+int index
+String failedShows
+ShowsActivity context

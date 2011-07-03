@@ -1,0 +1,19 @@
+{
+  Message msg=handler.obtainMessage();
+  if (name.length() == 0) {
+    msg.arg1=AddShow.SEARCH_NOINPUT_ERROR;
+  }
+ else {
+    try {
+      msg.obj=TheTVDB.searchShow(name,AddShow.this);
+      msg.arg1=AddShow.SEARCH_SUCCESS;
+    }
+ catch (    IOException e) {
+      msg.arg1=AddShow.SEARCH_GENERICERROR;
+    }
+catch (    SAXException e) {
+      msg.arg1=AddShow.SEARCH_SAXERROR;
+    }
+  }
+  handler.sendMessage(msg);
+}

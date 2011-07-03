@@ -1,0 +1,8 @@
+{
+  if (IS_HONEYCOMB) {
+    return super.requestWindowFeature((int)featureId);
+  }
+ else {
+    return mActionBar.requestWindowFeature((int)featureId);
+  }
+}

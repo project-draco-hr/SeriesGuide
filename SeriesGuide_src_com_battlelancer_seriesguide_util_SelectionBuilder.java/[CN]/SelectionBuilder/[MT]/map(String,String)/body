@@ -1,0 +1,4 @@
+{
+  mProjectionMap.put(fromColumn,toClause + " AS " + fromColumn);
+  return this;
+}

@@ -1,0 +1,4 @@
+{
+  Toast.makeText(mContext,"Sync cancelled",Toast.LENGTH_LONG).show();
+  restoreViewStates();
+}

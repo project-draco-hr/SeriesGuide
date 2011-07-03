@@ -1,0 +1,17 @@
+{
+  values.put(Shows.TITLE,show.getSeriesName());
+  values.put(Shows.OVERVIEW,show.getOverview());
+  values.put(Shows.ACTORS,show.getActors());
+  values.put(Shows.AIRSDAYOFWEEK,show.getAirsDayOfWeek());
+  values.put(Shows.AIRSTIME,show.getAirsTime());
+  values.put(Shows.FIRSTAIRED,show.getFirstAired());
+  values.put(Shows.GENRES,show.getGenres());
+  values.put(Shows.NETWORK,show.getNetwork());
+  values.put(Shows.RATING,show.getRating());
+  values.put(Shows.RUNTIME,show.getRuntime());
+  values.put(Shows.STATUS,show.getStatus());
+  values.put(Shows.CONTENTRATING,show.getContentRating());
+  values.put(Shows.POSTER,show.getPoster());
+  values.put(Shows.IMDBID,show.getImdbId());
+  return values;
+}

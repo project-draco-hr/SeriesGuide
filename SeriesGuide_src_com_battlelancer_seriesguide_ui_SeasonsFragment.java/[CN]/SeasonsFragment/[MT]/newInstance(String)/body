@@ -1,0 +1,7 @@
+{
+  SeasonsFragment f=new SeasonsFragment();
+  Bundle args=new Bundle();
+  args.putString(BaseColumns._ID,showId);
+  f.setArguments(args);
+  return f;
+}

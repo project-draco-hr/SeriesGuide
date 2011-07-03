@@ -1,0 +1,37 @@
+{
+  super.onCreate(savedInstanceState);
+  setContentView(R.layout.shows);
+  final Context context=this;
+  if (!EulaHelper.hasAcceptedEula(this)) {
+    EulaHelper.showEula(false,this);
+  }
+  updatePreferences();
+  mImageCache=((SeriesGuideApplication)getApplication()).getImageCache();
+  String[] from=new String[]{SeriesContract.Shows.TITLE,SeriesContract.Shows.NEXTTEXT,SeriesContract.Shows.AIRSTIME,SeriesContract.Shows.NETWORK,SeriesContract.Shows.POSTER};
+  int[] to=new int[]{R.id.seriesname,R.id.TextViewShowListNextEpisode,R.id.TextViewShowListAirtime,R.id.TextViewShowListNetwork,R.id.showposter};
+  int layout=R.layout.show_rowairtime;
+  mAdapter=new SlowAdapter(this,layout,null,from,to,0);
+  AbsListView list=(AbsListView)findViewById(android.R.id.list);
+  if (android.os.Build.VERSION.SDK_INT < 11) {
+    ((ListView)list).setAdapter(mAdapter);
+  }
+ else {
+    list.setAdapter(mAdapter);
+  }
+  list.setFastScrollEnabled(true);
+  list.setOnItemClickListener(new OnItemClickListener(){
+    public void onItemClick(    AdapterView<?> parent,    View v,    int position,    long id){
+      Intent i=new Intent(context,OverviewActivity.class);
+      i.putExtra(Shows._ID,String.valueOf(id));
+      startActivity(i);
+    }
+  }
+);
+  list.setOnScrollListener(this);
+  View emptyView=findViewById(android.R.id.empty);
+  if (emptyView != null) {
+    list.setEmptyView(emptyView);
+  }
+  getSupportLoaderManager().initLoader(LOADER_ID,null,this);
+  registerForContextMenu(list);
+}

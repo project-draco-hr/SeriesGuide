@@ -1,0 +1,4 @@
+{
+  SharedPreferences sp=PreferenceManager.getDefaultSharedPreferences(context);
+  return sp.getBoolean("accepted_eula",false);
+}

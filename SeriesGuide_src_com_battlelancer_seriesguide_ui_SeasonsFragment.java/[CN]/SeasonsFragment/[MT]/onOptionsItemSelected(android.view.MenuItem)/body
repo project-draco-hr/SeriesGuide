@@ -1,0 +1,20 @@
+{
+switch (item.getItemId()) {
+case R.id.menu_markall:
+    fireTrackerEvent("Mark all seasons");
+  markAllEpisodes(true);
+return true;
+case R.id.menu_unmarkall:
+fireTrackerEvent("Unmark all seasons");
+markAllEpisodes(false);
+return true;
+case R.id.menu_sesortby:
+fireTrackerEvent("Sort seasons");
+SortDialogFragment newFragment=SortDialogFragment.newInstance(sorting.index(),R.array.sesorting);
+FragmentTransaction ft=getFragmentManager().beginTransaction();
+newFragment.show(ft,"sortSeasonsDialog");
+return true;
+default :
+return super.onOptionsItemSelected(item);
+}
+}

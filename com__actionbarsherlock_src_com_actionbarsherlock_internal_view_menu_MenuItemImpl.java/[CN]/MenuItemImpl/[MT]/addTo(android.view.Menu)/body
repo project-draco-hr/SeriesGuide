@@ -1,0 +1,23 @@
+{
+  if (this.mSubMenu != null) {
+    android.view.SubMenu subMenu=menu.addSubMenu(this.mGroupId,this.mItemId,this.mOrder,this.mTitle);
+    if (mIconRes != View.NO_ID) {
+      subMenu.setIcon(mIconRes);
+    }
+ else {
+      subMenu.setIcon(mIcon);
+    }
+    for (    MenuItemImpl item : this.mSubMenu.getItems()) {
+      item.addTo(subMenu);
+    }
+  }
+ else {
+    android.view.MenuItem item=menu.add(this.mGroupId,this.mItemId,this.mOrder,this.mTitle).setAlphabeticShortcut(this.mAlphabeticalShortcut).setNumericShortcut(this.mNumericalShortcut).setVisible(this.isVisible()).setIntent(this.mIntent).setOnMenuItemClickListener(this.mClickListener);
+    if (this.isExclusiveCheckable()) {
+      menu.setGroupCheckable(this.mGroupId,true,true);
+    }
+    NativeMenuItemView nativeWrapper=new NativeMenuItemView(item);
+    nativeWrapper.initialize(this,MenuBuilder.TYPE_NATIVE);
+    setItemView(MenuBuilder.TYPE_NATIVE,nativeWrapper);
+  }
+}

@@ -1,0 +1,4 @@
+{
+  mSubtitle.setText((subtitle == null) ? "" : subtitle);
+  reloadDisplay();
+}

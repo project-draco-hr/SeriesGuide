@@ -1,0 +1,27 @@
+{
+  final boolean isStandard=mNavigationMode == ActionBar.NAVIGATION_MODE_STANDARD;
+  final boolean isList=mNavigationMode == ActionBar.NAVIGATION_MODE_LIST;
+  final boolean isTab=mNavigationMode == ActionBar.NAVIGATION_MODE_TABS;
+  final boolean hasSubtitle=(mSubtitle.getText() != null) && !mSubtitle.getText().equals("");
+  final boolean displayHome=getDisplayOptionValue(ActionBar.DISPLAY_SHOW_HOME);
+  final boolean displayHomeAsUp=getDisplayOptionValue(ActionBar.DISPLAY_HOME_AS_UP);
+  final boolean displayTitle=getDisplayOptionValue(ActionBar.DISPLAY_SHOW_TITLE);
+  final boolean displayCustom=getDisplayOptionValue(ActionBar.DISPLAY_SHOW_CUSTOM);
+  final boolean displayLogo=getDisplayOptionValue(ActionBar.DISPLAY_USE_LOGO);
+  mHome.setVisibility(displayHome ? View.VISIBLE : View.GONE);
+  if (displayHome) {
+    mHome.setUpIndicatorVisibility(displayHomeAsUp ? View.VISIBLE : View.GONE);
+    mHome.setLogoVisibility(displayLogo ? View.VISIBLE : View.GONE);
+    mHome.setIconVisibility(displayLogo ? View.GONE : View.VISIBLE);
+  }
+ else {
+    mHome.setUpIndicatorVisibility(View.GONE);
+    mHome.setLogoVisibility(View.GONE);
+    mHome.setIconVisibility(View.GONE);
+  }
+  mListView.setVisibility(isList ? View.VISIBLE : View.GONE);
+  mTabsView.setVisibility(isTab ? View.VISIBLE : View.GONE);
+  mTitle.setVisibility(isStandard && !displayCustom && displayTitle ? View.VISIBLE : View.GONE);
+  mSubtitle.setVisibility(isStandard && !displayCustom && displayTitle&& hasSubtitle ? View.VISIBLE : View.GONE);
+  mCustomView.setVisibility(isStandard && displayCustom ? View.VISIBLE : View.GONE);
+}

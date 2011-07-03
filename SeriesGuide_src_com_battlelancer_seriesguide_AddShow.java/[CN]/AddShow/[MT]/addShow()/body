@@ -1,0 +1,13 @@
+{
+  SearchResult show=(SearchResult)resultList.getItemAtPosition(data.currentPosition);
+  clearSearchField();
+  if (addTask == null || addTask.getStatus() == AsyncTask.Status.FINISHED) {
+    addTask=(AddShowTask)new AddShowTask(this,show).execute();
+  }
+ else {
+    boolean hasAddedShow=addTask.addShow(show);
+    if (!hasAddedShow) {
+      addTask=(AddShowTask)new AddShowTask(this,show).execute();
+    }
+  }
+}

@@ -1,0 +1,5 @@
+{
+  final ProgressBar progress=mContext.mUpdateProgress;
+  progress.setMax(values[1]);
+  progress.setProgress(values[0]);
+}

@@ -1,0 +1,13 @@
+{
+  int resultCode;
+  if (isCancelled()) {
+    return null;
+  }
+  if (TheTVDB.fetchArt(mPath,false,getActivity())) {
+    resultCode=SUCCESS;
+  }
+ else {
+    resultCode=ERROR;
+  }
+  return resultCode;
+}

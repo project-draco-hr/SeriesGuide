@@ -1,0 +1,5 @@
+{
+  super.onRestoreInstanceState(savedInstanceState);
+  restoreLocalState(savedInstanceState);
+  mSavedState=null;
+}

@@ -1,0 +1,9 @@
+{
+  String imageUrl=(String)key;
+  String imageThumbUrl=imageUrl + THUMB_SUFFIX;
+  Bitmap thumbnail=get(imageThumbUrl);
+  if (thumbnail != null) {
+    return thumbnail;
+  }
+  return getThumbHelper(imageUrl);
+}

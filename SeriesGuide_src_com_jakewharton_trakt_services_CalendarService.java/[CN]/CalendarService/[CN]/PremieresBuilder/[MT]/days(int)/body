@@ -1,0 +1,7 @@
+{
+  this.field(FIELD_DAYS,days);
+  if (!this.hasField(FIELD_DATE)) {
+    this.field(FIELD_DATE,new Date());
+  }
+  return this;
+}

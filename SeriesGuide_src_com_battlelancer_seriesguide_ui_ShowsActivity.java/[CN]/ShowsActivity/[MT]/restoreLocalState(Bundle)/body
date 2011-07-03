@@ -1,0 +1,4 @@
+{
+  restoreUpdateTask(savedInstanceState);
+  restoreArtTask(savedInstanceState);
+}

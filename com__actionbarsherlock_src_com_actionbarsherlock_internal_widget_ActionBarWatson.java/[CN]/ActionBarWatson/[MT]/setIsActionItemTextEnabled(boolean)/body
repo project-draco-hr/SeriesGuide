@@ -1,0 +1,12 @@
+{
+  if (isActionItemTextEnabled != mIsActionItemTextEnabled) {
+    mIsActionItemTextEnabled=isActionItemTextEnabled;
+    final int count=mActionsView.getChildCount();
+    for (int i=count - 1; i >= 0; i--) {
+      View view=mActionsView.getChildAt(i);
+      if (view instanceof ActionItem) {
+        ((ActionItem)view).reloadDisplay();
+      }
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  if (result != null) {
+    Toast.makeText(context,result,Toast.LENGTH_LONG).show();
+    ((PrepareRequestTokenActivity)context).finish();
+  }
+}

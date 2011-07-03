@@ -1,0 +1,7 @@
+{
+  SearchResult copy=new SearchResult();
+  copy.id=this.id;
+  copy.seriesName=this.seriesName;
+  copy.overview=this.overview;
+  return copy;
+}

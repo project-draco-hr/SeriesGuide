@@ -1,0 +1,4 @@
+{
+  mIconView.setImageDrawable(icon);
+  return this;
+}

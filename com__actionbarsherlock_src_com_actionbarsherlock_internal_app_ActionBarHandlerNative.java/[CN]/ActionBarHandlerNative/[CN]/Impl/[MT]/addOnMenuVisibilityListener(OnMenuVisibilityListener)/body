@@ -1,0 +1,12 @@
+{
+  if ((listener != null) && !mMenuListenerMap.containsKey(listener)) {
+    android.app.ActionBar.OnMenuVisibilityListener nativeListener=new android.app.ActionBar.OnMenuVisibilityListener(){
+      @Override public void onMenuVisibilityChanged(      boolean isVisible){
+        listener.onMenuVisibilityChanged(isVisible);
+      }
+    }
+;
+    mMenuListenerMap.put(listener,nativeListener);
+    getActionBar().addOnMenuVisibilityListener(nativeListener);
+  }
+}

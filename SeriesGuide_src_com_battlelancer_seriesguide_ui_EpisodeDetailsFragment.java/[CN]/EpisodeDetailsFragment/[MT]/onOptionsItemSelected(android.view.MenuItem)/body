@@ -1,0 +1,43 @@
+{
+switch (item.getItemId()) {
+case R.id.menu_togglemark:
+    fireTrackerEvent("Toggle watched");
+  onToggleWatchState();
+break;
+case R.id.menu_shareepisode:
+{
+fireTrackerEvent("Share episode");
+final Cursor episode=(Cursor)getListAdapter().getItem(0);
+episode.moveToFirst();
+Bundle shareData=new Bundle();
+String episodestring=ShareUtils.onCreateShareString(getActivity(),episode);
+String sharestring=getString(R.string.share_checkout);
+sharestring+=" \"" + episode.getString(EpisodeDetailsQuery.SHOW_TITLE);
+sharestring+=" - " + episodestring + "\" via @SeriesGuide";
+shareData.putString(ShareItems.EPISODESTRING,episodestring);
+shareData.putString(ShareItems.SHARESTRING,sharestring);
+shareData.putString(ShareItems.IMDBID,episode.getString(EpisodeDetailsQuery.SHOW_IMDBID));
+shareData.putInt(ShareItems.EPISODE,episode.getInt(EpisodeDetailsQuery.NUMBER));
+shareData.putInt(ShareItems.SEASON,episode.getInt(EpisodeDetailsQuery.SEASON));
+shareData.putInt(ShareItems.TVDBID,episode.getInt(EpisodeDetailsQuery.REF_SHOW_ID));
+ShareUtils.showShareDialog(getFragmentManager(),shareData);
+break;
+}
+case R.id.menu_addevent:
+{
+fireTrackerEvent("Add to calendar");
+final Cursor episode=(Cursor)getListAdapter().getItem(0);
+episode.moveToFirst();
+final String showTitle=episode.getString(EpisodeDetailsQuery.SHOW_TITLE);
+final String airDate=episode.getString(EpisodeDetailsQuery.FIRSTAIRED);
+final long airsTime=episode.getLong(EpisodeDetailsQuery.SHOW_AIRSTIME);
+final String runTime=episode.getString(EpisodeDetailsQuery.SHOW_RUNTIME);
+final String episodestring=ShareUtils.onCreateShareString(getActivity(),episode);
+ShareUtils.onAddCalendarEvent(getActivity(),showTitle,episodestring,airDate,airsTime,runTime);
+break;
+}
+default :
+break;
+}
+return super.onOptionsItemSelected(item);
+}

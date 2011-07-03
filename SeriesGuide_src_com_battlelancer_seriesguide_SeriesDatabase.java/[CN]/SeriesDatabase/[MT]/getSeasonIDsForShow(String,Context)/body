@@ -1,0 +1,9 @@
+{
+  Cursor setest=context.getContentResolver().query(Seasons.buildSeasonsOfShowUri(seriesid),new String[]{Seasons._ID},null,null,null);
+  HashSet<Long> seasonIDs=new HashSet<Long>();
+  while (setest.moveToNext()) {
+    seasonIDs.add(setest.getLong(0));
+  }
+  setest.close();
+  return seasonIDs;
+}

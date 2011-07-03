@@ -1,0 +1,17 @@
+{
+  if (intent == null) {
+    return;
+  }
+  if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+    AnalyticsUtils.getInstance(this).trackEvent(TAG,"Search action","Search",0);
+    String query=intent.getStringExtra(SearchManager.QUERY);
+    doMySearch(query);
+  }
+ else   if (Intent.ACTION_VIEW.equals(intent.getAction())) {
+    AnalyticsUtils.getInstance(this).trackEvent(TAG,"Search action","View",0);
+    Uri data=intent.getData();
+    String id=data.getLastPathSegment();
+    onShowEpisodeDetails(id);
+    finish();
+  }
+}

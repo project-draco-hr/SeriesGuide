@@ -1,0 +1,21 @@
+{
+  if (UIUtils.isExtStorageAvailable()) {
+    createDirectories();
+    File imageFile=getImageFile(imageUrl);
+    try {
+      imageFile.createNewFile();
+      FileOutputStream ostream=new FileOutputStream(imageFile);
+      bitmap.compress(mCompressedImageFormat,mCachedImageQuality,ostream);
+      ostream.close();
+      mCache.put(imageUrl,new SoftReference<Bitmap>(bitmap));
+      return bitmap;
+    }
+ catch (    FileNotFoundException e) {
+      e.printStackTrace();
+    }
+catch (    IOException e) {
+      e.printStackTrace();
+    }
+  }
+  return null;
+}

@@ -1,0 +1,61 @@
+{
+  mResult="";
+  List<TvShow> shows;
+  try {
+    shows=manager.userService().libraryShowsWatched(username).fire();
+  }
+ catch (  ApiException e) {
+    return FAILED_API;
+  }
+  Cursor showTvdbIds=mContext.getContentResolver().query(Shows.CONTENT_URI,new String[]{Shows._ID},null,null,null);
+  while (showTvdbIds.moveToNext()) {
+    String tvdbId=showTvdbIds.getString(0);
+    for (    TvShow tvShow : shows) {
+      if (tvdbId.equalsIgnoreCase(tvShow.getTvdbId())) {
+        if (mResult.length() != 0) {
+          mResult+=",";
+        }
+        if (mIsSyncingUnseen) {
+          ContentValues values=new ContentValues();
+          values.put(Episodes.WATCHED,false);
+          mContext.getContentResolver().update(Episodes.buildEpisodesOfShowUri(tvdbId),values,null,null);
+        }
+        final ArrayList<ContentProviderOperation> batch=Lists.newArrayList();
+        List<WatchedSeasons> seasons=tvShow.getSeasons();
+        for (        WatchedSeasons season : seasons) {
+          Cursor seasonMatch=mContext.getContentResolver().query(Seasons.buildSeasonsOfShowUri(tvdbId),new String[]{Seasons._ID},Seasons.COMBINED + "=?",new String[]{season.getSeason().toString()},null);
+          if (seasonMatch.moveToFirst()) {
+            String seasonId=seasonMatch.getString(0);
+            for (            Integer episode : season.getEpisodes()) {
+              batch.add(ContentProviderOperation.newUpdate(Episodes.buildEpisodesOfSeasonUri(seasonId)).withSelection(Episodes.NUMBER + "=?",new String[]{episode.toString()}).withValue(Episodes.WATCHED,true).build());
+            }
+          }
+          seasonMatch.close();
+        }
+        if (isCancelled()) {
+          showTvdbIds.close();
+          return null;
+        }
+        try {
+          mContext.getContentResolver().applyBatch(SeriesContract.CONTENT_AUTHORITY,batch);
+        }
+ catch (        RemoteException e) {
+          throw new RuntimeException("Problem applying batch operation",e);
+        }
+catch (        OperationApplicationException e) {
+          throw new RuntimeException("Problem applying batch operation",e);
+        }
+        mResult+=tvShow.getTitle();
+        shows.remove(tvShow);
+        break;
+      }
+    }
+  }
+  showTvdbIds.close();
+  if (mResult.length() != 0) {
+    return SUCCESS_WORK;
+  }
+ else {
+    return SUCCESS_NOWORK;
+  }
+}

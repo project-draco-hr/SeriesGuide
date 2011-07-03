@@ -1,0 +1,4 @@
+{
+  String url=xmlMirror + Constants.API_KEY + "/series/"+ seriesid+ "/"+ (language != null ? language + ".xml" : "");
+  return parseShow(url,context);
+}

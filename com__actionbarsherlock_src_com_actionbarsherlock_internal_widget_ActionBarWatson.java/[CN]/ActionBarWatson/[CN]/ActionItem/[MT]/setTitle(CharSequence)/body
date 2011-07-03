@@ -1,0 +1,5 @@
+{
+  mTextView.setText(title);
+  reloadDisplay();
+  return this;
+}

@@ -1,0 +1,8 @@
+{
+  super(BASE_URL + urlFormat);
+  this.service=service;
+  this.token=token;
+  this.method=method;
+  this.postBody=new JsonObject();
+  this.field(FIELD_API_KEY,this.service.getApiKey());
+}

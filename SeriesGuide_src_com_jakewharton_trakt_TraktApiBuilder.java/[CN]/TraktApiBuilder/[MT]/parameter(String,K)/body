@@ -1,0 +1,8 @@
+{
+  if ((value == null) || (value.toString() == null) || (value.toString().length() == 0)) {
+    return this.parameter(name,"");
+  }
+ else {
+    return this.parameter(name,value.toString());
+  }
+}

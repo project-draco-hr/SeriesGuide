@@ -1,0 +1,4 @@
+{
+  super.onCreate(savedInstanceState);
+  AnalyticsUtils.getInstance(getActivity()).trackPageView("/Seasons");
+}

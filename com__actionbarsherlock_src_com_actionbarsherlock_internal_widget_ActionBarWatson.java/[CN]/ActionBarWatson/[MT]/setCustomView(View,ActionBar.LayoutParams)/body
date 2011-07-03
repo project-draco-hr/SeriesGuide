@@ -1,0 +1,4 @@
+{
+  view.setLayoutParams(layoutParams);
+  setCustomView(view);
+}

@@ -1,0 +1,11 @@
+{
+  String[] splitted=tvdbstring.split("\\|");
+  tvdbstring="";
+  for (  String item : splitted) {
+    if (tvdbstring.length() != 0) {
+      tvdbstring+=", ";
+    }
+    tvdbstring+=item;
+  }
+  return tvdbstring;
+}

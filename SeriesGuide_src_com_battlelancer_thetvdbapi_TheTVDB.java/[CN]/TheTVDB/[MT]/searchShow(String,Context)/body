@@ -1,0 +1,50 @@
+{
+  String language=getTheTVDBLanguage(context);
+  URL url;
+  try {
+    url=new URL(xmlMirror + "GetSeries.php?seriesname=" + URLEncoder.encode(title,"UTF-8")+ (language != null ? "&language=" + language : ""));
+  }
+ catch (  Exception e) {
+    throw new RuntimeException(e);
+  }
+  final List<SearchResult> series=new ArrayList<SearchResult>();
+  final SearchResult currentShow=new SearchResult();
+  RootElement root=new RootElement("Data");
+  Element item=root.getChild("Series");
+  item.setEndElementListener(new EndElementListener(){
+    public void end(){
+      series.add(currentShow.copy());
+    }
+  }
+);
+  item.getChild("id").setEndTextElementListener(new EndTextElementListener(){
+    public void end(    String body){
+      currentShow.setId(Integer.valueOf(body));
+    }
+  }
+);
+  item.getChild("SeriesName").setEndTextElementListener(new EndTextElementListener(){
+    public void end(    String body){
+      currentShow.setSeriesName(body.trim());
+    }
+  }
+);
+  item.getChild("Overview").setEndTextElementListener(new EndTextElementListener(){
+    public void end(    String body){
+      currentShow.setOverview(body.trim());
+    }
+  }
+);
+  URLConnection connection=url.openConnection();
+  connection.setConnectTimeout(25000);
+  connection.setReadTimeout(90000);
+  InputStream in=connection.getInputStream();
+  try {
+    Xml.parse(in,Xml.Encoding.UTF_8,root.getContentHandler());
+  }
+ catch (  SocketTimeoutException se) {
+    throw new IOException();
+  }
+  in.close();
+  return series;
+}

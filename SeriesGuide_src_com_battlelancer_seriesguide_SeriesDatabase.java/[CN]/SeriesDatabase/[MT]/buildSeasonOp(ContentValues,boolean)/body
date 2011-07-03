@@ -1,0 +1,15 @@
+{
+  ContentProviderOperation op;
+  final String seasonId=values.getAsString(Seasons.REF_SEASON_ID);
+  final ContentValues seasonValues=new ContentValues();
+  seasonValues.put(Seasons.COMBINED,values.getAsString(Episodes.SEASON));
+  if (isNew) {
+    seasonValues.put(Seasons._ID,seasonId);
+    seasonValues.put(Shows.REF_SHOW_ID,values.getAsString(Shows.REF_SHOW_ID));
+    op=ContentProviderOperation.newInsert(Seasons.CONTENT_URI).withValues(seasonValues).build();
+  }
+ else {
+    op=ContentProviderOperation.newUpdate(Seasons.buildSeasonUri(seasonId)).withValues(seasonValues).build();
+  }
+  return op;
+}

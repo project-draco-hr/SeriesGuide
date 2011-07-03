@@ -1,0 +1,9 @@
+{
+  SharedPreferences prefs=PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
+  if (prefs.getString("seasonSorting","latestfirst").equals("latestfirst")) {
+    sorting=SeriesGuideData.SeasonSorting.LATEST_FIRST;
+  }
+ else {
+    sorting=SeriesGuideData.SeasonSorting.OLDEST_FIRST;
+  }
+}

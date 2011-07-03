@@ -1,0 +1,9 @@
+{
+  mActionBar=actionBar;
+  mView=LayoutInflater.from(mActionBar.getContext()).inflate(R.layout.actionbarwatson_tab,actionBar.mTabsView,false);
+  mView.setTag(this);
+  mView.setOnClickListener(clickListener);
+  mIconView=(ImageView)mView.findViewById(R.id.actionbarwatson_tab_icon);
+  mTextView=(TextView)mView.findViewById(R.id.actionbarwatson_tab);
+  mCustomView=(FrameLayout)mView.findViewById(R.id.actionbarwatson_tab_custom);
+}

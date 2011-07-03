@@ -1,0 +1,4 @@
+{
+  this.mMenuItem.setCheckable(checkable);
+  return this;
+}

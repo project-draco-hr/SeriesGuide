@@ -1,0 +1,3 @@
+{
+  return CONTENT_URI_WITHSHOW.buildUpon().appendPath(episodeId).build();
+}

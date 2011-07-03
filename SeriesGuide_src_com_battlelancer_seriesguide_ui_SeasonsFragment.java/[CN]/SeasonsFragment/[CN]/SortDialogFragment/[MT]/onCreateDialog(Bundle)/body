@@ -1,0 +1,14 @@
+{
+  final CharSequence[] items=getResources().getStringArray(getArguments().getInt("sortingarray"));
+  return new AlertDialog.Builder(getActivity()).setTitle(getString(R.string.pref_seasonsorting)).setSingleChoiceItems(items,getArguments().getInt("index"),new DialogInterface.OnClickListener(){
+    public void onClick(    DialogInterface dialog,    int item){
+      SeasonsFragment f=(SeasonsFragment)getFragmentManager().findFragmentById(R.id.fragment_seasons);
+      if (f == null) {
+        f=(SeasonsFragment)getFragmentManager().findFragmentById(R.id.root_container);
+      }
+      f.updateSorting(item);
+      dismiss();
+    }
+  }
+).create();
+}

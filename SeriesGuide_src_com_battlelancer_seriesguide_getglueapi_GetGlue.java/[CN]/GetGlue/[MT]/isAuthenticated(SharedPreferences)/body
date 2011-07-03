@@ -1,0 +1,8 @@
+{
+  String token=prefs.getString(OAuth.OAUTH_TOKEN,"");
+  String secret=prefs.getString(OAuth.OAUTH_TOKEN_SECRET,"");
+  if (token == "" || secret == "") {
+    return false;
+  }
+  return true;
+}

@@ -1,0 +1,10 @@
+{
+  final int count=mTabsView.getChildCount();
+  for (int i=0; i < count; i++) {
+    TabImpl existingTab=(TabImpl)mTabsView.getChildAt(i).getTag();
+    if (existingTab.equals(tab)) {
+      existingTab.select();
+      break;
+    }
+  }
+}

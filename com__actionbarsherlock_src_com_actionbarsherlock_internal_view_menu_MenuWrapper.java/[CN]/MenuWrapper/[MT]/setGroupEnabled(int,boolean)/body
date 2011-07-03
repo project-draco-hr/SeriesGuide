@@ -1,0 +1,3 @@
+{
+  mMenu.setGroupEnabled(group,enabled);
+}

@@ -1,0 +1,6 @@
+{
+  super(service,new TypeToken<List<TvShow>>(){
+  }
+,URI);
+  this.field(FIELD_QUERY,query);
+}

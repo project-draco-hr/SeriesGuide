@@ -1,0 +1,7 @@
+{
+  JsonObject ep=new JsonObject();
+  ep.addProperty(POST_SEASON,season);
+  ep.addProperty(POST_EPISODE,episode);
+  this.episodeList.add(ep);
+  return this;
+}

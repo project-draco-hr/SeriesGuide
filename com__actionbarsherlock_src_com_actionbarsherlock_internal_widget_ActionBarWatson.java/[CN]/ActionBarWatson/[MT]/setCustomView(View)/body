@@ -1,0 +1,4 @@
+{
+  mCustomView.removeAllViews();
+  mCustomView.addView(view);
+}

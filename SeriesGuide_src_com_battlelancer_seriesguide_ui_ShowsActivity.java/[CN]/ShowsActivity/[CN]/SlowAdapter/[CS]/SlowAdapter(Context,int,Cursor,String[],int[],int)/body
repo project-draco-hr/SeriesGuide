@@ -1,0 +1,5 @@
+{
+  super(context,layout,c,from,to,flags);
+  mLayoutInflater=(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+  mLayout=layout;
+}

@@ -1,0 +1,4 @@
+{
+  String fileName=Integer.toHexString(imageUrl.hashCode()) + "." + mCompressedImageFormat.name();
+  return new File(mSecondLevelCacheDir + "/" + fileName);
+}

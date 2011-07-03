@@ -1,0 +1,16 @@
+{
+  if (mView.isSelected()) {
+    if (mListener != null) {
+      mListener.onTabReselected(this,null);
+    }
+    return;
+  }
+  TabImpl current=mActionBar.getSelectedTab();
+  if (current != null) {
+    current.unselect();
+  }
+  mView.setSelected(true);
+  if (mListener != null) {
+    mListener.onTabSelected(this,null);
+  }
+}

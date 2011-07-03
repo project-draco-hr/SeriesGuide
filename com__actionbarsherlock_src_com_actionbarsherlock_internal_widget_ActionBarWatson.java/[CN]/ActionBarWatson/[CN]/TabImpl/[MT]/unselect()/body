@@ -1,0 +1,8 @@
+{
+  if (mView.isSelected()) {
+    mView.setSelected(false);
+    if (mListener != null) {
+      mListener.onTabUnselected(this,null);
+    }
+  }
+}

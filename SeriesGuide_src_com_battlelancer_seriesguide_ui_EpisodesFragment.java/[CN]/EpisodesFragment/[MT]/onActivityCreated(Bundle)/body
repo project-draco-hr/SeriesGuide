@@ -1,0 +1,56 @@
+{
+  super.onActivityCreated(savedInstanceState);
+  updatePreferences();
+  View detailsFragment=getActivity().findViewById(R.id.fragment_details);
+  mDualPane=detailsFragment != null && detailsFragment.getVisibility() == View.VISIBLE;
+  if (mDualPane) {
+    getListView().setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+  }
+  String[] from=new String[]{Episodes.WATCHED,Episodes.TITLE,Episodes.NUMBER,Episodes.FIRSTAIRED};
+  int[] to=new int[]{R.id.CustomCheckBoxWatched,R.id.TextViewEpisodeListTitle,R.id.TextViewEpisodeListNumber,R.id.TextViewEpisodeListAirdate};
+  mAdapter=new SimpleCursorAdapter(getActivity(),R.layout.episode_row,null,from,to,0);
+  mAdapter.setViewBinder(new ViewBinder(){
+    public boolean setViewValue(    View view,    final Cursor cursor,    int columnIndex){
+      if (columnIndex == EpisodesQuery.WATCHED) {
+        WatchedBox wb=(WatchedBox)view;
+        final String rowid=cursor.getString(EpisodesQuery._ID);
+        wb.setOnClickListener(new OnClickListener(){
+          public void onClick(          View v){
+            ((WatchedBox)v).toggle();
+            markEpisode(rowid,((WatchedBox)v).isChecked());
+          }
+        }
+);
+        wb.setChecked(cursor.getInt(columnIndex) > 0);
+        return true;
+      }
+ else       if (columnIndex == EpisodesQuery.NUMBER) {
+        TextView tv=(TextView)view;
+        String episodenumber=getString(R.string.episode) + " " + cursor.getString(EpisodesQuery.NUMBER);
+        float dvdnumber=cursor.getFloat(EpisodesQuery.DVDNUMBER);
+        if (dvdnumber != 0.0) {
+          episodenumber+=" (" + dvdnumber + ")";
+        }
+        tv.setText(episodenumber);
+        return true;
+      }
+ else       if (columnIndex == EpisodesQuery.FIRSTAIRED) {
+        TextView tv=(TextView)view;
+        String fieldValue=cursor.getString(EpisodesQuery.FIRSTAIRED);
+        if (fieldValue.length() != 0) {
+          tv.setText(SeriesGuideData.parseDateToLocalRelative(fieldValue,cursor.getLong(EpisodesQuery.SHOW_AIRSTIME),getActivity()));
+        }
+ else {
+          tv.setText(getString(R.string.episode_firstaired) + " " + getString(R.string.episode_unkownairdate));
+        }
+        return true;
+      }
+      return false;
+    }
+  }
+);
+  setListAdapter(mAdapter);
+  getLoaderManager().initLoader(EPISODES_LOADER,null,this);
+  registerForContextMenu(getListView());
+  setHasOptionsMenu(true);
+}

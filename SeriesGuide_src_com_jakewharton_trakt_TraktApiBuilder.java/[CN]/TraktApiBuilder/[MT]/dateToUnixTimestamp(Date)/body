@@ -1,0 +1,3 @@
+{
+  return date.getTime() / MILLISECONDS_IN_SECOND;
+}

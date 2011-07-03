@@ -1,0 +1,11 @@
+{
+  final FetchArtTask task=mArtTask;
+  if (task != null && task.getStatus() != AsyncTask.Status.FINISHED) {
+    task.cancel(true);
+    outState.putBoolean(STATE_ART_IN_PROGRESS,true);
+    outState.putStringArrayList(STATE_ART_PATHS,task.mPaths);
+    outState.putInt(STATE_ART_INDEX,task.mFetchCount.get());
+    mArtTask=null;
+    AnalyticsUtils.getInstance(this).trackEvent("Shows","Task Lifecycle","Art Task Saved",0);
+  }
+}

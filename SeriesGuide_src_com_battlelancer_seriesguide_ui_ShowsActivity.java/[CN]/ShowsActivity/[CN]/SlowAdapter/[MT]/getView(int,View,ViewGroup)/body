@@ -1,0 +1,61 @@
+{
+  if (!mDataValid) {
+    throw new IllegalStateException("this should only be called when the cursor is valid");
+  }
+  if (!mCursor.moveToPosition(position)) {
+    throw new IllegalStateException("couldn't move cursor to position " + position);
+  }
+  ViewHolder viewHolder;
+  if (convertView == null) {
+    convertView=mLayoutInflater.inflate(mLayout,null);
+    viewHolder=new ViewHolder();
+    viewHolder.name=(TextView)convertView.findViewById(R.id.seriesname);
+    viewHolder.network=(TextView)convertView.findViewById(R.id.TextViewShowListNetwork);
+    viewHolder.next=(TextView)convertView.findViewById(R.id.next);
+    viewHolder.episode=(TextView)convertView.findViewById(R.id.TextViewShowListNextEpisode);
+    viewHolder.episodeTime=(TextView)convertView.findViewById(R.id.episodetime);
+    viewHolder.airsTime=(TextView)convertView.findViewById(R.id.TextViewShowListAirtime);
+    viewHolder.poster=(ImageView)convertView.findViewById(R.id.showposter);
+    convertView.setTag(viewHolder);
+  }
+ else {
+    viewHolder=(ViewHolder)convertView.getTag();
+  }
+  viewHolder.name.setText(mCursor.getString(ShowsQuery.TITLE));
+  viewHolder.network.setText(mCursor.getString(ShowsQuery.NETWORK));
+  String fieldValue=mCursor.getString(ShowsQuery.NEXTTEXT);
+  if (fieldValue.length() == 0) {
+    fieldValue=mCursor.getString(ShowsQuery.STATUS);
+    if (fieldValue.equalsIgnoreCase("Continuing")) {
+      viewHolder.next.setText(getString(R.string.show_isalive));
+    }
+ else     if (fieldValue.equalsIgnoreCase("Ended")) {
+      viewHolder.next.setText(getString(R.string.show_isnotalive));
+    }
+    viewHolder.episode.setText("");
+    viewHolder.episodeTime.setText("");
+  }
+ else {
+    String[] splitted=fieldValue.split("\\" + SeriesGuideData.NEXTEPISODE_SPLIT);
+    viewHolder.next.setText(getString(R.string.nextepisode));
+    viewHolder.episode.setText(splitted[0]);
+    if (splitted.length == 2) {
+      viewHolder.episodeTime.setText(splitted[1]);
+    }
+ else {
+      viewHolder.episodeTime.setText("");
+    }
+  }
+  String[] values=SeriesGuideData.parseMillisecondsToTime(mCursor.getLong(ShowsQuery.AIRSTIME),mCursor.getString(ShowsQuery.AIRSDAYOFWEEK),true,ShowsActivity.this);
+  viewHolder.airsTime.setText(values[1] + " " + values[0]);
+  final String path=mCursor.getString(ShowsQuery.POSTER);
+  if (!mBusy) {
+    setPosterBitmap(viewHolder.poster,path);
+    viewHolder.poster.setTag(null);
+  }
+ else {
+    viewHolder.poster.setImageResource(R.drawable.show_generic);
+    viewHolder.poster.setTag(path);
+  }
+  return convertView;
+}

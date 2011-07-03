@@ -1,0 +1,42 @@
+{
+  if (mList != null) {
+    return;
+  }
+  View root=getView();
+  if (root == null) {
+    throw new IllegalStateException("Content view not yet created");
+  }
+  if (root instanceof ListView) {
+    mList=(ListView)root;
+  }
+ else {
+    mStandardEmptyView=(TextView)root.findViewById(INTERNAL_EMPTY_ID);
+    if (mStandardEmptyView == null) {
+      mEmptyView=root.findViewById(android.R.id.empty);
+    }
+    mProgressContainer=null;
+    mListContainer=null;
+    View rawListView=root.findViewById(android.R.id.list);
+    if (!(rawListView instanceof ListView)) {
+      if (rawListView == null) {
+        throw new RuntimeException("Your content must have a ListView whose id attribute is " + "'android.R.id.list'");
+      }
+      throw new RuntimeException("Content has view with id attribute 'android.R.id.list' " + "that is not a ListView class");
+    }
+    mList=(ListView)rawListView;
+    if (mEmptyView != null) {
+      mList.setEmptyView(mEmptyView);
+    }
+  }
+  mListShown=true;
+  mList.setOnItemClickListener(mOnClickListener);
+  if (mAdapter != null) {
+    setListAdapter(mAdapter);
+  }
+ else {
+    if (mProgressContainer != null) {
+      setListShown(false,false);
+    }
+  }
+  mHandler.post(mRequestFocus);
+}

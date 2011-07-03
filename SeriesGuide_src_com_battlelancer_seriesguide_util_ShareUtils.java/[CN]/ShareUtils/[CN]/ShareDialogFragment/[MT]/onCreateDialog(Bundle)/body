@@ -1,0 +1,46 @@
+{
+  final String imdbId=getArguments().getString(ShareUtils.ShareItems.IMDBID);
+  final String sharestring=getArguments().getString(ShareUtils.ShareItems.SHARESTRING);
+  final CharSequence[] items=getResources().getStringArray(R.array.share_items);
+  return new AlertDialog.Builder(getActivity()).setTitle(getString(R.string.share)).setItems(items,new DialogInterface.OnClickListener(){
+    public void onClick(    DialogInterface dialog,    int item){
+switch (item) {
+case 0:
+        if (imdbId.length() != 0) {
+          showGetGlueDialog(getFragmentManager(),getArguments());
+        }
+ else {
+          Toast.makeText(getActivity(),getString(R.string.noIMDBentry),Toast.LENGTH_LONG).show();
+        }
+      break;
+case 1:
+{
+      getArguments().putInt(ShareItems.TRAKTACTION,TraktAction.SEEN_EPISODE.index());
+      new TraktTask(getActivity(),getFragmentManager(),getArguments()).execute();
+      break;
+    }
+case 2:
+{
+    String text=sharestring;
+    if (imdbId.length() != 0) {
+      text+=" " + ShowInfo.IMDB_TITLE_URL + imdbId;
+    }
+    Intent i=new Intent(Intent.ACTION_SEND);
+    i.setType("text/plain");
+    i.putExtra(Intent.EXTRA_TEXT,text);
+    startActivity(Intent.createChooser(i,getString(R.string.share_episode)));
+    break;
+  }
+case 3:
+{
+  getArguments().putInt(ShareItems.TRAKTACTION,TraktAction.RATE_EPISODE.index());
+  TraktRateDialogFragment newFragment=TraktRateDialogFragment.newInstance(getArguments());
+  FragmentTransaction ft=getFragmentManager().beginTransaction();
+  newFragment.show(ft,"traktratedialog");
+  break;
+}
+}
+}
+}
+).create();
+}

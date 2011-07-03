@@ -1,0 +1,7 @@
+{
+  super.onSaveInstanceState(outState);
+  Parcelable p=mFragments.saveAllState();
+  if (p != null) {
+    outState.putParcelable(FRAGMENTS_TAG,p);
+  }
+}

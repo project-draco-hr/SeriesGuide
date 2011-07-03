@@ -1,0 +1,4 @@
+TraktApiService service
+TypeToken<T> token
+String urlFormat
+HttpMethod method

@@ -1,0 +1,4 @@
+{
+  this.mMenuItem.setVisible(visible);
+  return this;
+}

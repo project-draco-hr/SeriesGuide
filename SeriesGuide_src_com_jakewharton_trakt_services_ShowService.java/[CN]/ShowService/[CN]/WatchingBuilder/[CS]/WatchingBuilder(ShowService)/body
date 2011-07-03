@@ -1,0 +1,6 @@
+{
+  super(service,new TypeToken<Response>(){
+  }
+,URI,HttpMethod.Post);
+  this.includeDebugStrings();
+}

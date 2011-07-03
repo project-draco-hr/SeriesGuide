@@ -1,0 +1,25 @@
+{
+  itemId=attrs.getAttributeResourceValue(XML_NS,"id",defaultItemId);
+  final int category=attrs.getAttributeIntValue(XML_NS,"menuCategory",groupCategory);
+  final int order=attrs.getAttributeIntValue(XML_NS,"orderInCategory",groupOrder);
+  itemCategoryOrder=(category & Menu__CATEGORY_MASK) | (order & Menu__USER_MASK);
+  itemTitleId=attrs.getAttributeResourceValue(XML_NS,"title",0);
+  itemTitleCondensed=attrs.getAttributeValue(XML_NS,"titleCondensed");
+  itemIconResId=attrs.getAttributeResourceValue(XML_NS,"icon",defaultIconResId);
+  itemAlphabeticShortcut=getShortcut(attrs.getAttributeValue(XML_NS,"alphabeticShortcut"));
+  itemNumericShortcut=getShortcut(attrs.getAttributeValue(XML_NS,"numericShortcut"));
+  if (attrs.getAttributeValue(XML_NS,"checkable") != null) {
+    itemCheckable=attrs.getAttributeBooleanValue(XML_NS,"checkable",false) ? 1 : 0;
+  }
+ else {
+    itemCheckable=groupCheckable;
+  }
+  itemChecked=attrs.getAttributeBooleanValue(XML_NS,"checked",defaultItemChecked);
+  itemVisible=attrs.getAttributeBooleanValue(XML_NS,"visible",groupVisible);
+  itemEnabled=attrs.getAttributeBooleanValue(XML_NS,"enabled",groupEnabled);
+  itemListenerMethodName=attrs.getAttributeValue(XML_NS,"onClick");
+  itemShowAsAction=attrs.getAttributeIntValue(XML_NS,"showAsAction",defaultItemShowAsAction);
+  itemActionLayout=attrs.getAttributeResourceValue(XML_NS,"actionLayout",0);
+  itemActionViewClassName=attrs.getAttributeValue(XML_NS,"actionViewClass");
+  itemAdded=false;
+}

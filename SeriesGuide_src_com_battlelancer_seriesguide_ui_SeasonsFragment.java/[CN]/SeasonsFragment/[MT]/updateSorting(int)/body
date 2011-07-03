@@ -1,0 +1,11 @@
+{
+  sorting=(SeriesGuideData.SeasonSorting.values())[item];
+  AnalyticsUtils.getInstance(getActivity()).trackEvent("Seasons","Sorting",sorting.name(),0);
+  SharedPreferences.Editor prefEditor=PreferenceManager.getDefaultSharedPreferences(getActivity()).edit();
+  prefEditor.putString("seasonSorting",(getResources().getStringArray(R.array.sesortingData))[item]);
+  prefEditor.commit();
+  getLoaderManager().restartLoader(LOADER_ID,null,SeasonsFragment.this);
+  if (Build.VERSION.SDK_INT >= 11) {
+    getActivity().invalidateOptionsMenu();
+  }
+}

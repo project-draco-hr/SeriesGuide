@@ -1,0 +1,3 @@
+String username
+String passwordSha1
+String email

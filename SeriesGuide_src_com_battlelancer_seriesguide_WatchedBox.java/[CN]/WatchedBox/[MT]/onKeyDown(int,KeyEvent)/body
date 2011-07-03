@@ -1,0 +1,9 @@
+{
+  if (super.onKeyDown(keyCode,event)) {
+    this.setImageResource(R.drawable.btn_check_on_pressed_holo_dark);
+    return true;
+  }
+ else {
+    return false;
+  }
+}

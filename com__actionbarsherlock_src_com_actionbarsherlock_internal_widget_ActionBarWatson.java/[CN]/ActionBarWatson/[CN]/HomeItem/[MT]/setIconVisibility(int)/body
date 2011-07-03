@@ -1,0 +1,3 @@
+{
+  mIcon.setVisibility(visibility);
+}

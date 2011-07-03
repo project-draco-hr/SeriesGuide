@@ -1,0 +1,13 @@
+{
+  if (f.mInnerView == null) {
+    return;
+  }
+  if (mStateArray == null) {
+    mStateArray=new SparseArray<Parcelable>();
+  }
+  f.mInnerView.saveHierarchyState(mStateArray);
+  if (mStateArray.size() > 0) {
+    f.mSavedViewState=mStateArray;
+    mStateArray=null;
+  }
+}

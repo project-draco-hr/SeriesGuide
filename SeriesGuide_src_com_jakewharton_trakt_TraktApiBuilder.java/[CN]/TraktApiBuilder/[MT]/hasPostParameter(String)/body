@@ -1,0 +1,3 @@
+{
+  return this.postBody.has(name);
+}

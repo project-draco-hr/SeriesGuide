@@ -1,0 +1,6 @@
+{
+  JsonObject show=new JsonObject();
+  show.addProperty(POST_IMDB_ID,imdbId);
+  this.showList.add(show);
+  return this;
+}

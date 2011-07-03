@@ -1,0 +1,8 @@
+{
+  setIcon(itemData.getIcon());
+  setTitle(itemData.getTitle());
+  setEnabled(itemData.isEnabled());
+  setCheckable(itemData.isCheckable());
+  setChecked(itemData.isChecked());
+  setActionView(itemData.getActionView());
+}

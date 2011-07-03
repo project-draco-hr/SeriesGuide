@@ -1,0 +1,3 @@
+{
+  return this.field(name,URL_DATE_FORMAT.format(date));
+}

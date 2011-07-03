@@ -1,0 +1,12 @@
+{
+  this.preFireCallback();
+  try {
+    this.performValidation();
+  }
+ catch (  Exception e) {
+    throw new ApiException(e);
+  }
+  T result=this.service.unmarshall(this.token,this.execute());
+  this.postFireCallback(result);
+  return result;
+}

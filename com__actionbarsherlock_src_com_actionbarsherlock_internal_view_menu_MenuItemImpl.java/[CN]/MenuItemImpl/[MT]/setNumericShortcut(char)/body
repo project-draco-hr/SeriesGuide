@@ -1,0 +1,4 @@
+{
+  mNumericalShortcut=numericChar;
+  return this;
+}

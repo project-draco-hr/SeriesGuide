@@ -1,0 +1,4 @@
+{
+  this.field(FIELD_EXTENDED,EXTENDED);
+  return this;
+}

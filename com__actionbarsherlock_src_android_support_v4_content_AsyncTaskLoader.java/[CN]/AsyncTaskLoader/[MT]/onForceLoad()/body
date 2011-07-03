@@ -1,0 +1,7 @@
+{
+  super.onForceLoad();
+  cancelLoad();
+  mTask=new LoadTask();
+  if (DEBUG)   Log.v(TAG,"Preparing load: mTask=" + mTask);
+  executePendingTask();
+}

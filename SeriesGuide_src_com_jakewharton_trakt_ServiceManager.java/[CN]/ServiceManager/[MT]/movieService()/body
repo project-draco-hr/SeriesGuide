@@ -1,0 +1,5 @@
+{
+  MovieService service=ServiceManager.createMovieService();
+  this.setupService(service);
+  return service;
+}

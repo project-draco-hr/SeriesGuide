@@ -1,0 +1,3 @@
+{
+  return CONTENT_URI.buildUpon().appendPath(PATH_OFSEASON).appendPath(PATH_WITHSHOW).appendPath(seasonId).build();
+}

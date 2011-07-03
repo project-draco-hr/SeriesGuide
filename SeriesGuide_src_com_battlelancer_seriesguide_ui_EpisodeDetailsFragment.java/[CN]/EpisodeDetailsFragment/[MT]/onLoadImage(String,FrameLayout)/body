@@ -1,0 +1,20 @@
+{
+  if (imagePath.length() != 0) {
+    final Bitmap bitmap=imageCache.get(imagePath);
+    final ImageView imageView=(ImageView)container.findViewById(R.id.ImageViewEpisodeImage);
+    if (bitmap != null) {
+      imageView.setImageBitmap(bitmap);
+    }
+ else {
+      if (mArtTask == null) {
+        mArtTask=(FetchArtTask)new FetchArtTask(imagePath,imageView).execute();
+      }
+ else       if (mArtTask != null && mArtTask.getStatus() == AsyncTask.Status.FINISHED) {
+        mArtTask=(FetchArtTask)new FetchArtTask(imagePath,imageView).execute();
+      }
+    }
+  }
+ else {
+    container.setVisibility(View.GONE);
+  }
+}

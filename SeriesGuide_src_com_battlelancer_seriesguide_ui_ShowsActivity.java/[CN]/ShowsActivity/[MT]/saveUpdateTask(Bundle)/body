@@ -1,0 +1,12 @@
+{
+  final UpdateTask task=mUpdateTask;
+  if (task != null && task.getStatus() != AsyncTask.Status.FINISHED) {
+    task.cancel(true);
+    outState.putBoolean(STATE_UPDATE_IN_PROGRESS,true);
+    outState.putStringArray(STATE_UPDATE_SHOWS,task.mShows);
+    outState.putInt(STATE_UPDATE_INDEX,task.mUpdateCount.get());
+    outState.putString(STATE_UPDATE_FAILEDSHOWS,task.mFailedShows);
+    mUpdateTask=null;
+    AnalyticsUtils.getInstance(this).trackEvent("Shows","Task Lifecycle","Update Task Saved",0);
+  }
+}

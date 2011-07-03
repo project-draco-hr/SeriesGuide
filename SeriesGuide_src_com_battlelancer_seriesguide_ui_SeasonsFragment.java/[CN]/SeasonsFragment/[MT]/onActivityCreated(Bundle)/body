@@ -1,0 +1,7 @@
+{
+  super.onActivityCreated(savedInstanceState);
+  updatePreferences();
+  fillData();
+  registerForContextMenu(getListView());
+  setHasOptionsMenu(true);
+}

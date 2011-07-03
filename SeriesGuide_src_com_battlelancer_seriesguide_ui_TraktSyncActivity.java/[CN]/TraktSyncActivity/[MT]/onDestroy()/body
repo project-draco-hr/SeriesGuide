@@ -1,0 +1,7 @@
+{
+  super.onDestroy();
+  if (mSyncTask != null && mSyncTask.getStatus() == AsyncTask.Status.RUNNING) {
+    mSyncTask.cancel(true);
+    mSyncTask=null;
+  }
+}

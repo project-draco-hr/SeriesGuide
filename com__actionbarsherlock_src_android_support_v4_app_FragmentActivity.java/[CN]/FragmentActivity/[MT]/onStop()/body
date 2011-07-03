@@ -1,0 +1,6 @@
+{
+  super.onStop();
+  mStopped=true;
+  mHandler.sendEmptyMessage(MSG_REALLY_STOPPED);
+  mFragments.dispatchStop();
+}

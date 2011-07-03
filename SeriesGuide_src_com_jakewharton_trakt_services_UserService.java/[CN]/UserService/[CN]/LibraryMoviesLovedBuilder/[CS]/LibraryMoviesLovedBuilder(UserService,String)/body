@@ -1,0 +1,6 @@
+{
+  super(service,new TypeToken<List<Movie>>(){
+  }
+,URI);
+  this.field(FIELD_USERNAME,username);
+}

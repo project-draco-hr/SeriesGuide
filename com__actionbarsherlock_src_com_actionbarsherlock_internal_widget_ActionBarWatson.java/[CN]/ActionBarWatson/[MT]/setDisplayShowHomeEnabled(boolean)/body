@@ -1,0 +1,3 @@
+{
+  setDisplayOptions(showHome ? ActionBar.DISPLAY_SHOW_HOME : 0,ActionBar.DISPLAY_SHOW_HOME);
+}

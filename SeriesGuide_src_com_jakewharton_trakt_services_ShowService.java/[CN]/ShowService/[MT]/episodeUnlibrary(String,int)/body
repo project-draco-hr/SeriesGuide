@@ -1,0 +1,3 @@
+{
+  return new EpisodeUnlibraryBuilder(this).title(title).year(year);
+}

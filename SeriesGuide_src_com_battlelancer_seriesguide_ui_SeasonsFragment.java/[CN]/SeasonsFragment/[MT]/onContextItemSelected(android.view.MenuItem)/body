@@ -1,0 +1,12 @@
+{
+  AdapterContextMenuInfo info=(AdapterContextMenuInfo)item.getMenuInfo();
+switch (item.getItemId()) {
+case ID_MARK_ALL_WATCHED:
+    markSeasonEpisodes(info.id,true);
+  return true;
+case ID_MARK_ALL_UNWATCHED:
+markSeasonEpisodes(info.id,false);
+return true;
+}
+return super.onContextItemSelected(item);
+}

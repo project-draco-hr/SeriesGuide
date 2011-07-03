@@ -1,0 +1,35 @@
+{
+  if (milliseconds == -1) {
+    if (dayofweek != null) {
+      return new String[]{"",getDayShortcode(dayofweek)};
+    }
+ else {
+      return new String[]{"",""};
+    }
+  }
+  SharedPreferences prefs=PreferenceManager.getDefaultSharedPreferences(context);
+  boolean useUserTimeZone=prefs.getBoolean(SeriesGuidePreferences.KEY_USE_MY_TIMEZONE,false);
+  Calendar cal=Calendar.getInstance(TimeZone.getTimeZone("America/Los_Angeles"));
+  cal.setTimeInMillis(milliseconds);
+  int offset=Integer.valueOf(prefs.getString(SeriesGuidePreferences.KEY_OFFSET,"0"));
+  cal.add(Calendar.HOUR_OF_DAY,offset);
+  java.text.DateFormat timeFormat=DateFormat.getTimeFormat(context);
+  if (!useUserTimeZone) {
+    timeFormat.setTimeZone(TimeZone.getTimeZone("America/Los_Angeles"));
+  }
+  String time=timeFormat.format(cal.getTime());
+  if (dayofweek != null && calculateDay) {
+    if (useUserTimeZone) {
+      cal.set(Calendar.DAY_OF_WEEK,getDayOfWeek(dayofweek));
+      Calendar local=Calendar.getInstance();
+      local.setTimeInMillis(cal.getTimeInMillis());
+      return new String[]{time,getDayShortcode(local.get(Calendar.DAY_OF_WEEK))};
+    }
+ else {
+      return new String[]{time,getDayShortcode(dayofweek)};
+    }
+  }
+ else {
+    return new String[]{time,""};
+  }
+}

@@ -1,0 +1,3 @@
+{
+  return new EpisodeShoutsBuilder(this).title(title).season(season).episode(episode);
+}

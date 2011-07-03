@@ -1,0 +1,3 @@
+{
+  return new ShowBuilder(this).title(title).year(year);
+}

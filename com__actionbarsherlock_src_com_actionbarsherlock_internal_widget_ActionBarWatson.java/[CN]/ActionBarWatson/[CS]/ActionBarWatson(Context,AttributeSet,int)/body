@@ -1,0 +1,45 @@
+{
+  super(context,attrs,defStyle);
+  LayoutInflater.from(context).inflate(R.layout.actionbarwatson,this,true);
+  final TypedArray attrsActionBar=context.obtainStyledAttributes(attrs,R.styleable.SherlockActionBar,defStyle,0);
+  final TypedArray attrsTheme=context.obtainStyledAttributes(attrs,R.styleable.SherlockTheme,defStyle,0);
+  mHome=(HomeItem)findViewById(R.id.actionbarwatson_home);
+  final Drawable homeAsUpIndicator=attrsTheme.getDrawable(R.styleable.SherlockTheme_homeAsUpIndicator);
+  mHome.setUpIndicator(homeAsUpIndicator);
+  final Drawable homeLogo=attrsActionBar.getDrawable(R.styleable.SherlockActionBar_logo);
+  if (homeLogo != null) {
+    mHome.setLogo(homeLogo);
+  }
+  final Drawable homeIcon=attrsActionBar.getDrawable(R.styleable.SherlockActionBar_icon);
+  mHome.setIcon(homeIcon);
+  mTitle=(TextView)findViewById(R.id.actionbarwatson_title);
+  final int titleTextStyle=attrsActionBar.getResourceId(R.styleable.SherlockActionBar_titleTextStyle,0);
+  if (titleTextStyle != 0) {
+    mTitle.setTextAppearance(context,titleTextStyle);
+  }
+  final CharSequence title=attrsActionBar.getString(R.styleable.SherlockActionBar_title);
+  if (title != null) {
+    setTitle(title);
+  }
+  mSubtitle=(TextView)findViewById(R.id.actionbarwatson_subtitle);
+  final int subtitleTextStyle=attrsActionBar.getResourceId(R.styleable.SherlockActionBar_subtitleTextStyle,0);
+  if (subtitleTextStyle != 0) {
+    mSubtitle.setTextAppearance(context,subtitleTextStyle);
+  }
+  final CharSequence subtitle=attrsActionBar.getString(R.styleable.SherlockActionBar_subtitle);
+  if (subtitle != null) {
+    setSubtitle(subtitle);
+  }
+  mListView=(Spinner)findViewById(R.id.actionbarwatson_nav_list);
+  mTabsView=(LinearLayout)findViewById(R.id.actionbarwatson_nav_tabs);
+  mCustomView=(FrameLayout)findViewById(R.id.actionbarwatson_custom);
+  final int customViewResourceId=attrsActionBar.getResourceId(R.styleable.SherlockActionBar_customNavigationLayout,0);
+  if (customViewResourceId != 0) {
+    setCustomView(customViewResourceId);
+  }
+  mActionsView=(LinearLayout)findViewById(R.id.actionbarwatson_actions);
+  setDisplayOptions(attrsActionBar.getInteger(R.styleable.SherlockActionBar_displayOptions,DEFAULT_DISPLAY_OPTIONS));
+  setNavigationMode(attrsActionBar.getInteger(R.styleable.SherlockActionBar_navigationMode,DEFAULT_NAVIGATION_MODE));
+  attrsActionBar.recycle();
+  attrsTheme.recycle();
+}

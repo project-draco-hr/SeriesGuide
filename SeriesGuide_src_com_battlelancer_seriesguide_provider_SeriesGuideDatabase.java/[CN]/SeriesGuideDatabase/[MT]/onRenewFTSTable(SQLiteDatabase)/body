@@ -1,0 +1,12 @@
+{
+  db.beginTransaction();
+  try {
+    db.execSQL("drop table if exists " + Tables.EPISODES_SEARCH);
+    db.execSQL(CREATE_SEARCH_TABLE);
+    db.execSQL("INSERT INTO " + Tables.EPISODES_SEARCH + "(docid,"+ Episodes.TITLE+ ","+ Episodes.OVERVIEW+ ")"+ " select "+ Episodes._ID+ ","+ Episodes.TITLE+ ","+ Episodes.OVERVIEW+ " from "+ Tables.EPISODES+ ";");
+    db.setTransactionSuccessful();
+  }
+  finally {
+    db.endTransaction();
+  }
+}

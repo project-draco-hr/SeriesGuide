@@ -1,0 +1,3 @@
+{
+  mMenuInflater.inflate(menuRes,((MenuWrapper)menu).unwrap());
+}

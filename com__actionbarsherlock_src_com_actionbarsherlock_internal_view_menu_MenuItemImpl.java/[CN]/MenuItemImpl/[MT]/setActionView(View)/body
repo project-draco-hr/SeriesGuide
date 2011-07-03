@@ -1,0 +1,6 @@
+{
+  mActionView=view;
+  mActionViewRes=View.NO_ID;
+  setActionViewOnViews(mActionView);
+  return this;
+}

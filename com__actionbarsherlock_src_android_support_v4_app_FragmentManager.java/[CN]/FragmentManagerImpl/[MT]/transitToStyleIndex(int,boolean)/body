@@ -1,0 +1,15 @@
+{
+  int animAttr=-1;
+switch (transit) {
+case FragmentTransaction.TRANSIT_FRAGMENT_OPEN:
+    animAttr=enter ? ANIM_STYLE_OPEN_ENTER : ANIM_STYLE_OPEN_EXIT;
+  break;
+case FragmentTransaction.TRANSIT_FRAGMENT_CLOSE:
+animAttr=enter ? ANIM_STYLE_CLOSE_ENTER : ANIM_STYLE_CLOSE_EXIT;
+break;
+case FragmentTransaction.TRANSIT_FRAGMENT_FADE:
+animAttr=enter ? ANIM_STYLE_FADE_ENTER : ANIM_STYLE_FADE_EXIT;
+break;
+}
+return animAttr;
+}

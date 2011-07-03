@@ -1,0 +1,6 @@
+{
+  if (mImageCache == null) {
+    mImageCache=ImageCache.getInstance(getApplicationContext());
+  }
+  return mImageCache;
+}

@@ -1,0 +1,14 @@
+{
+  if (mNavigationMode == ActionBar.NAVIGATION_MODE_LIST) {
+    return mListView.getSelectedItemPosition();
+  }
+  if (mNavigationMode == ActionBar.NAVIGATION_MODE_TABS) {
+    final int count=mTabsView.getChildCount();
+    for (int i=0; i < count; i++) {
+      if (((TabImpl)mTabsView.getChildAt(i).getTag()).mView.isSelected()) {
+        return i;
+      }
+    }
+  }
+  return -1;
+}

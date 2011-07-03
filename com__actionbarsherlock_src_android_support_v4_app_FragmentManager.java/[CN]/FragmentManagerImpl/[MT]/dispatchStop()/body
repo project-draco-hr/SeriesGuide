@@ -1,0 +1,4 @@
+{
+  mStateSaved=true;
+  moveToState(Fragment.ACTIVITY_CREATED,false);
+}

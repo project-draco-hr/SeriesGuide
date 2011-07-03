@@ -1,0 +1,40 @@
+{
+  Animation animObj=fragment.onCreateAnimation(transit,enter,fragment.mNextAnim);
+  if (animObj != null) {
+    return animObj;
+  }
+  if (fragment.mNextAnim != 0) {
+    Animation anim=AnimationUtils.loadAnimation(mActivity,fragment.mNextAnim);
+    if (anim != null) {
+      return anim;
+    }
+  }
+  if (transit == 0) {
+    return null;
+  }
+  int styleIndex=transitToStyleIndex(transit,enter);
+  if (styleIndex < 0) {
+    return null;
+  }
+switch (styleIndex) {
+case ANIM_STYLE_OPEN_ENTER:
+    return makeOpenCloseAnimation(mActivity,1.125f,1.0f,0,1);
+case ANIM_STYLE_OPEN_EXIT:
+  return makeOpenCloseAnimation(mActivity,1.0f,.975f,1,0);
+case ANIM_STYLE_CLOSE_ENTER:
+return makeOpenCloseAnimation(mActivity,.975f,1.0f,0,1);
+case ANIM_STYLE_CLOSE_EXIT:
+return makeOpenCloseAnimation(mActivity,1.0f,1.075f,1,0);
+case ANIM_STYLE_FADE_ENTER:
+return makeFadeAnimation(mActivity,0,1);
+case ANIM_STYLE_FADE_EXIT:
+return makeFadeAnimation(mActivity,1,0);
+}
+if (transitionStyle == 0 && mActivity.getWindow() != null) {
+transitionStyle=mActivity.getWindow().getAttributes().windowAnimations;
+}
+if (transitionStyle == 0) {
+return null;
+}
+return null;
+}

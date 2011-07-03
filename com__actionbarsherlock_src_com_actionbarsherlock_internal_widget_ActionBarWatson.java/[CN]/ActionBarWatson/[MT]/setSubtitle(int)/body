@@ -1,0 +1,4 @@
+{
+  mSubtitle.setText(resId);
+  reloadDisplay();
+}

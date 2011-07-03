@@ -1,0 +1,5 @@
+{
+  ActionItem item=(ActionItem)LayoutInflater.from(getContext()).inflate(R.layout.actionbarwatson_item,mActionsView,false);
+  item.setActionBar(this);
+  return item;
+}

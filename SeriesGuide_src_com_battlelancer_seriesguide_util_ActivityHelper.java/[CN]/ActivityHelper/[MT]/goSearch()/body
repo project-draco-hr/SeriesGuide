@@ -1,0 +1,3 @@
+{
+  mActivity.startSearch(null,false,Bundle.EMPTY,false);
+}

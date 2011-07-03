@@ -1,0 +1,3 @@
+{
+  mActionBar.setListNavigationCallbacks(adapter,callback);
+}

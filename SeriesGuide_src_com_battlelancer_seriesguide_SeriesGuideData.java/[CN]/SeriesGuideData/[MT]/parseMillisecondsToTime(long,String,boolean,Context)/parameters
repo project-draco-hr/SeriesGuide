@@ -1,0 +1,4 @@
+long milliseconds
+String dayofweek
+boolean calculateDay
+Context context

@@ -1,0 +1,5 @@
+{
+  boolean result=menu.hasVisibleItems();
+  if (DEBUG)   Log.d(TAG,"onPrepareOptionsMenu(Menu): Returning " + result);
+  return result;
+}

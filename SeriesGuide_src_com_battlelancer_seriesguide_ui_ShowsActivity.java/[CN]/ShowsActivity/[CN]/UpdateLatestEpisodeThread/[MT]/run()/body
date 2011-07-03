@@ -1,0 +1,13 @@
+{
+  if (mShowId != null) {
+    SeriesDatabase.updateLatestEpisode(mContext,mShowId);
+  }
+ else {
+    final Cursor shows=mContext.getContentResolver().query(Shows.CONTENT_URI,new String[]{Shows._ID},null,null,null);
+    while (shows.moveToNext()) {
+      String id=shows.getString(0);
+      SeriesDatabase.updateLatestEpisode(mContext,id);
+    }
+    shows.close();
+  }
+}

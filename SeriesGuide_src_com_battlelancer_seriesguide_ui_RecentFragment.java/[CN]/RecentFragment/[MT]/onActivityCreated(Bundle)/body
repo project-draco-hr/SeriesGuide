@@ -1,0 +1,5 @@
+{
+  super.onActivityCreated(savedInstanceState);
+  setupAdapter();
+  getActivity().getSupportLoaderManager().initLoader(LOADER_ID,null,this);
+}

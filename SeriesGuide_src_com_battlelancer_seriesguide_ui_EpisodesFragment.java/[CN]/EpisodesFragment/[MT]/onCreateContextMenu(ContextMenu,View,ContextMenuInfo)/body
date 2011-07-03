@@ -1,0 +1,6 @@
+{
+  super.onCreateContextMenu(menu,v,menuInfo);
+  menu.add(0,MARK_WATCHED_ID,0,R.string.mark_episode);
+  menu.add(0,MARK_UNWATCHED_ID,1,R.string.unmark_episode);
+  menu.add(0,DELETE_EPISODE_ID,2,R.string.delete_show);
+}

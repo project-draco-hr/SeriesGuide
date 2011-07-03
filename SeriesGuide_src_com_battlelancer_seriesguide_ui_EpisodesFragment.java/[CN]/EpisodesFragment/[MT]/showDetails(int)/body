@@ -1,0 +1,19 @@
+{
+  String episodeId=String.valueOf(getListView().getItemIdAtPosition(position));
+  if (mDualPane) {
+    EpisodeDetailsFragment detailsFragment=(EpisodeDetailsFragment)getFragmentManager().findFragmentById(R.id.fragment_details);
+    if (detailsFragment == null || !detailsFragment.getEpisodeId().equalsIgnoreCase(episodeId)) {
+      detailsFragment=EpisodeDetailsFragment.newInstance(episodeId);
+      FragmentTransaction ft=getFragmentManager().beginTransaction();
+      ft.replace(R.id.fragment_details,detailsFragment,"fragmentDetails");
+      ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+      ft.commit();
+    }
+  }
+ else {
+    Intent intent=new Intent();
+    intent.setClass(getActivity(),EpisodeDetailsActivity.class);
+    intent.putExtra(BaseColumns._ID,episodeId);
+    startActivity(intent);
+  }
+}

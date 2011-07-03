@@ -1,0 +1,4 @@
+{
+  mLogo.setImageDrawable(logo);
+  return this;
+}

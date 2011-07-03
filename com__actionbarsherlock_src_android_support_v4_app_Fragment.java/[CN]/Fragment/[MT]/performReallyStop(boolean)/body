@@ -1,0 +1,17 @@
+{
+  if (mLoadersStarted) {
+    mLoadersStarted=false;
+    if (!mCheckedForLoaderManager) {
+      mCheckedForLoaderManager=true;
+      mLoaderManager=mActivity.getLoaderManager(mIndex,mLoadersStarted,false);
+    }
+    if (mLoaderManager != null) {
+      if (!retaining) {
+        mLoaderManager.doStop();
+      }
+ else {
+        mLoaderManager.doRetain();
+      }
+    }
+  }
+}

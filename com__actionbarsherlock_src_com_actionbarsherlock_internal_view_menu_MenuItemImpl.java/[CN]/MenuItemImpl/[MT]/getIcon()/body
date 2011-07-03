@@ -1,0 +1,9 @@
+{
+  if (mIcon != null) {
+    return mIcon;
+  }
+  if (mIconRes != View.NO_ID) {
+    return mMenu.getContext().getResources().getDrawable(mIconRes);
+  }
+  return null;
+}

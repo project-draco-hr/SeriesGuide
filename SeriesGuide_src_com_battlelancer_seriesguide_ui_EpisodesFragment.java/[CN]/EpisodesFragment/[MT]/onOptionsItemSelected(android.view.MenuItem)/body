@@ -1,0 +1,20 @@
+{
+switch (item.getItemId()) {
+case R.id.mark_all:
+    fireTrackerEvent("Mark all episodes");
+  markAllEpisodes(true);
+return true;
+case R.id.unmark_all:
+fireTrackerEvent("Unmark all episodes");
+markAllEpisodes(false);
+return true;
+case R.id.menu_epsorting:
+fireTrackerEvent("Sort episodes");
+SortDialogFragment newFragment=SortDialogFragment.newInstance(sorting.index(),R.array.epsorting);
+FragmentTransaction ft=getFragmentManager().beginTransaction();
+newFragment.show(ft,"sortEpisodesDialog");
+return true;
+default :
+return super.onOptionsItemSelected(item);
+}
+}

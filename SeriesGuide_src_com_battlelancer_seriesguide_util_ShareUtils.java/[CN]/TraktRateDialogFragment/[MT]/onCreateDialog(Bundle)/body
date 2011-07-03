@@ -1,0 +1,30 @@
+{
+  final Context context=getActivity();
+  AlertDialog.Builder builder;
+  LayoutInflater inflater=(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+  final View layout=inflater.inflate(R.layout.trakt_rate_dialog,null);
+  final Button totallyNinja=(Button)layout.findViewById(R.id.totallyninja);
+  final Button weakSauce=(Button)layout.findViewById(R.id.weaksauce);
+  totallyNinja.setOnClickListener(new View.OnClickListener(){
+    public void onClick(    View v){
+      final Rating rating=Rating.Love;
+      getArguments().putString(ShareItems.RATING,rating.toString());
+      new TraktTask(context,getFragmentManager(),getArguments()).execute();
+      dismiss();
+    }
+  }
+);
+  weakSauce.setOnClickListener(new View.OnClickListener(){
+    public void onClick(    View v){
+      final Rating rating=Rating.Hate;
+      getArguments().putString(ShareItems.RATING,rating.toString());
+      new TraktTask(context,getFragmentManager(),getArguments()).execute();
+      dismiss();
+    }
+  }
+);
+  builder=new AlertDialog.Builder(context);
+  builder.setView(layout);
+  builder.setNegativeButton(android.R.string.cancel,null);
+  return builder.create();
+}

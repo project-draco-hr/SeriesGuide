@@ -1,0 +1,11 @@
+{
+  Cursor eptest=context.getContentResolver().query(Episodes.buildEpisodesOfShowUri(seriesid),new String[]{Episodes._ID},null,null,null);
+  HashSet<Long> episodeIDs=new HashSet<Long>();
+  eptest.moveToFirst();
+  while (!eptest.isAfterLast()) {
+    episodeIDs.add(eptest.getLong(0));
+    eptest.moveToNext();
+  }
+  eptest.close();
+  return episodeIDs;
+}

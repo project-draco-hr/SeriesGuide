@@ -1,0 +1,17 @@
+{
+  if (prefs.getString(SeriesGuidePreferences.KEY_NUMBERFORMAT,SeriesGuidePreferences.NUMBERFORMAT_DEFAULT).equals(SeriesGuidePreferences.NUMBERFORMAT_DEFAULT)) {
+    season+="x";
+  }
+ else {
+    if (season.length() == 1) {
+      season="0" + season;
+    }
+    season="S" + season + "E";
+  }
+  if (episode.length() == 1) {
+    season+="0";
+  }
+  season+=episode;
+  season+=" " + title;
+  return season;
+}

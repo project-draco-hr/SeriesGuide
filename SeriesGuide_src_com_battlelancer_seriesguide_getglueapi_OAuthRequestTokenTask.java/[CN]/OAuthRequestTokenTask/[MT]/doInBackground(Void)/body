@@ -1,0 +1,14 @@
+{
+  try {
+    Log.i(TAG,"Retrieving request token from Google servers");
+    final String url=provider.retrieveRequestToken(consumer,GetGlue.OAUTH_CALLBACK_URL);
+    Log.i(TAG,"Popping a browser with the authorize URL : " + url);
+    Intent intent=new Intent(Intent.ACTION_VIEW,Uri.parse(url)).setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_FROM_BACKGROUND);
+    context.startActivity(intent);
+  }
+ catch (  Exception e) {
+    Log.e(TAG,"Error during OAUth retrieve request token",e);
+    return e.getMessage();
+  }
+  return null;
+}

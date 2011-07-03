@@ -1,0 +1,38 @@
+{
+  GsonBuilder builder=new GsonBuilder();
+  builder.registerTypeAdapter(Date.class,new JsonDeserializer<Date>(){
+    public Date deserialize(    JsonElement json,    Type typeOfT,    JsonDeserializationContext context) throws JsonParseException {
+      try {
+        return new Date(json.getAsLong() * TraktApiBuilder.MILLISECONDS_IN_SECOND);
+      }
+ catch (      NumberFormatException outer) {
+        try {
+          return JSON_STRING_DATE.parse(json.getAsString());
+        }
+ catch (        ParseException inner) {
+          throw outer;
+        }
+      }
+    }
+  }
+);
+  builder.registerTypeAdapter(MediaType.class,new JsonDeserializer<MediaType>(){
+    public MediaType deserialize(    JsonElement json,    Type typeOfT,    JsonDeserializationContext context) throws JsonParseException {
+      return MediaType.fromValue(json.getAsString());
+    }
+  }
+);
+  builder.registerTypeAdapter(Rating.class,new JsonDeserializer<Rating>(){
+    public Rating deserialize(    JsonElement json,    Type typeOfT,    JsonDeserializationContext context) throws JsonParseException {
+      return Rating.fromValue(json.getAsString());
+    }
+  }
+);
+  builder.registerTypeAdapter(Rating.class,new JsonSerializer<Rating>(){
+    public JsonElement serialize(    Rating src,    Type typeOfSrc,    JsonSerializationContext context){
+      return new JsonPrimitive(src.toString());
+    }
+  }
+);
+  return builder;
+}

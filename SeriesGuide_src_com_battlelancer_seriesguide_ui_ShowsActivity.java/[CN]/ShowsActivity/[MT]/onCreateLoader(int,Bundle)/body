@@ -1,0 +1,3 @@
+{
+  return new CursorLoader(this,Shows.CONTENT_URI,ShowsQuery.PROJECTION,null,null,sorting.query());
+}

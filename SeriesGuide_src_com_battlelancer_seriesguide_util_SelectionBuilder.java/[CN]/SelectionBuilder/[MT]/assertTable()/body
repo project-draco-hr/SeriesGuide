@@ -1,0 +1,5 @@
+{
+  if (mTable == null) {
+    throw new IllegalStateException("Table not specified");
+  }
+}

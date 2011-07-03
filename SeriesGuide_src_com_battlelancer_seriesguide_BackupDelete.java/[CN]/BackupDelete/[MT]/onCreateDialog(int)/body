@@ -1,0 +1,43 @@
+{
+switch (id) {
+case EXPORT_DIALOG:
+    return new AlertDialog.Builder(BackupDelete.this).setMessage(getString(R.string.backup_question)).setPositiveButton(getString(R.string.backup_yes),new DialogInterface.OnClickListener(){
+      public void onClick(      DialogInterface arg0,      int arg1){
+        if (UIUtils.isExtStorageAvailable()) {
+          fireTrackerEvent("Do Backup");
+          mExportTask=new ExportDatabaseTask();
+          mExportTask.execute();
+        }
+ else {
+          fireTrackerEvent("Don't Backup");
+          Toast.makeText(BackupDelete.this,getString(R.string.backup_failed_nosd),Toast.LENGTH_SHORT).show();
+        }
+      }
+    }
+).setNegativeButton(getString(R.string.backup_no),null).create();
+case IMPORT_DIALOG:
+  return new AlertDialog.Builder(BackupDelete.this).setMessage(getString(R.string.import_question)).setPositiveButton(getString(R.string.import_yes),new DialogInterface.OnClickListener(){
+    public void onClick(    DialogInterface arg0,    int arg1){
+      if (UIUtils.isExtStorageAvailable()) {
+        fireTrackerEvent("Do Import");
+        mImportTask=new ImportDatabaseTask();
+        mImportTask.execute();
+      }
+ else {
+        fireTrackerEvent("Don't Import");
+        Toast.makeText(BackupDelete.this,getString(R.string.import_failed_nosd),Toast.LENGTH_SHORT).show();
+      }
+    }
+  }
+).setNegativeButton(getString(R.string.import_no),null).create();
+case EXPORT_PROGRESS:
+exportProgress=new ProgressDialog(BackupDelete.this);
+exportProgress.setMessage(getString(R.string.backup_inprogress));
+return exportProgress;
+case IMPORT_PROGRESS:
+importProgress=new ProgressDialog(BackupDelete.this);
+importProgress.setMessage(getString(R.string.import_inprogress));
+return importProgress;
+}
+return null;
+}

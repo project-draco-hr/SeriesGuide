@@ -1,0 +1,9 @@
+{
+  if (mActivity instanceof ShowsActivity) {
+    return;
+  }
+  final Intent intent=new Intent(mActivity,ShowsActivity.class);
+  intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+  mActivity.startActivity(intent);
+  mActivity.overridePendingTransition(R.anim.home_enter,R.anim.home_exit);
+}

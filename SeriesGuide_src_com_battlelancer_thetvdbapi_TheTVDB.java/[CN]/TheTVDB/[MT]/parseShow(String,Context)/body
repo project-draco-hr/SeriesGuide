@@ -1,0 +1,109 @@
+{
+  final Series currentShow=new Series();
+  RootElement root=new RootElement("Data");
+  Element show=root.getChild("Series");
+  show.getChild("id").setEndTextElementListener(new EndTextElementListener(){
+    public void end(    String body){
+      currentShow.setId(body.trim());
+    }
+  }
+);
+  show.getChild("Language").setEndTextElementListener(new EndTextElementListener(){
+    public void end(    String body){
+      currentShow.setLanguage(body.trim());
+    }
+  }
+);
+  show.getChild("SeriesName").setEndTextElementListener(new EndTextElementListener(){
+    public void end(    String body){
+      currentShow.setSeriesName(body.trim());
+    }
+  }
+);
+  show.getChild("Overview").setEndTextElementListener(new EndTextElementListener(){
+    public void end(    String body){
+      currentShow.setOverview(body.trim());
+    }
+  }
+);
+  show.getChild("Actors").setEndTextElementListener(new EndTextElementListener(){
+    public void end(    String body){
+      currentShow.setActors(body.trim());
+    }
+  }
+);
+  show.getChild("Airs_DayOfWeek").setEndTextElementListener(new EndTextElementListener(){
+    public void end(    String body){
+      currentShow.setAirsDayOfWeek(body.trim());
+    }
+  }
+);
+  show.getChild("Airs_Time").setEndTextElementListener(new EndTextElementListener(){
+    public void end(    String body){
+      currentShow.setAirsTime(SeriesGuideData.parseTimeToMilliseconds(body.trim()));
+    }
+  }
+);
+  show.getChild("FirstAired").setEndTextElementListener(new EndTextElementListener(){
+    public void end(    String body){
+      currentShow.setFirstAired(body.trim());
+    }
+  }
+);
+  show.getChild("Genre").setEndTextElementListener(new EndTextElementListener(){
+    public void end(    String body){
+      currentShow.setGenres(body.trim());
+    }
+  }
+);
+  show.getChild("Network").setEndTextElementListener(new EndTextElementListener(){
+    public void end(    String body){
+      currentShow.setNetwork(body.trim());
+    }
+  }
+);
+  show.getChild("Rating").setEndTextElementListener(new EndTextElementListener(){
+    public void end(    String body){
+      currentShow.setRating(body.trim());
+    }
+  }
+);
+  show.getChild("Runtime").setEndTextElementListener(new EndTextElementListener(){
+    public void end(    String body){
+      currentShow.setRuntime(body.trim());
+    }
+  }
+);
+  show.getChild("Status").setEndTextElementListener(new EndTextElementListener(){
+    public void end(    String body){
+      currentShow.setStatus(body.trim());
+    }
+  }
+);
+  show.getChild("ContentRating").setEndTextElementListener(new EndTextElementListener(){
+    public void end(    String body){
+      currentShow.setContentRating(body.trim());
+    }
+  }
+);
+  show.getChild("poster").setEndTextElementListener(new EndTextElementListener(){
+    public void end(    String body){
+      String posterurl=body.trim();
+      currentShow.setPoster(posterurl);
+      if (posterurl.length() != 0) {
+        fetchArt(posterurl,true,context);
+      }
+    }
+  }
+);
+  show.getChild("IMDB_ID").setEndTextElementListener(new EndTextElementListener(){
+    public void end(    String body){
+      currentShow.setImdbId(body.trim());
+    }
+  }
+);
+  HttpUriRequest request=new HttpGet(url);
+  HttpClient httpClient=getHttpClient(context);
+  execute(request,httpClient,root.getContentHandler(),false);
+  return currentShow;
+}

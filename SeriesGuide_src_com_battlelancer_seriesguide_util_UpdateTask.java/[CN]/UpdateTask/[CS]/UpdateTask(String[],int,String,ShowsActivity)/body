@@ -1,0 +1,5 @@
+{
+  this(shows,context);
+  mUpdateCount.set(index);
+  mFailedShows=failedShows;
+}

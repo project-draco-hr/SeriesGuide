@@ -1,0 +1,15 @@
+{
+  if (mProgressOverlay == null) {
+    mProgressOverlay=((ViewStub)findViewById(R.id.stub_update)).inflate();
+    mUpdateProgress=(ProgressBar)findViewById(R.id.ProgressBarShowListDet);
+    mCancelButton=mProgressOverlay.findViewById(R.id.overlayCancel);
+    mCancelButton.setOnClickListener(new View.OnClickListener(){
+      public void onClick(      View v){
+        onCancelTasks();
+      }
+    }
+);
+  }
+  mUpdateProgress.setIndeterminate(true);
+  showOverlay(mProgressOverlay);
+}

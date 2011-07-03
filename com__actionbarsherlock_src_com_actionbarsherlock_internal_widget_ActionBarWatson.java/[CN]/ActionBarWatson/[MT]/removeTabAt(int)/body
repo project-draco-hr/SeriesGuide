@@ -1,0 +1,13 @@
+{
+  TabImpl tab=(TabImpl)getTabAt(position);
+  if (tab != null) {
+    tab.unselect();
+    mTabsView.removeViewAt(position);
+    if (position > 0) {
+      ((TabImpl)mTabsView.getChildAt(position - 1).getTag()).select();
+    }
+ else     if (mTabsView.getChildCount() > 0) {
+      ((TabImpl)mTabsView.getChildAt(0).getTag()).select();
+    }
+  }
+}

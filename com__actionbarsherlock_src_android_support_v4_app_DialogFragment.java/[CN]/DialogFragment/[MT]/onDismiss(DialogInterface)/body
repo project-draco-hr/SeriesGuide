@@ -1,0 +1,5 @@
+{
+  if (!mRemoved) {
+    dismissInternal(true);
+  }
+}

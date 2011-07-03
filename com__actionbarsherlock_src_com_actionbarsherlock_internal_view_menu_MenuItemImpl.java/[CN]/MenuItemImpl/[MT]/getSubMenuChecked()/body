@@ -1,0 +1,8 @@
+{
+  final int count=mSubMenu.size();
+  boolean[] checked=new boolean[count];
+  for (int i=0; i < count; i++) {
+    checked[i]=mSubMenu.getItem(i).isChecked();
+  }
+  return checked;
+}

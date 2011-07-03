@@ -1,0 +1,13 @@
+{
+  if (result == null) {
+    Toast.makeText(mContext,mContext.getString(R.string.trakt_success),Toast.LENGTH_SHORT).show();
+  }
+ else   if (result.length() == 0) {
+    TraktCredentialsDialogFragment newFragment=TraktCredentialsDialogFragment.newInstance(mTraktData);
+    FragmentTransaction ft=mManager.beginTransaction();
+    newFragment.show(ft,"traktdialog");
+  }
+ else {
+    Toast.makeText(mContext,mContext.getString(R.string.trakt_error) + " (" + result+ ")",Toast.LENGTH_LONG).show();
+  }
+}

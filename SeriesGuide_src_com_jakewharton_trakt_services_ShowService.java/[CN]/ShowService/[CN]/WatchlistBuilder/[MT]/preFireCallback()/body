@@ -1,0 +1,3 @@
+{
+  this.postParameter(POST_SHOWS,this.showList);
+}

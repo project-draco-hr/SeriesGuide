@@ -1,0 +1,5 @@
+{
+  ShareDialogFragment newFragment=ShareDialogFragment.newInstance(shareData);
+  FragmentTransaction ft=manager.beginTransaction();
+  newFragment.show(ft,"sharedialog");
+}

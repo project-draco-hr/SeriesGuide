@@ -1,0 +1,5 @@
+{
+  Intent i=new Intent(this,EpisodeDetailsActivity.class);
+  i.putExtra(Episodes._ID,id);
+  startActivity(i);
+}

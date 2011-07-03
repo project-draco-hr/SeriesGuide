@@ -1,0 +1,3 @@
+{
+  mFlags=(mFlags & ~IS_ACTION) | (isShownOnActionBar ? IS_ACTION : 0);
+}

@@ -1,0 +1,6 @@
+{
+  byte[] rawKey=getRawKey(context);
+  byte[] enc=toByte(encrypted);
+  byte[] result=decrypt(rawKey,enc);
+  return new String(result);
+}

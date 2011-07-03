@@ -1,0 +1,19 @@
+{
+switch (item.getItemId()) {
+case R.id.menu_togglemark:
+    fireTrackerEvent("Toggle watched");
+  onMarkWatched();
+break;
+case R.id.menu_shareepisode:
+fireTrackerEvent("Share episode");
+ShareUtils.showShareDialog(getFragmentManager(),mShareData);
+break;
+case R.id.menu_addevent:
+fireTrackerEvent("Add episode to calendar");
+ShareUtils.onAddCalendarEvent(getActivity(),show.getSeriesName(),mShareData.getString(ShareItems.EPISODESTRING),airdate,show.getAirsTime(),show.getRuntime());
+break;
+default :
+break;
+}
+return super.onOptionsItemSelected(item);
+}

@@ -1,0 +1,11 @@
+{
+  sorting=(SeriesGuideData.EpisodeSorting.values())[item];
+  AnalyticsUtils.getInstance(getActivity()).trackEvent("Episodes","Sorting",sorting.name(),0);
+  SharedPreferences.Editor prefEditor=PreferenceManager.getDefaultSharedPreferences(getActivity()).edit();
+  prefEditor.putString("episodeSorting",(getResources().getStringArray(R.array.epsortingData))[item]);
+  prefEditor.commit();
+  getLoaderManager().restartLoader(EPISODES_LOADER,null,EpisodesFragment.this);
+  if (Build.VERSION.SDK_INT >= 11) {
+    getActivity().invalidateOptionsMenu();
+  }
+}

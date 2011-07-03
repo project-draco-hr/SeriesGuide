@@ -1,0 +1,3 @@
+{
+  onShowEpisodeDetails(String.valueOf(id));
+}

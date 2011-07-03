@@ -1,0 +1,5 @@
+{
+  setNumericShortcut(numericChar);
+  setAlphabeticShortcut(alphaChar);
+  return this;
+}

@@ -1,0 +1,5 @@
+{
+  RateService service=ServiceManager.createRateService();
+  this.setupService(service);
+  return service;
+}

@@ -1,0 +1,27 @@
+{
+  if (context == null) {
+    return;
+  }
+  mApplicationContext=context.getApplicationContext();
+  mTracker=GoogleAnalyticsTracker.getInstance();
+  mTracker.start(UACODE,300,mApplicationContext);
+  Log.d(TAG,"Initializing Analytics");
+  SharedPreferences prefs=PreferenceManager.getDefaultSharedPreferences(mApplicationContext);
+  final boolean firstRun=prefs.getBoolean(FIRST_RUN_KEY,true);
+  if (firstRun) {
+    Log.d(TAG,"Analytics firstRun");
+    String apiLevel=Integer.toString(Build.VERSION.SDK_INT);
+    String model=Build.MODEL;
+    mTracker.setCustomVar(1,"apiLevel",apiLevel,VISITOR_SCOPE);
+    mTracker.setCustomVar(2,"model",model,VISITOR_SCOPE);
+    String version;
+    try {
+      version=mApplicationContext.getPackageManager().getPackageInfo(mApplicationContext.getPackageName(),PackageManager.GET_META_DATA).versionName;
+    }
+ catch (    NameNotFoundException e) {
+      version="unknown";
+    }
+    mTracker.setCustomVar(3,"releaseType",version);
+    prefs.edit().putBoolean(FIRST_RUN_KEY,false).commit();
+  }
+}

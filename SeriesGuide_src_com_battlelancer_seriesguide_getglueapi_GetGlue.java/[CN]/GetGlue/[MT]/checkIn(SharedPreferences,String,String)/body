@@ -1,0 +1,13 @@
+{
+  String token=prefs.getString(OAuth.OAUTH_TOKEN,"");
+  String secret=prefs.getString(OAuth.OAUTH_TOKEN_SECRET,"");
+  comment=URLEncoder.encode(comment,"UTF-8");
+  String requestString=GETGLUE_APIPATH_V2;
+  requestString+="user/addCheckin?objectId=http://www.imdb.com/title/" + imdbId + GETGLUE_SOURCE+ "&comment="+ comment;
+  OAuthConsumer consumer=new CommonsHttpOAuthConsumer(Constants.CONSUMER_KEY,Constants.CONSUMER_SECRET);
+  consumer.setTokenWithSecret(token,secret);
+  HttpGet request=new HttpGet(requestString);
+  consumer.sign(request);
+  HttpClient httpClient=new DefaultHttpClient();
+  httpClient.execute(request);
+}

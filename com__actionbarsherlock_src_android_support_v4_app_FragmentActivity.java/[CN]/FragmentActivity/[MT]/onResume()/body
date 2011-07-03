@@ -1,0 +1,5 @@
+{
+  super.onResume();
+  mResumed=true;
+  mFragments.execPendingActions();
+}

@@ -1,0 +1,19 @@
+{
+  item.setChecked(itemChecked).setVisible(itemVisible).setEnabled(itemEnabled).setCheckable(itemCheckable >= 1).setTitleCondensed(itemTitleCondensed).setIcon(itemIconResId).setAlphabeticShortcut(itemAlphabeticShortcut).setNumericShortcut(itemNumericShortcut);
+  if (itemShowAsAction > 0) {
+    item.setShowAsAction(itemShowAsAction);
+  }
+  if (itemListenerMethodName != null) {
+    if (MenuInflater.this.mContext.isRestricted()) {
+      throw new IllegalStateException("The android:onClick attribute cannot be used within a restricted context");
+    }
+    item.setOnMenuItemClickListener(new InflatedOnMenuItemClickListener(itemListenerMethodName));
+  }
+  if (itemCheckable >= 2) {
+    item.setExclusiveCheckable(true);
+  }
+  if (itemActionViewClassName != null) {
+  }
+ else   if (itemActionLayout >= 0) {
+  }
+}

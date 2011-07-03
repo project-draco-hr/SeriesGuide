@@ -1,0 +1,10 @@
+{
+  ShowSorting oldSorting=sorting;
+  if (prefs.getString(SeriesGuideData.KEY_SHOWSSORTORDER,"alphabetic").equals("alphabetic")) {
+    sorting=SeriesGuideData.ShowSorting.ALPHABETIC;
+  }
+ else {
+    sorting=SeriesGuideData.ShowSorting.UPCOMING;
+  }
+  return oldSorting != sorting;
+}

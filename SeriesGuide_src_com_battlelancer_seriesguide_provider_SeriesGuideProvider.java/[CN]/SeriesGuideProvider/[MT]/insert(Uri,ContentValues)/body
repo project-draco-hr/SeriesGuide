@@ -1,0 +1,29 @@
+{
+  if (LOGV)   Log.v(TAG,"insert(uri=" + uri + ", values="+ values.toString()+ ")");
+  final SQLiteDatabase db=mOpenHelper.getWritableDatabase();
+  final int match=sUriMatcher.match(uri);
+switch (match) {
+case SHOWS:
+{
+      db.insertOrThrow(Tables.SHOWS,null,values);
+      getContext().getContentResolver().notifyChange(uri,null);
+      return Shows.buildShowUri(values.getAsString(Shows._ID));
+    }
+case SEASONS:
+{
+    db.insertOrThrow(Tables.SEASONS,null,values);
+    getContext().getContentResolver().notifyChange(uri,null);
+    return Seasons.buildSeasonUri(values.getAsString(Seasons._ID));
+  }
+case EPISODES:
+{
+  db.insertOrThrow(Tables.EPISODES,null,values);
+  getContext().getContentResolver().notifyChange(uri,null);
+  return Episodes.buildEpisodeUri(values.getAsString(Episodes._ID));
+}
+default :
+{
+throw new UnsupportedOperationException("Unknown uri: " + uri);
+}
+}
+}

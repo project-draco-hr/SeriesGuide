@@ -1,0 +1,3 @@
+{
+  return addInternal(itemId,order,mResources.getString(titleRes));
+}

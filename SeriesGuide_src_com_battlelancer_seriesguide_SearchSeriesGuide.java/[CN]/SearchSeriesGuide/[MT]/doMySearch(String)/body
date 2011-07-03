@@ -1,0 +1,33 @@
+{
+  Cursor searchResults=getContentResolver().query(EpisodeSearch.CONTENT_URI_SEARCH,SearchQuery.PROJECTION,null,new String[]{query},null);
+  startManagingCursor(searchResults);
+  String[] from=new String[]{Episodes.TITLE,Episodes.OVERVIEW,Episodes.NUMBER,Episodes.WATCHED,Shows.TITLE};
+  int[] to=new int[]{R.id.TextViewSearchRow,R.id.TextViewSearchSnippet,R.id.TextViewSearchEpNumbers,R.id.TextViewSearchEpWatchedState,R.id.TextViewSearchSeriesName};
+  SimpleCursorAdapter resultsAdapter=new SimpleCursorAdapter(getApplicationContext(),R.layout.search_row,searchResults,from,to);
+  resultsAdapter.setViewBinder(new ViewBinder(){
+    public boolean setViewValue(    View view,    Cursor cursor,    int columnIndex){
+      if (columnIndex == SearchQuery.NUMBER) {
+        TextView numbers=(TextView)view;
+        String epnumber=getString(R.string.episode) + " " + cursor.getString(columnIndex);
+        String senumber=getString(R.string.season) + " " + cursor.getString(SearchQuery.SEASON);
+        numbers.setText(senumber + " " + epnumber);
+        return true;
+      }
+      if (columnIndex == SearchQuery.WATCHED) {
+        boolean isWatched=(1 == cursor.getInt(columnIndex));
+        TextView watchedState=(TextView)view;
+        watchedState.setText(isWatched ? getString(R.string.episode_iswatched) : getString(R.string.episode_notwatched));
+        watchedState.setTextColor(isWatched ? Color.GREEN : Color.GRAY);
+        return true;
+      }
+      if (columnIndex == SearchQuery.OVERVIEW) {
+        TextView watchedState=(TextView)view;
+        watchedState.setText(Html.fromHtml(cursor.getString(SearchQuery.OVERVIEW)));
+        return true;
+      }
+      return false;
+    }
+  }
+);
+  setListAdapter(resultsAdapter);
+}

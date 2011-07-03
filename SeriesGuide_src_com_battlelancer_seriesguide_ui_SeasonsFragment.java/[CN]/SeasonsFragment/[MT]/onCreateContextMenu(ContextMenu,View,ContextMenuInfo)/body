@@ -1,0 +1,5 @@
+{
+  super.onCreateContextMenu(menu,v,menuInfo);
+  menu.add(0,ID_MARK_ALL_WATCHED,0,R.string.mark_all);
+  menu.add(0,ID_MARK_ALL_UNWATCHED,1,R.string.unmark_all);
+}

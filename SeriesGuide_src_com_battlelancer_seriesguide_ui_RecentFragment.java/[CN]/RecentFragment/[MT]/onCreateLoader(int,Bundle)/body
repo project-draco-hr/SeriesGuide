@@ -1,0 +1,5 @@
+{
+  Date date=new Date();
+  String today=SeriesGuideData.theTVDBDateFormat.format(date);
+  return new CursorLoader(getActivity(),Episodes.CONTENT_URI_WITHSHOW,UpcomingQuery.PROJECTION,Episodes.FIRSTAIRED + "<?",new String[]{today},RecentQuery.sortOrder);
+}

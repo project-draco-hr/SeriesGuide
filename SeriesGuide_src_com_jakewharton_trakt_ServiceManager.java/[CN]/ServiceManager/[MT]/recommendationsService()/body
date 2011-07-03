@@ -1,0 +1,5 @@
+{
+  RecommendationsService service=ServiceManager.createRecommendationsService();
+  this.setupService(service);
+  return service;
+}

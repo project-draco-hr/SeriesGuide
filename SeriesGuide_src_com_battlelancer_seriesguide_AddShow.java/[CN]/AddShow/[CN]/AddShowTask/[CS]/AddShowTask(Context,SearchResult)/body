@@ -1,0 +1,4 @@
+{
+  mContext=activity;
+  mAddQueue.add(show);
+}

@@ -1,0 +1,13 @@
+{
+  if (DEBUG)   Log.d(TAG,"supportInvalidateOptionsMenu(): Invalidating menu.");
+  if (IS_HONEYCOMB) {
+    HoneycombInvalidateOptionsMenu.invoke(this);
+  }
+ else {
+    mActionBarMenu.clear();
+    mOptionsMenuCreateResult=onCreateOptionsMenu(mActionBarMenu);
+    mOptionsMenuCreateResult|=mFragments.dispatchCreateOptionsMenu(mActionBarMenu,getMenuInflater());
+    mActionBar.onMenuInflated(mActionBarMenu);
+    mOptionsMenuInvalidated=true;
+  }
+}

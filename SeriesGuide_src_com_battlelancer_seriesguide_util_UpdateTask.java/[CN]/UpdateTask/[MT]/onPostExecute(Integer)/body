@@ -1,0 +1,19 @@
+{
+  mContext.setFailedShowsString(mFailedShows);
+switch (result) {
+case UPDATE_SUCCESS:
+    AnalyticsUtils.getInstance(mContext).trackEvent("Shows","Update Task","Success",0);
+  Toast.makeText(mContext,mContext.getString(R.string.update_success),Toast.LENGTH_SHORT).show();
+break;
+case UPDATE_SAXERROR:
+AnalyticsUtils.getInstance(mContext).trackEvent("Shows","Update Task","SAX error",0);
+mContext.showDialog(ShowsActivity.UPDATE_SAXERROR_DIALOG);
+break;
+case UPDATE_OFFLINE:
+AnalyticsUtils.getInstance(mContext).trackEvent("Shows","Update Task","Offline",0);
+mContext.showDialog(ShowsActivity.UPDATE_OFFLINE_DIALOG);
+break;
+}
+mContext.updateLatestEpisode();
+mContext.hideOverlay(mContext.mProgressOverlay);
+}

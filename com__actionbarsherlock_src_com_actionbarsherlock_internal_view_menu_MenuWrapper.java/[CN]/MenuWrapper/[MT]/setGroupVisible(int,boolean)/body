@@ -1,0 +1,3 @@
+{
+  mMenu.setGroupVisible(group,visible);
+}

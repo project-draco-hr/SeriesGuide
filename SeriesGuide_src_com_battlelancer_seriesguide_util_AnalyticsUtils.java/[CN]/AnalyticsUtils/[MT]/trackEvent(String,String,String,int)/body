@@ -1,0 +1,15 @@
+{
+  new AsyncTask<Void,Void,Void>(){
+    @Override protected Void doInBackground(    Void... voids){
+      try {
+        mTracker.trackEvent(category,action,label,value);
+        Log.d(TAG,"SeriesGuide Analytics trackEvent: " + category + " / "+ action+ " / "+ label+ " / "+ value);
+      }
+ catch (      Exception e) {
+        Log.w(TAG,"SeriesGuide Analytics trackEvent error: " + category + " / "+ action+ " / "+ label+ " / "+ value,e);
+      }
+      return null;
+    }
+  }
+.execute();
+}

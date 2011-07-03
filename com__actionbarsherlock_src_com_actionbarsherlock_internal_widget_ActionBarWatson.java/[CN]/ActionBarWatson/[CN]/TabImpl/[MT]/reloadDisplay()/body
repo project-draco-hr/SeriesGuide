@@ -1,0 +1,6 @@
+{
+  boolean hasCustom=mCustomView.getChildCount() > 0;
+  mIconView.setVisibility(hasCustom ? View.GONE : View.VISIBLE);
+  mTextView.setVisibility(hasCustom ? View.GONE : View.VISIBLE);
+  mCustomView.setVisibility(hasCustom ? View.VISIBLE : View.GONE);
+}

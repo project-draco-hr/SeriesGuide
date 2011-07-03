@@ -1,0 +1,3 @@
+{
+  AnalyticsUtils.getInstance(getActivity()).trackEvent("Episodes","Click",label,0);
+}

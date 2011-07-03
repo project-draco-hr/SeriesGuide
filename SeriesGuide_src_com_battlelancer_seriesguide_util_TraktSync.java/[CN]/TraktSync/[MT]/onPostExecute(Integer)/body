@@ -1,0 +1,25 @@
+{
+  String message="";
+  int duration=Toast.LENGTH_SHORT;
+switch (result) {
+case SUCCESS_WORK:
+    message="Finished syncing (" + mResult + ")";
+  break;
+case SUCCESS_NOWORK:
+message="There was nothing to sync.";
+break;
+case FAILED_CREDENTIALS:
+message="Your credentials are incomplete. Please enter them again.";
+duration=Toast.LENGTH_LONG;
+TraktCredentialsDialogFragment newFragment=TraktCredentialsDialogFragment.newInstance();
+FragmentTransaction ft=mContext.getSupportFragmentManager().beginTransaction();
+newFragment.show(ft,"traktcredentialsdialog");
+break;
+case FAILED_API:
+message="Could not communicate with trakt servers. Try again later.";
+duration=Toast.LENGTH_LONG;
+break;
+}
+Toast.makeText(mContext,message,duration).show();
+restoreViewStates();
+}

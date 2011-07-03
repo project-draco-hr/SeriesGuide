@@ -1,0 +1,71 @@
+{
+  String message="";
+switch (id) {
+case UPDATE_SAXERROR_DIALOG:
+    if (getFailedShowsString() != null && getFailedShowsString().length() != 0) {
+      message+=getString(R.string.update_incomplete1) + " " + getFailedShowsString()+ getString(R.string.update_incomplete2)+ getString(R.string.saxerror);
+    }
+ else {
+      message+=getString(R.string.update_error) + " " + getString(R.string.saxerror);
+    }
+  return new AlertDialog.Builder(this).setTitle(getString(R.string.saxerror_title)).setMessage(message).setPositiveButton(android.R.string.ok,null).create();
+case UPDATE_OFFLINE_DIALOG:
+return new AlertDialog.Builder(this).setTitle(getString(R.string.offline_title)).setMessage(getString(R.string.update_error) + " " + getString(R.string.offline)).setPositiveButton(android.R.string.ok,null).create();
+case CONFIRM_DELETE_DIALOG:
+return new AlertDialog.Builder(this).setMessage(getString(R.string.confirm_delete)).setPositiveButton(getString(R.string.delete_show),new OnClickListener(){
+public void onClick(DialogInterface dialog,int which){
+  final ProgressDialog progress=new ProgressDialog(ShowsActivity.this);
+  progress.setCancelable(false);
+  progress.show();
+  new Thread(new Runnable(){
+    public void run(){
+      SeriesDatabase.deleteShow(getApplicationContext(),String.valueOf(toDeleteID));
+      if (progress.isShowing()) {
+        progress.dismiss();
+      }
+    }
+  }
+).start();
+}
+}
+).setNegativeButton(getString(R.string.dontdelete_show),null).create();
+case WHATS_NEW_DIALOG:
+return new AlertDialog.Builder(this).setTitle(getString(R.string.whatsnew_title)).setIcon(android.R.drawable.ic_dialog_info).setMessage(getString(R.string.whatsnew_content)).setPositiveButton(android.R.string.ok,null).setNeutralButton(getString(R.string.changelog),new OnClickListener(){
+public void onClick(DialogInterface dialog,int which){
+Intent myIntent=new Intent(Intent.ACTION_VIEW,Uri.parse(SeriesGuideData.CHANGELOG_URL));
+startActivity(myIntent);
+}
+}
+).create();
+case BETA_WARNING_DIALOG:
+return new AlertDialog.Builder(this).setTitle(getString(R.string.whatsnew_title)).setIcon(android.R.drawable.ic_dialog_alert).setMessage(getString(R.string.betawarning)).setPositiveButton(R.string.gobreak,null).setNeutralButton(getString(R.string.download_stable),new OnClickListener(){
+public void onClick(DialogInterface dialog,int which){
+try {
+Intent myIntent=new Intent(Intent.ACTION_VIEW,Uri.parse("market://details?id=com.battlelancer.seriesguide"));
+startActivity(myIntent);
+}
+ catch (ActivityNotFoundException e) {
+Intent myIntent=new Intent(Intent.ACTION_VIEW,Uri.parse("http://market.android.com/details?id=com.battlelancer.seriesguide"));
+startActivity(myIntent);
+}
+finish();
+}
+}
+).create();
+case SORT_DIALOG:
+final CharSequence[] items=getResources().getStringArray(R.array.shsorting);
+return new AlertDialog.Builder(this).setTitle(getString(R.string.pref_showsorting)).setSingleChoiceItems(items,sorting.index(),new DialogInterface.OnClickListener(){
+public void onClick(DialogInterface dialog,int item){
+sorting=(SeriesGuideData.ShowSorting.values())[item];
+AnalyticsUtils.getInstance(ShowsActivity.this).trackEvent("Shows","Sorting",sorting.name(),0);
+SharedPreferences.Editor prefEditor=PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit();
+prefEditor.putString(SeriesGuideData.KEY_SHOWSSORTORDER,(getResources().getStringArray(R.array.shsortingData))[item]);
+prefEditor.commit();
+requery();
+removeDialog(SORT_DIALOG);
+}
+}
+).create();
+}
+return null;
+}

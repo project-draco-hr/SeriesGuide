@@ -1,0 +1,7 @@
+{
+  final boolean hasCustomView=mCustomView.getChildCount() > 0;
+  final boolean hasText=(mTextView.getText() != null) && !mTextView.getText().equals("");
+  mIconView.setVisibility(!hasCustomView ? View.VISIBLE : View.GONE);
+  mTextView.setVisibility(!hasCustomView && hasText && mActionBar.mIsActionItemTextEnabled ? View.VISIBLE : View.GONE);
+  mCustomView.setVisibility(hasCustomView ? View.VISIBLE : View.GONE);
+}

@@ -1,0 +1,4 @@
+{
+  View view=mTabsView.getChildAt(index);
+  return (view != null) ? (TabImpl)view.getTag() : null;
+}

@@ -1,0 +1,3 @@
+{
+  prefs.edit().putString(OAuth.OAUTH_TOKEN,"").putString(OAuth.OAUTH_TOKEN_SECRET,"").commit();
+}

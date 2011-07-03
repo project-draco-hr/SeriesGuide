@@ -1,0 +1,52 @@
+{
+  final SelectionBuilder builder=new SelectionBuilder();
+switch (match) {
+case SHOWS:
+{
+      return builder.table(Tables.SHOWS);
+    }
+case SHOWS_ID:
+{
+    final String showId=Shows.getShowId(uri);
+    return builder.table(Tables.SHOWS).where(Shows._ID + "=?",showId);
+  }
+case EPISODES_OFSHOW:
+{
+  final String showId=uri.getPathSegments().get(2);
+  return builder.table(Tables.EPISODES).where(Shows.REF_SHOW_ID + "=?",showId);
+}
+case EPISODES_OFSEASON:
+{
+final String seasonId=uri.getPathSegments().get(2);
+return builder.table(Tables.EPISODES).where(Seasons.REF_SEASON_ID + "=?",seasonId);
+}
+case EPISODES_OFSEASON_WITHSHOW:
+{
+final String seasonId=uri.getPathSegments().get(3);
+return builder.table(Tables.EPISODES_JOIN_SHOWS).mapToTable(Episodes._ID,Tables.EPISODES).mapToTable(Episodes.RATING,Tables.EPISODES).where(Seasons.REF_SEASON_ID + "=?",seasonId);
+}
+case EPISODES_ID:
+{
+final String episodeId=Episodes.getEpisodeId(uri);
+return builder.table(Tables.EPISODES).where(Episodes._ID + "=?",episodeId);
+}
+case EPISODES_WITHSHOW:
+{
+return builder.table(Tables.EPISODES_JOIN_SHOWS).mapToTable(Episodes._ID,Tables.EPISODES).mapToTable(Episodes.RATING,Tables.EPISODES);
+}
+case EPISODES_ID_WITHSHOW:
+{
+final String episodeId=Episodes.getEpisodeId(uri);
+return builder.table(Tables.EPISODES_JOIN_SHOWS).mapToTable(Episodes._ID,Tables.EPISODES).mapToTable(Episodes.RATING,Tables.EPISODES).where(Tables.EPISODES + "." + Episodes._ID+ "=?",episodeId);
+}
+case SEASONS_OFSHOW:
+{
+final String showId=uri.getPathSegments().get(2);
+return builder.table(Tables.SEASONS).where(Shows.REF_SHOW_ID + "=?",showId);
+}
+default :
+{
+throw new UnsupportedOperationException("Unknown uri: " + uri);
+}
+}
+}

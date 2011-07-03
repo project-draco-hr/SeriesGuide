@@ -1,0 +1,7 @@
+{
+  super.onActivityCreated(savedInstanceState);
+  imageCache=((SeriesGuideApplication)getActivity().getApplication()).getImageCache();
+  setupAdapter();
+  getLoaderManager().initLoader(EPISODE_LOADER,null,this);
+  setHasOptionsMenu(true);
+}

@@ -1,0 +1,11 @@
+{
+  StringBuilder builder=new StringBuilder();
+  Iterator<K> iterator=valueList.iterator();
+  while (iterator.hasNext()) {
+    builder.append(encodeUrl(iterator.next().toString()));
+    if (iterator.hasNext()) {
+      builder.append(SEPERATOR);
+    }
+  }
+  return this.parameter(name,builder.toString());
+}

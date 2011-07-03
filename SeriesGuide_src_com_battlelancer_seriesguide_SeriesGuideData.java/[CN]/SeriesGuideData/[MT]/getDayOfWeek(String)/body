@@ -1,0 +1,10 @@
+{
+  DateFormatSymbols dfs=new DateFormatSymbols(Locale.US);
+  String[] weekdays=dfs.getWeekdays();
+  for (int i=1; i < weekdays.length; i++) {
+    if (day.equalsIgnoreCase(weekdays[i])) {
+      return i;
+    }
+  }
+  return Calendar.SUNDAY;
+}

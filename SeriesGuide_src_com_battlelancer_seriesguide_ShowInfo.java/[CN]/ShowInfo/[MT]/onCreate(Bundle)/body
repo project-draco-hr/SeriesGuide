@@ -1,0 +1,11 @@
+{
+  super.onCreate(savedInstanceState);
+  setContentView(R.layout.show_info);
+  final ActionBar actionBar=getSupportActionBar();
+  actionBar.setTitle(getString(R.string.context_showinfo));
+  actionBar.setDisplayShowTitleEnabled(true);
+  imageCache=((SeriesGuideApplication)getApplication()).getImageCache();
+  Bundle extras=getIntent().getExtras();
+  seriesid=extras.getString(Shows._ID);
+  fillData();
+}

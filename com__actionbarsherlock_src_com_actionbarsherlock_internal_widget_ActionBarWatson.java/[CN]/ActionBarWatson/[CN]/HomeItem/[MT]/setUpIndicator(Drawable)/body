@@ -1,0 +1,3 @@
+{
+  mUpIndicator.setBackgroundDrawable(homeAsUpIndicator);
+}

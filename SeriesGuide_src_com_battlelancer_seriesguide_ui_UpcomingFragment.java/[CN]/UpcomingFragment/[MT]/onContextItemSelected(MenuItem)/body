@@ -1,0 +1,12 @@
+{
+  AdapterContextMenuInfo info=(AdapterContextMenuInfo)item.getMenuInfo();
+switch (item.getItemId()) {
+case MARK_WATCHED_ID:
+    SeriesDatabase.markEpisode(getActivity(),String.valueOf(info.id),true);
+  return true;
+case MARK_UNWATCHED_ID:
+SeriesDatabase.markEpisode(getActivity(),String.valueOf(info.id),false);
+return true;
+}
+return super.onContextItemSelected(item);
+}

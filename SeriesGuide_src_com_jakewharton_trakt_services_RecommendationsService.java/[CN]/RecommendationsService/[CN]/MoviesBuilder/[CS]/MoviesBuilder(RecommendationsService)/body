@@ -1,0 +1,5 @@
+{
+  super(service,new TypeToken<List<Movie>>(){
+  }
+,URI,HttpMethod.Post);
+}

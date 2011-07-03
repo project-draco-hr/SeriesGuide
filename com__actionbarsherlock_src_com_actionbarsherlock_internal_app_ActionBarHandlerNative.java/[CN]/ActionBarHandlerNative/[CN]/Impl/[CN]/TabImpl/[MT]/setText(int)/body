@@ -1,0 +1,4 @@
+{
+  mText=mActionBar.getActivity().getResources().getString(resId);
+  return this;
+}

@@ -1,0 +1,4 @@
+{
+  mAlphabeticalShortcut=Character.toLowerCase(alphaChar);
+  return this;
+}

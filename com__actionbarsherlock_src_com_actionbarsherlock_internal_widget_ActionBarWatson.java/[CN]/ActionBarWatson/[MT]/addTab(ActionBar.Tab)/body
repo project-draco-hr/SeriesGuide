@@ -1,0 +1,4 @@
+{
+  final int tabCount=getTabCount();
+  addTab(tab,tabCount,tabCount == 0);
+}

@@ -1,0 +1,3 @@
+String imdbId
+int plays
+Date lastPlayed

@@ -1,0 +1,5 @@
+{
+  if (mImageCache != null) {
+    mImageCache.clear();
+  }
+}

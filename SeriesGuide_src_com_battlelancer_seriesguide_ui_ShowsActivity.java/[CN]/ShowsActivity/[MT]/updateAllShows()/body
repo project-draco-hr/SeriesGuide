@@ -1,0 +1,11 @@
+{
+  final Cursor shows=getContentResolver().query(Shows.CONTENT_URI,new String[]{Shows._ID},null,null,null);
+  final String[] showIDs=new String[shows.getCount()];
+  int i=0;
+  while (shows.moveToNext()) {
+    showIDs[i]=shows.getString(0);
+    i++;
+  }
+  shows.close();
+  createUpdateTask(showIDs);
+}

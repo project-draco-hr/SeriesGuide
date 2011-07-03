@@ -1,0 +1,4 @@
+{
+  this.mMenuItem.setIcon(icon);
+  return this;
+}

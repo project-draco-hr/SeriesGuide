@@ -1,0 +1,3 @@
+{
+  return this.air_day;
+}

@@ -1,0 +1,4 @@
+{
+  mIconView.setImageResource(resId);
+  return this;
+}

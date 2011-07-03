@@ -1,0 +1,20 @@
+{
+  final String episodestring=getArguments().getString(ShareItems.EPISODESTRING);
+  final String imdbId=getArguments().getString(ShareItems.IMDBID);
+  input=new EditText(getActivity());
+  input.setMinLines(3);
+  input.setGravity(Gravity.TOP);
+  input.setFilters(new InputFilter[]{new InputFilter.LengthFilter(140)});
+  if (savedInstanceState != null) {
+    input.setText(savedInstanceState.getString("inputtext"));
+  }
+ else {
+    input.setText(episodestring + ". #SeriesGuide");
+  }
+  return new AlertDialog.Builder(getActivity()).setTitle(getString(R.string.comment)).setView(input).setPositiveButton(R.string.checkin,new DialogInterface.OnClickListener(){
+    public void onClick(    DialogInterface dialog,    int which){
+      onGetGlueCheckIn(getActivity(),input.getText().toString(),imdbId);
+    }
+  }
+).setNegativeButton(android.R.string.cancel,null).create();
+}

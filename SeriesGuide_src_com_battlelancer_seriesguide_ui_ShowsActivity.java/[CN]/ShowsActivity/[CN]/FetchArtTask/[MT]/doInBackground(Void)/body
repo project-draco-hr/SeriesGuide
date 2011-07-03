@@ -1,0 +1,32 @@
+{
+  if (mPaths == null) {
+    Cursor shows=getContentResolver().query(Shows.CONTENT_URI,new String[]{Shows.POSTER},null,null,null);
+    if (shows.getCount() == 0) {
+      shows.close();
+      return UPDATE_SUCCESS;
+    }
+    mPaths=new ArrayList<String>();
+    while (shows.moveToNext()) {
+      String imagePath=shows.getString(shows.getColumnIndexOrThrow(Shows.POSTER));
+      if (imagePath.length() != 0) {
+        mPaths.add(imagePath);
+      }
+    }
+    shows.close();
+  }
+  int resultCode=UPDATE_SUCCESS;
+  final List<String> list=mPaths;
+  final int count=list.size();
+  final AtomicInteger fetchCount=mFetchCount;
+  for (int i=fetchCount.get(); i < count; i++) {
+    if (isCancelled()) {
+      return UPDATE_INCOMPLETE;
+    }
+    if (!TheTVDB.fetchArt(list.get(i),true,ShowsActivity.this)) {
+      resultCode=UPDATE_INCOMPLETE;
+    }
+    fetchCount.incrementAndGet();
+  }
+  getContentResolver().notifyChange(Shows.CONTENT_URI,null);
+  return resultCode;
+}

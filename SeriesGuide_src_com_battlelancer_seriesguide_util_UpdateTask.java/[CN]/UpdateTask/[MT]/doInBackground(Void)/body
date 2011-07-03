@@ -1,0 +1,41 @@
+{
+  final String[] shows=mShows;
+  final AtomicInteger updateCount=mUpdateCount;
+  ContentResolver resolver=mContext.getContentResolver();
+  int resultCode=UPDATE_SUCCESS;
+  String id;
+  for (int i=updateCount.get(); i < shows.length; i++) {
+    if (isCancelled()) {
+      resultCode=UPDATE_INCOMPLETE;
+      break;
+    }
+    if (!SeriesGuideData.isNetworkAvailable(mContext)) {
+      resultCode=UPDATE_OFFLINE;
+      break;
+    }
+    publishProgress(i,shows.length + 1);
+    id=shows[i];
+    for (int itry=0; itry < 2; itry++) {
+      try {
+        TheTVDB.updateShow(id,mContext);
+        break;
+      }
+ catch (      SAXException saxe) {
+        if (itry == 1) {
+          resultCode=UPDATE_SAXERROR;
+          Cursor show=resolver.query(Shows.buildShowUri(id),new String[]{Shows.TITLE},null,null,null);
+          if (show.moveToFirst()) {
+            String name=show.getString(0);
+            addFailedShow(name);
+          }
+          show.close();
+        }
+      }
+    }
+    updateCount.incrementAndGet();
+  }
+  publishProgress(shows.length,shows.length + 1);
+  TheTVDB.onRenewFTSTable(mContext);
+  publishProgress(shows.length + 1,shows.length + 1);
+  return resultCode;
+}

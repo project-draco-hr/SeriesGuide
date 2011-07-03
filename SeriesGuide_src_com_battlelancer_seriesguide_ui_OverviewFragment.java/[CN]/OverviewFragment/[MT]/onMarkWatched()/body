@@ -1,0 +1,13 @@
+{
+  SeriesDatabase.markEpisode(getActivity(),String.valueOf(episodeid),true);
+  Toast.makeText(getActivity(),getString(R.string.mark_episode),Toast.LENGTH_SHORT).show();
+  SharedPreferences prefs=PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
+  if (prefs.getBoolean("com.battlelancer.seriesguide.traktintegration",false)) {
+    new ShareUtils.TraktTask(getActivity(),getFragmentManager(),mShareData).execute();
+  }
+  onLoadEpisode();
+  SeasonsFragment seasons=(SeasonsFragment)getFragmentManager().findFragmentById(R.id.fragment_seasons);
+  if (seasons != null) {
+    seasons.updateUnwatchedCounts(false);
+  }
+}

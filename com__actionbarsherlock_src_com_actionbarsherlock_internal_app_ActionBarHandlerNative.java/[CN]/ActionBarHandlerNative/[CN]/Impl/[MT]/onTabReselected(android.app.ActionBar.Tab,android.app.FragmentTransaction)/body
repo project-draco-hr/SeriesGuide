@@ -1,0 +1,6 @@
+{
+  ActionBar.TabListener listener=((ActionBar.Tab)tab.getTag()).getTabListener();
+  if (listener != null) {
+    listener.onTabReselected((ActionBar.Tab)tab.getTag(),null);
+  }
+}

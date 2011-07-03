@@ -1,0 +1,37 @@
+{
+  show=SeriesDatabase.getShow(getActivity(),getShowId());
+  if (show == null) {
+    return;
+  }
+  mShareData.putString(ShareItems.IMDBID,show.getImdbId());
+  TextView showname=(TextView)getActivity().findViewById(R.id.seriesname);
+  showname.setText(show.getSeriesName());
+  TextView status=(TextView)getActivity().findViewById(R.id.showStatus);
+  if (show.getStatus().equalsIgnoreCase("Continuing")) {
+    status.setTextColor(Color.GREEN);
+    status.setText(getString(R.string.show_isalive));
+  }
+ else   if (show.getStatus().equalsIgnoreCase("Ended")) {
+    status.setTextColor(Color.GRAY);
+    status.setText(getString(R.string.show_isnotalive));
+  }
+  if (Build.VERSION.SDK_INT > Build.VERSION_CODES.ECLAIR_MR1) {
+    final ImageView background=(ImageView)getActivity().findViewById(R.id.background);
+    Bitmap bg=imageCache.get(show.getPoster());
+    if (bg != null) {
+      BitmapDrawable drawable=new BitmapDrawable(getResources(),bg);
+      drawable.setAlpha(50);
+      background.setImageDrawable(drawable);
+    }
+  }
+  String timeAndNetwork="";
+  if (show.getAirsDayOfWeek().length() != 0 && show.getAirsTime() != -1) {
+    String[] values=SeriesGuideData.parseMillisecondsToTime(show.getAirsTime(),show.getAirsDayOfWeek(),true,getActivity());
+    timeAndNetwork+=values[1] + " " + values[0];
+  }
+  if (show.getNetwork().length() != 0) {
+    timeAndNetwork+=" " + getString(R.string.show_network) + " "+ show.getNetwork();
+  }
+  TextView showmeta=(TextView)getActivity().findViewById(R.id.showmeta);
+  showmeta.setText(timeAndNetwork);
+}

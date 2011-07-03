@@ -1,0 +1,4 @@
+{
+  this.mMenuItem.setEnabled(enabled);
+  return this;
+}

@@ -1,0 +1,6 @@
+SQLiteDatabase db
+String[] columns
+String groupBy
+String having
+String orderBy
+String limit

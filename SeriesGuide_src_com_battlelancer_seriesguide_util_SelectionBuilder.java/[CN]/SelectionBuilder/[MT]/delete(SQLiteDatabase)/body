@@ -1,0 +1,5 @@
+{
+  assertTable();
+  if (LOGV)   Log.v(TAG,"delete() " + this);
+  return db.delete(mTable,getSelection(),getSelectionArgs());
+}

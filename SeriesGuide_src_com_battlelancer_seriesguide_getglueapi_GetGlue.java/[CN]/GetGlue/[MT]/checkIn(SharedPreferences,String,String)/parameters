@@ -1,0 +1,3 @@
+SharedPreferences prefs
+String imdbId
+String comment

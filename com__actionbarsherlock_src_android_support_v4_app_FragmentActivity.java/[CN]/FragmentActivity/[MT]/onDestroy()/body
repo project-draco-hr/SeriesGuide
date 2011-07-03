@@ -1,0 +1,8 @@
+{
+  super.onDestroy();
+  doReallyStop(false);
+  mFragments.dispatchDestroy();
+  if (mLoaderManager != null) {
+    mLoaderManager.doDestroy();
+  }
+}

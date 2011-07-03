@@ -1,0 +1,6 @@
+{
+  if (mSavedViewState != null) {
+    mInnerView.restoreHierarchyState(mSavedViewState);
+    mSavedViewState=null;
+  }
+}

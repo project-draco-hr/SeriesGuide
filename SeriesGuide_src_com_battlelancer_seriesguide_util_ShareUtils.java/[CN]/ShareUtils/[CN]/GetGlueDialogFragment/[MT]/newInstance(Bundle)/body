@@ -1,0 +1,5 @@
+{
+  GetGlueDialogFragment f=new GetGlueDialogFragment();
+  f.setArguments(shareData);
+  return f;
+}

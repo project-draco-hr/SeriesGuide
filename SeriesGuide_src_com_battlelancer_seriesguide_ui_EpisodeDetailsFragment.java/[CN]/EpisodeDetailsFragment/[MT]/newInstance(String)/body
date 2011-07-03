@@ -1,0 +1,7 @@
+{
+  EpisodeDetailsFragment f=new EpisodeDetailsFragment();
+  Bundle args=new Bundle();
+  args.putString(Episodes._ID,episodeId);
+  f.setArguments(args);
+  return f;
+}

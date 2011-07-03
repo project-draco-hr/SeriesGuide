@@ -1,0 +1,15 @@
+{
+  if (exportProgress.isShowing()) {
+    exportProgress.dismiss();
+  }
+  if (errorMsg == null) {
+    AnalyticsUtils.getInstance(BackupDelete.this).trackEvent(TAG,"Backup","Success",0);
+    Toast.makeText(BackupDelete.this,getString(R.string.backup_success),Toast.LENGTH_SHORT).show();
+  }
+ else {
+    AnalyticsUtils.getInstance(BackupDelete.this).trackEvent(TAG,"Backup",errorMsg,0);
+    Toast.makeText(BackupDelete.this,getString(R.string.backup_failed) + " - " + errorMsg,Toast.LENGTH_LONG).show();
+  }
+  setResult(RESULT_OK);
+  finish();
+}

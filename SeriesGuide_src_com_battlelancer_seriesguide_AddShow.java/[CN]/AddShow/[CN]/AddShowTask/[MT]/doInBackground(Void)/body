@@ -1,0 +1,32 @@
+{
+  int result;
+  boolean modifiedDB=false;
+  while (!mAddQueue.isEmpty()) {
+    if (isCancelled()) {
+      return null;
+    }
+    SearchResult nextShow=mAddQueue.removeFirst();
+    final int id=nextShow.getId();
+    nextShow.setId(ADD_STARTED);
+    publishProgress(nextShow);
+    try {
+      if (TheTVDB.addShow(String.valueOf(id),mContext.getApplicationContext())) {
+        result=ADD_SUCCESS;
+      }
+ else {
+        result=ADD_ALREADYEXISTS;
+      }
+      modifiedDB=true;
+    }
+ catch (    SAXException e) {
+      result=ADD_SAXERROR;
+    }
+    nextShow.setId(result);
+    publishProgress(nextShow);
+  }
+  isFinishedAddingShows=true;
+  if (modifiedDB) {
+    TheTVDB.onRenewFTSTable(mContext.getApplicationContext());
+  }
+  return null;
+}

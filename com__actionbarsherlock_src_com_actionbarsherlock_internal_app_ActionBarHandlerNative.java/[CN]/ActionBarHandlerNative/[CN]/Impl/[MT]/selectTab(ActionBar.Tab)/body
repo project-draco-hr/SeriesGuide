@@ -1,0 +1,9 @@
+{
+  final int tabCount=getActionBar().getTabCount();
+  for (int i=0; i < tabCount; i++) {
+    if (getActionBar().getTabAt(i).getTag().equals(tab)) {
+      getActionBar().setSelectedNavigationItem(i);
+      break;
+    }
+  }
+}

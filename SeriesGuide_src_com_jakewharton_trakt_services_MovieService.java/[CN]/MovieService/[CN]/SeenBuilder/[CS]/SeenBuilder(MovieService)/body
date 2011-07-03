@@ -1,0 +1,6 @@
+{
+  super(service,new TypeToken<Void>(){
+  }
+,URI);
+  this.movieList=new JsonArray();
+}

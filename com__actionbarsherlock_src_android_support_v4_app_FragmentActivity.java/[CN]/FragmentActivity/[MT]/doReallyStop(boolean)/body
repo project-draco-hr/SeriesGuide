@@ -1,0 +1,7 @@
+{
+  if (!mReallyStopped) {
+    mReallyStopped=true;
+    mHandler.removeMessages(MSG_REALLY_STOPPED);
+    onReallyStop(retaining);
+  }
+}

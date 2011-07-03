@@ -1,0 +1,3 @@
+{
+  mItemViews[type]=new WeakReference<MenuView.ItemView>(itemView);
+}

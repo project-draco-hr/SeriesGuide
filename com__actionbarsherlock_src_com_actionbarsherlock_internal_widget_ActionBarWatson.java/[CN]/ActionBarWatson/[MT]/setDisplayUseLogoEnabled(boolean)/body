@@ -1,0 +1,3 @@
+{
+  setDisplayOptions(useLogo ? ActionBar.DISPLAY_USE_LOGO : 0,ActionBar.DISPLAY_USE_LOGO);
+}

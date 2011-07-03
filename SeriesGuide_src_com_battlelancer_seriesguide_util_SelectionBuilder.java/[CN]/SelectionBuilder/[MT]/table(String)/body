@@ -1,0 +1,4 @@
+{
+  mTable=table;
+  return this;
+}

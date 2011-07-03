@@ -1,0 +1,16 @@
+{
+  Intent intent=new Intent();
+  intent.setClass(getActivity(),EpisodesActivity.class);
+  intent.putExtra(Seasons._ID,seasonid);
+  intent.putExtra(Shows.REF_SHOW_ID,getShowId());
+  Cursor item=(Cursor)(getListView().getItemAtPosition(position));
+  String season=item.getString(item.getColumnIndexOrThrow(Seasons.COMBINED));
+  if (season.equals("0") || season.length() == 0) {
+    season=getString(R.string.specialseason);
+  }
+ else {
+    season=getString(R.string.season) + " " + season;
+  }
+  intent.putExtra(Intent.EXTRA_TITLE,getActivity().getTitle() + " " + season);
+  startActivity(intent);
+}

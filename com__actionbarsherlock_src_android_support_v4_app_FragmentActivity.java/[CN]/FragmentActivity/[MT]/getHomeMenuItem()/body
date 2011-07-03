@@ -1,0 +1,3 @@
+{
+  return mActionBarMenu.addDetached(android.R.id.home);
+}

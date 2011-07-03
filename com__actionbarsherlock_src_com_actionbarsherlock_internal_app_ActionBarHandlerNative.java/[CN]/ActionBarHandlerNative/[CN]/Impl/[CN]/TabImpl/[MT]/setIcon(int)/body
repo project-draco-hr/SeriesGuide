@@ -1,0 +1,4 @@
+{
+  mIcon=mActionBar.getActivity().getResources().getDrawable(resId);
+  return this;
+}

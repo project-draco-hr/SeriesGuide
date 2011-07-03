@@ -1,0 +1,14 @@
+{
+  mListView.setAdapter(adapter);
+  mListView.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
+    @Override public void onItemSelected(    AdapterView<?> adapterView,    View view,    int position,    long itemId){
+      if (callback != null) {
+        callback.onNavigationItemSelected(position,itemId);
+      }
+    }
+    @Override public void onNothingSelected(    AdapterView<?> arg0){
+    }
+  }
+);
+  reloadDisplay();
+}

@@ -1,0 +1,4 @@
+{
+  Thread t=new UpdateLatestEpisodeThread(this);
+  t.start();
+}

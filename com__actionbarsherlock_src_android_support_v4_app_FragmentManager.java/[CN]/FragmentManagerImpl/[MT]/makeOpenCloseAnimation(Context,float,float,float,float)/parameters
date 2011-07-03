@@ -1,0 +1,5 @@
+Context context
+float startScale
+float endScale
+float startAlpha
+float endAlpha

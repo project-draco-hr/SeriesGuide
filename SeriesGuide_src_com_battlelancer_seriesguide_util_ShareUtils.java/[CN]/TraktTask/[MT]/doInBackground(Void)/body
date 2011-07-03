@@ -1,0 +1,44 @@
+{
+  if (!isTraktCredentialsValid(mContext)) {
+    return "";
+  }
+  SharedPreferences prefs=PreferenceManager.getDefaultSharedPreferences(mContext.getApplicationContext());
+  ServiceManager manager=new ServiceManager();
+  final String username=prefs.getString(SeriesGuidePreferences.PREF_TRAKTUSER,"");
+  String password=prefs.getString(SeriesGuidePreferences.PREF_TRAKTPWD,"");
+  try {
+    password=SimpleCrypto.decrypt(password,mContext);
+  }
+ catch (  Exception e1) {
+    return mContext.getString(R.string.trakt_decryptfail);
+  }
+  manager.setAuthentication(username,ShareUtils.toSHA1(password.getBytes()));
+  manager.setApiKey(Constants.TRAKT_API_KEY);
+  if (isCancelled()) {
+    return "Cancelled";
+  }
+  final int season=mTraktData.getInt(ShareItems.SEASON);
+  final int episode=mTraktData.getInt(ShareItems.EPISODE);
+  final TraktAction action=TraktAction.values()[mTraktData.getInt(ShareItems.TRAKTACTION)];
+  try {
+switch (action) {
+case SEEN_EPISODE:
+{
+        final String imdbId=mTraktData.getString(ShareItems.IMDBID);
+        manager.showService().episodeSeen(imdbId).episode(season,episode).fire();
+        break;
+      }
+case RATE_EPISODE:
+{
+      final int mTvdbId=mTraktData.getInt(ShareItems.TVDBID);
+      final Rating rating=Rating.fromValue(mTraktData.getString(ShareItems.RATING));
+      manager.rateService().episode(mTvdbId).season(season).episode(episode).rating(rating).fire();
+      break;
+    }
+}
+return null;
+}
+ catch (ApiException e) {
+return "API error: " + e.getMessage();
+}
+}

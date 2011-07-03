@@ -1,0 +1,3 @@
+String fileName
+boolean isPoster
+Context context

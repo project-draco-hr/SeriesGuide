@@ -1,0 +1,25 @@
+{
+  File dbBackupFile=new File(Environment.getExternalStorageDirectory() + "/seriesguidebackup/seriesdatabase");
+  if (!dbBackupFile.exists()) {
+    return getString(R.string.import_failed_nofile);
+  }
+ else   if (!dbBackupFile.canRead()) {
+    return getString(R.string.import_failed_noread);
+  }
+  if (isCancelled()) {
+    return null;
+  }
+  File dbFile=getApplication().getDatabasePath(SeriesGuideDatabase.DATABASE_NAME);
+  getApplication().deleteDatabase(SeriesGuideDatabase.DATABASE_NAME);
+  try {
+    dbFile.createNewFile();
+    FileUtil.copyFile(dbBackupFile,dbFile);
+    PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit().putBoolean(SeriesGuidePreferences.KEY_DATABASEIMPORTED,true).commit();
+    getContentResolver().notifyChange(Shows.CONTENT_URI,null);
+    return null;
+  }
+ catch (  IOException e) {
+    Log.e(TAG,e.getMessage(),e);
+    return e.getMessage();
+  }
+}

@@ -1,0 +1,4 @@
+{
+  mPaths=paths;
+  mFetchCount.set(index);
+}

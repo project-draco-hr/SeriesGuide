@@ -1,0 +1,7 @@
+{
+  if (android.os.Build.VERSION.SDK_INT >= 11) {
+    final CharSequence[] items=getResources().getStringArray(R.array.shsorting);
+    menu.findItem(R.id.menu_showsortby).setTitle(getString(R.string.sort) + ": " + items[sorting.index()]);
+  }
+  return super.onPrepareOptionsMenu(menu);
+}

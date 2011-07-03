@@ -1,0 +1,5 @@
+{
+  Intent i=new Intent(getActivity(),ShowInfo.class);
+  i.putExtra(Shows._ID,getShowId());
+  startActivity(i);
+}

@@ -1,0 +1,4 @@
+{
+  db.execSQL("ALTER TABLE " + SeriesDatabase.SERIES_TABLE + " ADD COLUMN "+ SeriesDatabase.SERIES_IMDBID+ " text default '';");
+  db.execSQL("ALTER TABLE " + SeriesDatabase.SEASONS_TABLE + " ADD COLUMN "+ SeriesDatabase.SEASON_NOAIRDATECOUNT+ " integer default 0;");
+}

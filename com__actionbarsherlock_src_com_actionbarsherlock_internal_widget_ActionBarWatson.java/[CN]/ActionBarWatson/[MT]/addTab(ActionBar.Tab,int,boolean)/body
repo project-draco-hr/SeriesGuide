@@ -1,0 +1,6 @@
+{
+  mTabsView.addView(((TabImpl)tab).mView,position);
+  if (setSelected) {
+    tab.select();
+  }
+}

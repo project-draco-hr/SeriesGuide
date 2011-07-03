@@ -1,0 +1,5 @@
+{
+  mShowId=showId;
+  mUpdateOverview=updateOverview;
+  this.setName("UpdateWatchStatsThread");
+}

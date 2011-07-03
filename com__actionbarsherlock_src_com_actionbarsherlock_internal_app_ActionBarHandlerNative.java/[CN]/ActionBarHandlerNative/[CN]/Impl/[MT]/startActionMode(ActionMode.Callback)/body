@@ -1,0 +1,19 @@
+{
+  return new ActionModeWrapper(getActivity(),getActivity().startActionMode(new android.view.ActionMode.Callback(){
+    @Override public boolean onPrepareActionMode(    android.view.ActionMode mode,    android.view.Menu menu){
+      return callback.onPrepareActionMode(new ActionModeWrapper(getActivity(),mode),menu);
+    }
+    @Override public void onDestroyActionMode(    android.view.ActionMode mode){
+      final ActionMode actionMode=new ActionModeWrapper(getActivity(),mode);
+      callback.onDestroyActionMode(actionMode);
+      getActivity().onActionModeFinished(actionMode);
+    }
+    @Override public boolean onCreateActionMode(    android.view.ActionMode mode,    android.view.Menu menu){
+      return callback.onCreateActionMode(new ActionModeWrapper(getActivity(),mode),menu);
+    }
+    @Override public boolean onActionItemClicked(    android.view.ActionMode mode,    android.view.MenuItem item){
+      return callback.onActionItemClicked(new ActionModeWrapper(getActivity(),mode),item);
+    }
+  }
+));
+}

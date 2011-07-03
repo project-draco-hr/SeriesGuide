@@ -1,0 +1,4 @@
+String title
+int year
+int plays
+Date lastPlayed

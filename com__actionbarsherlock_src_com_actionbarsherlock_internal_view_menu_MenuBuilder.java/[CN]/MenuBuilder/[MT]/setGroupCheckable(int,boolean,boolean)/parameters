@@ -1,0 +1,3 @@
+int groupId
+boolean checkable
+boolean exclusive

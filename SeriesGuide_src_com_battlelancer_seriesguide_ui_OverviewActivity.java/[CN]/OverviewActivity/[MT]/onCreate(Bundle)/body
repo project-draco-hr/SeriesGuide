@@ -1,0 +1,12 @@
+{
+  super.onCreate(savedInstanceState);
+  setContentView(R.layout.overview_multipane);
+  final ActionBar actionBar=getSupportActionBar();
+  actionBar.setTitle(getString(R.string.description_overview));
+  actionBar.setDisplayShowTitleEnabled(true);
+  if (savedInstanceState == null) {
+    mFragment=new OverviewFragment();
+    mFragment.setArguments(getIntent().getExtras());
+    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_overview,mFragment).commit();
+  }
+}

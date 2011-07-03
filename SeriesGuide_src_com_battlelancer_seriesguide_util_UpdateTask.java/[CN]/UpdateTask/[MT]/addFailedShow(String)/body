@@ -1,0 +1,6 @@
+{
+  if (mFailedShows.length() != 0) {
+    mFailedShows+=", ";
+  }
+  mFailedShows+=seriesName;
+}

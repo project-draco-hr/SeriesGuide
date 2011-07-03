@@ -1,0 +1,4 @@
+{
+  mLogo.setImageResource(resId);
+  return this;
+}

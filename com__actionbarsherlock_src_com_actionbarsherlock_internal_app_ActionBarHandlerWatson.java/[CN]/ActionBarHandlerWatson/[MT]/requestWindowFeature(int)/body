@@ -1,0 +1,13 @@
+{
+  if (featureId == Window.FEATURE_ACTION_BAR_OVERLAY) {
+    return true;
+  }
+  if (featureId == Window.FEATURE_ACTION_MODE_OVERLAY) {
+    return true;
+  }
+  if (featureId == Window.FEATURE_ENABLE_ACTION_BAR_WATSON_TEXT) {
+    mIsActionItemTextEnabled=true;
+    return true;
+  }
+  return false;
+}

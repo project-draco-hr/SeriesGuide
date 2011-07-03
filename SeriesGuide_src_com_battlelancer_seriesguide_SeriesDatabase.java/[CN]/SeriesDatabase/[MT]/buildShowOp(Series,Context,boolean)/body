@@ -1,0 +1,11 @@
+{
+  ContentValues values=new ContentValues();
+  values=putCommonShowValues(show,values);
+  if (isNew) {
+    values.put(Shows._ID,show.getId());
+    return ContentProviderOperation.newInsert(Shows.CONTENT_URI).withValues(values).build();
+  }
+ else {
+    return ContentProviderOperation.newUpdate(Shows.buildShowUri(show.getId())).withValues(values).build();
+  }
+}

@@ -1,0 +1,12 @@
+{
+  AnimationSet set=new AnimationSet(false);
+  ScaleAnimation scale=new ScaleAnimation(startScale,endScale,startScale,endScale,Animation.RELATIVE_TO_SELF,.5f,Animation.RELATIVE_TO_SELF,.5f);
+  scale.setInterpolator(DECELERATE_QUINT);
+  scale.setDuration(ANIM_DUR);
+  set.addAnimation(scale);
+  AlphaAnimation alpha=new AlphaAnimation(startAlpha,endAlpha);
+  alpha.setInterpolator(DECELERATE_CUBIC);
+  alpha.setDuration(ANIM_DUR);
+  set.addAnimation(alpha);
+  return set;
+}

@@ -1,0 +1,14 @@
+{
+  if (mLoadersStarted) {
+    mLoadersStarted=false;
+    if (mLoaderManager != null) {
+      if (!retaining) {
+        mLoaderManager.doStop();
+      }
+ else {
+        mLoaderManager.doRetain();
+      }
+    }
+  }
+  mFragments.dispatchReallyStop(retaining);
+}

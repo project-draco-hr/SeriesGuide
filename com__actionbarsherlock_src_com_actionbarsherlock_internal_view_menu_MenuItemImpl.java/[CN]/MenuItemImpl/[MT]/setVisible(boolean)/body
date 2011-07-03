@@ -1,0 +1,7 @@
+{
+  final boolean oldValue=isVisible();
+  mFlags=(mFlags & ~HIDDEN) | (visible ? 0 : HIDDEN);
+  if (oldValue != visible) {
+  }
+  return this;
+}

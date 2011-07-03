@@ -1,0 +1,5 @@
+{
+  SeriesDatabase.markEpisode(getActivity(),getEpisodeId(),!isWatched);
+  isWatched=!isWatched;
+  getLoaderManager().restartLoader(EPISODE_LOADER,null,this);
+}

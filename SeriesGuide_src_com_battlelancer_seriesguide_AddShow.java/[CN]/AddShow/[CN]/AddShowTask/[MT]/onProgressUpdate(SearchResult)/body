@@ -1,0 +1,19 @@
+{
+  String showname=values[0].getSeriesName();
+switch (values[0].getId()) {
+case ADD_STARTED:
+{
+      Toast.makeText(mContext.getApplicationContext(),"\"" + showname + "\" "+ mContext.getString(R.string.add_started),Toast.LENGTH_SHORT).show();
+      break;
+    }
+case ADD_SUCCESS:
+  Toast.makeText(mContext.getApplicationContext(),"\"" + showname + "\" "+ mContext.getString(R.string.add_success),Toast.LENGTH_SHORT).show();
+break;
+case ADD_ALREADYEXISTS:
+Toast.makeText(mContext.getApplicationContext(),"\"" + showname + "\" "+ mContext.getString(R.string.add_already_exists),Toast.LENGTH_LONG).show();
+break;
+case ADD_SAXERROR:
+Toast.makeText(mContext.getApplicationContext(),mContext.getString(R.string.add_error_begin) + showname + mContext.getString(R.string.add_error_end)+ " ("+ mContext.getString(R.string.saxerror_title)+ ")",Toast.LENGTH_LONG).show();
+break;
+}
+}

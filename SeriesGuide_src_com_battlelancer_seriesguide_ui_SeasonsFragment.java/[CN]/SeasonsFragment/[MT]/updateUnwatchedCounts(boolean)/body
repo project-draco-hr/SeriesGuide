@@ -1,0 +1,4 @@
+{
+  Thread t=new UpdateUnwatchThread(getShowId(),updateOverview);
+  t.start();
+}

@@ -1,0 +1,6 @@
+{
+  ContentValues values=new ContentValues();
+  values.put(Episodes.WATCHED,state);
+  getActivity().getContentResolver().update(Episodes.buildEpisodesOfShowUri(getShowId()),values,null,null);
+  updateUnwatchedCounts(true);
+}

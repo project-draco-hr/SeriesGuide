@@ -1,0 +1,8 @@
+{
+  new Thread(new Runnable(){
+    public void run(){
+      SeriesDatabase.markEpisode(getActivity(),episodeId,state);
+    }
+  }
+).start();
+}

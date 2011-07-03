@@ -1,0 +1,6 @@
+{
+  if (resId != View.NO_ID) {
+    mIconView.setImageResource(resId);
+  }
+  return this;
+}

@@ -1,0 +1,6 @@
+{
+  mTable=null;
+  mSelection.setLength(0);
+  mSelectionArgs.clear();
+  return this;
+}

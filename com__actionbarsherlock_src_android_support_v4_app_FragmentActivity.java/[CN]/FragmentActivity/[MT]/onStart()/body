@@ -1,0 +1,23 @@
+{
+  super.onStart();
+  mStopped=false;
+  mHandler.removeMessages(MSG_REALLY_STOPPED);
+  mFragments.noteStateNotSaved();
+  mFragments.execPendingActions();
+  if (!mLoadersStarted) {
+    mLoadersStarted=true;
+    if (mLoaderManager != null) {
+      mLoaderManager.doStart();
+    }
+ else     if (!mCheckedForLoaderManager) {
+      mLoaderManager=getLoaderManager(-1,mLoadersStarted,false);
+    }
+    mCheckedForLoaderManager=true;
+  }
+  mFragments.dispatchStart();
+  if (mAllLoaderManagers != null) {
+    for (int i=mAllLoaderManagers.size() - 1; i >= 0; i--) {
+      mAllLoaderManagers.valueAt(i).finishRetain();
+    }
+  }
+}

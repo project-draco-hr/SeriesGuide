@@ -1,0 +1,5 @@
+{
+  ShowService service=ServiceManager.createShowService();
+  this.setupService(service);
+  return service;
+}

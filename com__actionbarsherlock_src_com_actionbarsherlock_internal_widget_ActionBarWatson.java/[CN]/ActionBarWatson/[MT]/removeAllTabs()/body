@@ -1,0 +1,7 @@
+{
+  TabImpl selected=getSelectedTab();
+  if (selected != null) {
+    selected.unselect();
+  }
+  mTabsView.removeAllViews();
+}

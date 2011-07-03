@@ -1,0 +1,3 @@
+{
+  AnalyticsUtils.getInstance(getActivity()).trackPageView("/Upcoming");
+}

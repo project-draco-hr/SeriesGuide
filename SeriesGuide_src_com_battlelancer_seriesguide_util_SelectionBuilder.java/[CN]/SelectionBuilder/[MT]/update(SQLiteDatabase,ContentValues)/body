@@ -1,0 +1,5 @@
+{
+  assertTable();
+  if (LOGV)   Log.v(TAG,"update() " + this);
+  return db.update(mTable,values,getSelection(),getSelectionArgs());
+}

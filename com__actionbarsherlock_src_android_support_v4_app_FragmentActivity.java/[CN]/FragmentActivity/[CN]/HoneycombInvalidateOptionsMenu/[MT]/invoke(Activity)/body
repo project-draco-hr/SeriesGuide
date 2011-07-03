@@ -1,0 +1,3 @@
+{
+  activity.getWindow().invalidatePanelMenu(Window.FEATURE_OPTIONS_PANEL);
+}

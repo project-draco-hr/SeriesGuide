@@ -1,0 +1,8 @@
+{
+  mMenu=menu;
+  mItemId=itemId;
+  mGroupId=groupId;
+  mOrder=order;
+  mTitle=title;
+  mItemViews=new WeakReference[MenuBuilder.NUM_TYPES];
+}

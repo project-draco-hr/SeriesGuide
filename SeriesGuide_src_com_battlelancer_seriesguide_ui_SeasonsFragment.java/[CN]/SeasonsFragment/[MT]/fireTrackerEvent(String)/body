@@ -1,0 +1,3 @@
+{
+  AnalyticsUtils.getInstance(getActivity()).trackEvent("Seasons","Click",label,0);
+}

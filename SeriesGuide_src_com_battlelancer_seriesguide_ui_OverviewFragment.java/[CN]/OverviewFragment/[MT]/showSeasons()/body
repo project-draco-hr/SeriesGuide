@@ -1,0 +1,18 @@
+{
+  if (mDualPane) {
+    SeasonsFragment seasons=(SeasonsFragment)getFragmentManager().findFragmentById(R.id.fragment_seasons);
+    if (seasons == null) {
+      seasons=SeasonsFragment.newInstance(getShowId());
+      FragmentTransaction ft=getFragmentManager().beginTransaction();
+      ft.replace(R.id.fragment_seasons,seasons);
+      ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+      ft.commit();
+    }
+  }
+ else {
+    Intent intent=new Intent();
+    intent.setClass(getActivity(),SeasonsActivity.class);
+    intent.putExtra(BaseColumns._ID,getShowId());
+    startActivity(intent);
+  }
+}

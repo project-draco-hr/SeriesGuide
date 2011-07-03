@@ -1,0 +1,5 @@
+{
+  this.username=username;
+  this.password_sha=password_sha;
+  return this;
+}

@@ -1,0 +1,12 @@
+{
+  Bitmap bitmap=null;
+  if (path.length() != 0) {
+    bitmap=mImageCache.getThumb(path);
+  }
+  if (bitmap != null) {
+    poster.setImageBitmap(bitmap);
+  }
+ else {
+    poster.setImageResource(R.drawable.show_generic);
+  }
+}

@@ -1,0 +1,6 @@
+{
+  mContext=activity;
+  mContainer=container;
+  mIsSyncToTrakt=isSyncToTrakt;
+  mIsSyncingUnseen=isSyncingUnseen;
+}

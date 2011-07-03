@@ -1,0 +1,20 @@
+{
+  final ArrayList<ContentProviderOperation> batch=Lists.newArrayList();
+  final String showId=String.valueOf(id);
+  HashSet<Long> episodeIDs=getEpisodeIDsForShow(id,context);
+  for (  Long episodeID : episodeIDs) {
+    batch.add(ContentProviderOperation.newDelete(EpisodeSearch.buildDocIdUri(String.valueOf(episodeID))).build());
+  }
+  batch.add(ContentProviderOperation.newDelete(Shows.buildShowUri(showId)).build());
+  batch.add(ContentProviderOperation.newDelete(Seasons.buildSeasonsOfShowUri(showId)).build());
+  batch.add(ContentProviderOperation.newDelete(Episodes.buildEpisodesOfShowUri(showId)).build());
+  try {
+    context.getContentResolver().applyBatch(SeriesContract.CONTENT_AUTHORITY,batch);
+  }
+ catch (  RemoteException e) {
+    throw new RuntimeException("Problem applying batch operation",e);
+  }
+catch (  OperationApplicationException e) {
+    throw new RuntimeException("Problem applying batch operation",e);
+  }
+}

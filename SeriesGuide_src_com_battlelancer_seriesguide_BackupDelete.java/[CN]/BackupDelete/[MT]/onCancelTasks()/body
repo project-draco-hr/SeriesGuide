@@ -1,0 +1,10 @@
+{
+  if (mImportTask != null && mImportTask.getStatus() == AsyncTask.Status.RUNNING) {
+    mImportTask.cancel(true);
+    mImportTask=null;
+  }
+  if (mExportTask != null && mExportTask.getStatus() == AsyncTask.Status.RUNNING) {
+    mExportTask.cancel(true);
+    mExportTask=null;
+  }
+}

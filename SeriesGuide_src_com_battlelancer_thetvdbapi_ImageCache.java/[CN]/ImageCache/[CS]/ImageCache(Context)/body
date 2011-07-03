@@ -1,0 +1,31 @@
+{
+  this.mCtx=ctx;
+  this.mCache=new HashMap<String,SoftReference<Bitmap>>();
+  this.mSecondLevelCacheDir=Environment.getExternalStorageDirectory().getAbsolutePath() + "/Android/data/com.battlelancer.seriesguide/files";
+  mScale=mCtx.getResources().getDisplayMetrics().density;
+  createDirectories();
+  SharedPreferences sharedPreferences=PreferenceManager.getDefaultSharedPreferences(mCtx);
+  listener=new OnSharedPreferenceChangeListener(){
+    public void onSharedPreferenceChanged(    SharedPreferences sharedPreferences,    String key){
+      if (key.equalsIgnoreCase(SeriesGuideData.KEY_HIDEIMAGES)) {
+        if (sharedPreferences.getBoolean(SeriesGuideData.KEY_HIDEIMAGES,true)) {
+          AnalyticsUtils.getInstance(mCtx).trackEvent("Settings","Hide images","Enable",0);
+          try {
+            new File(mSecondLevelCacheDir + "/.nomedia").createNewFile();
+          }
+ catch (          IOException e) {
+            Log.w(TAG,"Could not create .nomedia file");
+          }
+          Log.d(TAG,"Creating .nomedia file");
+        }
+ else {
+          AnalyticsUtils.getInstance(mCtx).trackEvent("Settings","Hide images","Disable",0);
+          new File(mSecondLevelCacheDir + "/.nomedia").delete();
+          Log.d(TAG,"Deleting .nomedia file");
+        }
+      }
+    }
+  }
+;
+  sharedPreferences.registerOnSharedPreferenceChangeListener(listener);
+}

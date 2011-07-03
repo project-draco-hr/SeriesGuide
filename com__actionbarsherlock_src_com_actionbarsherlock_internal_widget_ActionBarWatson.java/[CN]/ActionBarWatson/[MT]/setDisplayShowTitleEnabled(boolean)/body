@@ -1,0 +1,3 @@
+{
+  setDisplayOptions(showTitle ? ActionBar.DISPLAY_SHOW_TITLE : 0,ActionBar.DISPLAY_SHOW_TITLE);
+}

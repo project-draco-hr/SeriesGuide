@@ -1,0 +1,3 @@
+{
+  return (mSubMenu != null) && (mSubMenu.size() > 0);
+}

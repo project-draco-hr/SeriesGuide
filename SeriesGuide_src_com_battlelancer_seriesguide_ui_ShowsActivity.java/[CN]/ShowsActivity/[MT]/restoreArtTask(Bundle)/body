@@ -1,0 +1,10 @@
+{
+  if (savedInstanceState.getBoolean(STATE_ART_IN_PROGRESS)) {
+    ArrayList<String> paths=savedInstanceState.getStringArrayList(STATE_ART_PATHS);
+    int index=savedInstanceState.getInt(STATE_ART_INDEX);
+    if (paths != null) {
+      mArtTask=(FetchArtTask)new FetchArtTask(paths,index).execute();
+      AnalyticsUtils.getInstance(this).trackEvent("Shows","Task Lifecycle","Art Task Restored",0);
+    }
+  }
+}

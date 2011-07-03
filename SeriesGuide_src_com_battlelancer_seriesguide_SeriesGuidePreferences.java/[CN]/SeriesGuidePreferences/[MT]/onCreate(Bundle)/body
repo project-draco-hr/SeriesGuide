@@ -1,0 +1,156 @@
+{
+  super.onCreate(savedInstanceState);
+  final SeriesGuidePreferences activity=this;
+  addPreferencesFromResource(R.layout.preferences);
+  Preference aboutPref=(Preference)findPreference("aboutPref");
+  try {
+    aboutPref.setSummary("v" + getPackageManager().getPackageInfo(getPackageName(),PackageManager.GET_META_DATA).versionName + " (dbver "+ SeriesGuideDatabase.DATABASE_VERSION+ ")");
+  }
+ catch (  NameNotFoundException e) {
+    aboutPref.setSummary("Unkown version");
+  }
+  aboutPref.setOnPreferenceClickListener(new OnPreferenceClickListener(){
+    public boolean onPreferenceClick(    Preference preference){
+      fireTrackerEvent("About dialog");
+      showDialog(ABOUT_DIALOG);
+      return true;
+    }
+  }
+);
+  Preference changelogPref=(Preference)findPreference("changelogPref");
+  changelogPref.setOnPreferenceClickListener(new OnPreferenceClickListener(){
+    public boolean onPreferenceClick(    Preference preference){
+      fireTrackerEvent("Changelog");
+      Intent myIntent=new Intent(Intent.ACTION_VIEW,Uri.parse(SeriesGuideData.CHANGELOG_URL));
+      startActivity(myIntent);
+      return true;
+    }
+  }
+);
+  Preference helpPref=(Preference)findPreference("helpPref");
+  helpPref.setOnPreferenceClickListener(new OnPreferenceClickListener(){
+    public boolean onPreferenceClick(    Preference preference){
+      fireTrackerEvent("Help");
+      Intent myIntent=new Intent(Intent.ACTION_VIEW,Uri.parse("http://code.google.com/p/seriesguide/wiki/Help"));
+      startActivity(myIntent);
+      return true;
+    }
+  }
+);
+  Preference clearCachePref=(Preference)findPreference("clearCache");
+  clearCachePref.setOnPreferenceClickListener(new OnPreferenceClickListener(){
+    public boolean onPreferenceClick(    Preference preference){
+      fireTrackerEvent("Clear Image Cache");
+      ((SeriesGuideApplication)getApplication()).getImageCache().clear();
+      ((SeriesGuideApplication)getApplication()).getImageCache().clearExternal();
+      Toast.makeText(getApplicationContext(),getString(R.string.done),Toast.LENGTH_SHORT).show();
+      return true;
+    }
+  }
+);
+  Preference backupPref=(Preference)findPreference("backup");
+  backupPref.setOnPreferenceClickListener(new OnPreferenceClickListener(){
+    public boolean onPreferenceClick(    Preference preference){
+      startActivity(new Intent(activity,BackupDelete.class));
+      return true;
+    }
+  }
+);
+  Preference thetvdbCredit=(Preference)findPreference("thetvdb");
+  thetvdbCredit.setOnPreferenceClickListener(new OnPreferenceClickListener(){
+    public boolean onPreferenceClick(    Preference preference){
+      fireTrackerEvent("Go to thetvdb.com");
+      Intent myIntent=new Intent(Intent.ACTION_VIEW,Uri.parse("http://www.thetvdb.com"));
+      startActivity(myIntent);
+      return true;
+    }
+  }
+);
+  Preference futureepisodes=(Preference)findPreference(KEY_ONLY_FUTURE_EPISODES);
+  futureepisodes.setOnPreferenceClickListener(new OnPreferenceClickListener(){
+    public boolean onPreferenceClick(    Preference preference){
+      if (((CheckBoxPreference)preference).isChecked()) {
+        AnalyticsUtils.getInstance(activity).trackEvent("Settings","OnlyFutureEpisodes","Enable",0);
+      }
+ else {
+        AnalyticsUtils.getInstance(activity).trackEvent("Settings","OnlyFutureEpisodes","Disable",0);
+      }
+      return false;
+    }
+  }
+);
+  final SharedPreferences prefs=PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+  Preference getgluePref=(Preference)findPreference("clearGetGlueCredentials");
+  getgluePref.setOnPreferenceClickListener(new OnPreferenceClickListener(){
+    public boolean onPreferenceClick(    Preference preference){
+      fireTrackerEvent("Disonnect GetGlue");
+      GetGlue.clearCredentials(prefs);
+      preference.setEnabled(false);
+      return true;
+    }
+  }
+);
+  getgluePref.setEnabled(GetGlue.isAuthenticated(prefs));
+  Preference helpTranslate=(Preference)findPreference("com.battlelancer.seriesguide.helpTranslate");
+  helpTranslate.setOnPreferenceClickListener(new OnPreferenceClickListener(){
+    public boolean onPreferenceClick(    Preference preference){
+      fireTrackerEvent("Help translate");
+      Intent myIntent=new Intent(Intent.ACTION_VIEW,Uri.parse("http://crowdin.net/project/seriesguide-translations/invite"));
+      startActivity(myIntent);
+      return true;
+    }
+  }
+);
+  CheckBoxPreference useMyTimezone=(CheckBoxPreference)findPreference("com.battlelancer.seriesguide.usemytimezone");
+  useMyTimezone.setOnPreferenceClickListener(new OnPreferenceClickListener(){
+    public boolean onPreferenceClick(    Preference preference){
+      if (((CheckBoxPreference)preference).isChecked()) {
+        AnalyticsUtils.getInstance(activity).trackEvent("Settings","Use my time zone","Enable",0);
+      }
+ else {
+        AnalyticsUtils.getInstance(activity).trackEvent("Settings","Use my time zone","Disable",0);
+      }
+      return false;
+    }
+  }
+);
+  Preference traktCred=findPreference("com.battlelancer.seriesguide.traktcredentials");
+  traktCred.setEnabled(ShareUtils.isTraktCredentialsValid(this));
+  traktCred.setOnPreferenceClickListener(new OnPreferenceClickListener(){
+    public boolean onPreferenceClick(    Preference preference){
+      prefs.edit().putString(SeriesGuidePreferences.PREF_TRAKTUSER,"").putString(SeriesGuidePreferences.PREF_TRAKTPWD,"").commit();
+      preference.setEnabled(false);
+      return true;
+    }
+  }
+);
+  Preference feedback=(Preference)findPreference("com.battlelancer.seriesguide.feedback");
+  feedback.setOnPreferenceClickListener(new OnPreferenceClickListener(){
+    public boolean onPreferenceClick(    Preference preference){
+      final Intent intent=new Intent(android.content.Intent.ACTION_SEND);
+      intent.setType("plain/text");
+      intent.putExtra(android.content.Intent.EXTRA_EMAIL,new String[]{"seriesguide@battlelancer.com"});
+      intent.putExtra(android.content.Intent.EXTRA_SUBJECT,"SeriesGuide Feedback");
+      intent.putExtra(android.content.Intent.EXTRA_TEXT,"");
+      startActivity(Intent.createChooser(intent,"Send mail..."));
+      return true;
+    }
+  }
+);
+  findPreference("com.battlelancer.seriesguide.donate").setOnPreferenceClickListener(new OnPreferenceClickListener(){
+    public boolean onPreferenceClick(    Preference preference){
+      fireTrackerEvent("Donate");
+      Intent myIntent=new Intent(Intent.ACTION_VIEW,Uri.parse("https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=VVBLMQBSBU74L"));
+      startActivity(myIntent);
+      return true;
+    }
+  }
+);
+  findPreference("com.battlelancer.seriesguide.traktsync").setOnPreferenceClickListener(new OnPreferenceClickListener(){
+    public boolean onPreferenceClick(    Preference preference){
+      startActivity(new Intent(SeriesGuidePreferences.this,TraktSyncActivity.class));
+      return true;
+    }
+  }
+);
+}

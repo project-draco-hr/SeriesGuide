@@ -1,0 +1,89 @@
+{
+  String[] from=new String[]{Episodes.TITLE,Episodes.OVERVIEW,Episodes.NUMBER,Episodes.DVDNUMBER,Episodes.FIRSTAIRED,Episodes.DIRECTORS,Episodes.GUESTSTARS,Episodes.WRITERS,Episodes.RATING,Episodes.IMAGE,Shows.TITLE,Episodes.WATCHED};
+  int[] to=new int[]{R.id.TextViewEpisodeTitle,R.id.TextViewEpisodeDescription,R.id.TextViewEpisodeNumbers,R.id.textViewEpisodeDVDnumber,R.id.TextViewEpisodeFirstAirdate,R.id.TextViewEpisodeDirectors,R.id.TextViewEpisodeGuestStars,R.id.TextViewEpisodeWriters,R.id.ratingbar,R.id.imageContainer,R.id.textViewEpisodeDetailsShowName,R.id.TextViewEpisodeWatchedState};
+  mAdapter=new SimpleCursorAdapter(getActivity(),R.layout.episodedetails,null,from,to,0);
+  mAdapter.setViewBinder(new ViewBinder(){
+    public boolean setViewValue(    View view,    Cursor episode,    int columnIndex){
+      if (columnIndex == EpisodeDetailsQuery.NUMBER) {
+        TextView numbers=(TextView)view;
+        numbers.setText(getString(R.string.season) + " " + episode.getString(EpisodeDetailsQuery.SEASON)+ " "+ getString(R.string.episode)+ " "+ episode.getString(EpisodeDetailsQuery.NUMBER));
+        return true;
+      }
+      if (columnIndex == EpisodeDetailsQuery.WATCHED) {
+        TextView watchedState=(TextView)view;
+        isWatched=episode.getInt(EpisodeDetailsQuery.WATCHED) == 1 ? true : false;
+        watchedState.setText(isWatched ? getString(R.string.episode_iswatched) : getString(R.string.episode_notwatched));
+        watchedState.setTextColor(isWatched ? Color.GREEN : Color.GRAY);
+        return true;
+      }
+      if (columnIndex == EpisodeDetailsQuery.FIRSTAIRED) {
+        TextView airdate=(TextView)view;
+        final String firstAired=episode.getString(EpisodeDetailsQuery.FIRSTAIRED);
+        if (firstAired.length() != 0) {
+          airdate.setText(getString(R.string.episode_firstaired) + " " + SeriesGuideData.parseDateToLocal(firstAired,episode.getLong(EpisodeDetailsQuery.SHOW_AIRSTIME),getActivity()));
+        }
+ else {
+          airdate.setText(getString(R.string.episode_firstaired) + " " + getString(R.string.episode_unkownairdate));
+        }
+        return true;
+      }
+      if (columnIndex == EpisodeDetailsQuery.DVDNUMBER) {
+        TextView dvdnumber=(TextView)view;
+        dvdnumber.setText(getString(R.string.episode_dvdnumber) + ": " + episode.getString(EpisodeDetailsQuery.DVDNUMBER));
+        return true;
+      }
+      if (columnIndex == EpisodeDetailsQuery.DIRECTORS) {
+        TextView directors=(TextView)view;
+        String directorsAll=SeriesGuideData.splitAndKitTVDBStrings(episode.getString(EpisodeDetailsQuery.DIRECTORS));
+        directors.setText(getString(R.string.episode_directors) + " " + directorsAll);
+        return true;
+      }
+      if (columnIndex == EpisodeDetailsQuery.GUESTSTARS) {
+        TextView gueststars=(TextView)view;
+        gueststars.setText(getString(R.string.episode_gueststars) + " " + SeriesGuideData.splitAndKitTVDBStrings(episode.getString(EpisodeDetailsQuery.GUESTSTARS)));
+        return true;
+      }
+      if (columnIndex == EpisodeDetailsQuery.WRITERS) {
+        TextView writers=(TextView)view;
+        writers.setText(getString(R.string.episode_writers) + " " + SeriesGuideData.splitAndKitTVDBStrings(episode.getString(EpisodeDetailsQuery.WRITERS)));
+        return true;
+      }
+      if (columnIndex == EpisodeDetailsQuery.RATING) {
+        RelativeLayout rating=(RelativeLayout)view;
+        String ratingText=episode.getString(EpisodeDetailsQuery.RATING);
+        if (ratingText != null && ratingText.length() != 0) {
+          RatingBar ratingBar=(RatingBar)rating.findViewById(R.id.bar);
+          TextView ratingValue=(TextView)rating.findViewById(R.id.value);
+          ratingBar.setProgress((int)(Double.valueOf(ratingText) / 0.1));
+          ratingValue.setText(ratingText + "/10");
+        }
+        return true;
+      }
+      if (columnIndex == EpisodeDetailsQuery.IMAGE) {
+        FrameLayout imageContainer=(FrameLayout)view;
+        String imagePath=episode.getString(EpisodeDetailsQuery.IMAGE);
+        onLoadImage(imagePath,imageContainer);
+        return true;
+      }
+      if (columnIndex == EpisodeDetailsQuery.SHOW_TITLE) {
+        TextView showtitle=(TextView)view;
+        showtitle.setText(episode.getString(EpisodeDetailsQuery.SHOW_TITLE));
+        final String showId=episode.getString(EpisodeDetailsQuery.REF_SHOW_ID);
+        showtitle.setOnClickListener(new OnClickListener(){
+          public void onClick(          View v){
+            if (showId != null) {
+              Intent i=new Intent(getActivity(),OverviewActivity.class);
+              i.putExtra(Shows._ID,showId);
+              startActivity(i);
+            }
+          }
+        }
+);
+        return true;
+      }
+      return false;
+    }
+  }
+);
+  setListAdapter(mAdapter);
+}

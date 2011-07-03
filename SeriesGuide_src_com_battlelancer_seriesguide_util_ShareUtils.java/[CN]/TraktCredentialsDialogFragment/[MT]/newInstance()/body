@@ -1,0 +1,5 @@
+{
+  TraktCredentialsDialogFragment f=new TraktCredentialsDialogFragment();
+  f.isForwardingGivenTask=false;
+  return f;
+}

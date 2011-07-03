@@ -1,0 +1,6 @@
+{
+  itemAdded=true;
+  SubMenuBuilder subMenu=menu.addSubMenu(groupId,itemId,itemCategoryOrder,itemTitleId);
+  setItem(subMenu.getItem());
+  return subMenu;
+}

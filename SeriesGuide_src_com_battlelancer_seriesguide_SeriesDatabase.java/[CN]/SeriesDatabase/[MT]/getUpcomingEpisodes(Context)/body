@@ -1,0 +1,7 @@
+{
+  Date date=new Date();
+  String today=SeriesGuideData.theTVDBDateFormat.format(date);
+  String[] projection=new String[]{Tables.EPISODES + "." + Episodes._ID,Episodes.TITLE,Episodes.WATCHED,Episodes.NUMBER,Episodes.SEASON,Episodes.FIRSTAIRED,Shows.TITLE,Shows.AIRSTIME,Shows.NETWORK,Shows.POSTER};
+  String sortOrder=Episodes.FIRSTAIRED + " ASC," + Shows.AIRSTIME+ " ASC,"+ Shows.TITLE+ " ASC";
+  return context.getContentResolver().query(Episodes.CONTENT_URI_WITHSHOW,projection,Episodes.FIRSTAIRED + ">=?",new String[]{today},sortOrder);
+}

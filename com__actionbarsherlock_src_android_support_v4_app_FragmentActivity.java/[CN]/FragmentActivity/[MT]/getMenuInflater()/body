@@ -1,0 +1,8 @@
+{
+  if (IS_HONEYCOMB) {
+    if (DEBUG)     Log.d(TAG,"getMenuInflater(): Wrapping native inflater.");
+    return new MenuInflaterWrapper(this,super.getMenuInflater());
+  }
+  if (DEBUG)   Log.d(TAG,"getMenuInflater(): Returning support inflater.");
+  return new MenuInflater(this);
+}

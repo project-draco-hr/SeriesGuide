@@ -1,0 +1,5 @@
+{
+  byte[] rawKey=getRawKey(context);
+  byte[] result=encrypt(rawKey,cleartext.getBytes());
+  return toHex(result);
+}
