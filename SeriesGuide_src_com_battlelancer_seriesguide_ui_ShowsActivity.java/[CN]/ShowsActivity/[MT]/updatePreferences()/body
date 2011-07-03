@@ -1,4 +1,14 @@
 {
   SharedPreferences prefs=PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
   updateSorting(prefs);
+  int lastVersion=prefs.getInt(SeriesGuideData.KEY_VERSION,-1);
+  try {
+    int currentVersion=getPackageManager().getPackageInfo(getPackageName(),PackageManager.GET_META_DATA).versionCode;
+    if (currentVersion > lastVersion) {
+      showDialog(BETA_WARNING_DIALOG);
+      prefs.edit().putInt(SeriesGuideData.KEY_VERSION,currentVersion).commit();
+    }
+  }
+ catch (  NameNotFoundException e) {
+  }
 }
